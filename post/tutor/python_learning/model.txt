@@ -1,0 +1,10 @@
+---
+title: Python基础-00.简介
+description: 简介以及目录
+date: 2025-02-22
+image: py.png
+categories:
+    - 笔记
+tags:
+    - Python
+---

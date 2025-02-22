@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="C简单数据类型和数学、逻辑运算">
+<title>C/C&#43;&#43;基础-03.数据类型和运算</title>
+
+<link rel='canonical' href='http://localhost:1313/post/tutor/c_cpp_learning/03.data-calc/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="C/C++基础-03.数据类型和运算">
+<meta property='og:description' content="C简单数据类型和数学、逻辑运算">
+<meta property='og:url' content='http://localhost:1313/post/tutor/c_cpp_learning/03.data-calc/'>
+<meta property='og:site_name' content='solxr'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C-C&#43;&#43;' /><meta property='article:published_time' content='2025-02-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-20T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/tutor/c_cpp_learning/03.data-calc/c.png' />
+<meta name="twitter:title" content="C/C++基础-03.数据类型和运算">
+<meta name="twitter:description" content="C简单数据类型和数学、逻辑运算"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/tutor/c_cpp_learning/03.data-calc/c.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_376a18d0875bf4d4.png" width="300"
+                            height="201" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌞</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">solxr</a></h1>
+            <h2 class="site-description">33</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TSR-solar/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#走进变量">走进变量</a></li>
+    <li><a href="#更多变量类型">更多变量类型</a>
+      <ol>
+        <li><a href="#用了d会发生什么">用了%d会发生什么</a></li>
+      </ol>
+    </li>
+    <li><a href="#数据类型">数据类型</a>
+      <ol>
+        <li><a href="#整数类型">整数类型</a>
+          <ol>
+            <li><a href="#补码">补码</a></li>
+          </ol>
+        </li>
+        <li><a href="#浮点数类型">浮点数类型</a></li>
+        <li><a href="#字符类型">字符类型</a>
+          <ol>
+            <li><a href="#类型转换">类型转换</a></li>
+          </ol>
+        </li>
+        <li><a href="#bool类型">bool类型</a></li>
+      </ol>
+    </li>
+    <li><a href="#c语言中的简单运算">C语言中的简单运算</a>
+      <ol>
+        <li><a href="#数学运算">数学运算</a></li>
+        <li><a href="#关系运算">关系运算</a></li>
+        <li><a href="#逻辑运算">逻辑运算</a></li>
+        <li><a href="#条件运算符">条件运算符</a></li>
+        <li><a href="#逗号运算符">逗号运算符</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/tutor/c_cpp_learning/03.data-calc/">
+                <img src="/post/tutor/c_cpp_learning/03.data-calc/c_hu_618700d8cdd69642.png"
+                        srcset="/post/tutor/c_cpp_learning/03.data-calc/c_hu_618700d8cdd69642.png 800w, /post/tutor/c_cpp_learning/03.data-calc/c_hu_d7ad109a27778894.png 1600w"
+                        width="800" 
+                        height="432" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-03.数据类型和运算" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
+                笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/tutor/c_cpp_learning/03.data-calc/">C/C&#43;&#43;基础-03.数据类型和运算</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            C简单数据类型和数学、逻辑运算
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 20, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 15 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="数据类型与运算">数据类型与运算
+</h1><h2 id="走进变量">走进变量
+</h2><p>之前我们定义变量，并用变量来存储用函数scanf输入的数据，并用printf输出存储值；<br>
+那么，现在让我们更深入的了解一下变量；<br>
+当要在程序里保存数据时，就需要一个<strong>变量</strong>来保存它； <br>
+用一个变量保存了数据，它才能参加到后面的计算中； <br>
+<strong>不定义变量，函数scanf就无法使用</strong>，因为数据得不到保存；</p>
+<p>变量定义的一般形式就是：&lt;类型名称&gt;  &lt;变量名称&gt;； <br>
+int就是一种类型名称，除此之外还有很多种类型名称；<br>
+变量名称自己任意取，只能由字母、数字和下划线 _ 组成，数字不可以出现在第一个位置上，<strong>区分大小写</strong>；<br>
+此外，C语言的关键字（如int）不可以用作变量名称。</p>
+<p>利用变量来储存数据时，常用赋值运算符“=”；<br>
+在C语言中，<strong>“=”不表示相等关系，而是赋值动作，是动态过程；</strong></p>
+<blockquote>
+<p>如 int a = 114 ；就表示把114储存在a这个变量中，并不代表a和114相等；</p></blockquote>
+<p>除此之外，还可以用scanf一次输入多个变量或者常量，或者是用printf展示多个变量，如以下的例子：(int.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk1</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="c1">//定义变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">atk2</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">ATK3</span> <span class="o">=</span> <span class="mi">10</span> <span class="p">;</span><span class="c1">//定义常量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">originalhp</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have 100 hp now.</span><span class="se">\n</span><span class="s">There have 3 players that will attack me.</span><span class="se">\n</span><span class="s">We have known player3&#39;s attack is 10.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player1&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player2&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">hp</span> <span class="o">=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="n">atk1</span> <span class="o">-</span> <span class="n">atk2</span> <span class="o">-</span> <span class="n">ATK3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK,Now I only have %d-%d-%d-%d=%d hp.</span><span class="se">\n</span><span class="s"> &#34;</span><span class="p">,</span><span class="n">originalhp</span><span class="p">,</span><span class="n">atk1</span><span class="p">,</span><span class="n">atk2</span><span class="p">,</span><span class="n">ATK3</span><span class="p">,</span><span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>int</strong>为定义变量，不必多说；<br>
+<strong>const int</strong>为定义常量,用const int定义的常量数值永远不会发生变化，因此常用大写字母表示(ATK3)；<br>
+如果想要强行用赋值表达式改变常量数值，会报错；   <br>
+const int 的意义在于给予常数名字，从而增强代码的可读性； <br>
+如ATK3即玩家3的攻击，它的数值为10；如想修改玩家3的攻击，只需找到ATK3，而不是10；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have 100 hp now.</span><span class="se">\n</span><span class="s">There have 3 players that will attack me.</span><span class="se">\n</span><span class="s">We have known player3&#39;s attack is 10.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player1&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player2&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span> <span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里连续使用多个scanf函数，以输入两名玩家的攻击。<br>
+注意：在函数scanf中，只有输入数据并按回车后，才会执行下面的代码；
+同理，碰到scanf后，会暂停读后面的代码；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">hp</span> <span class="o">=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="n">atk1</span> <span class="o">-</span> <span class="n">atk2</span> <span class="o">-</span> <span class="n">ATK3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK,Now I only have %d-%d-%d-%d=%d hp.</span><span class="se">\n</span><span class="s"> &#34;</span><span class="p">,</span><span class="n">originalhp</span><span class="p">,</span><span class="n">atk1</span><span class="p">,</span><span class="n">atk2</span><span class="p">,</span><span class="n">ATK3</span><span class="p">,</span><span class="n">hp</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的printf一次展示了多个变量； <br>
+想输出几个变量，就在前面放入几个 %d ，用 %d 代替要展示的变量；<br>
+相应地，在后面，要填入等量的变量，中间用逗号隔开，注意变量之间的顺序；</p>
+<p>一种代码运行示例：</p>
+<blockquote>
+<p>I have 100 hp now.<br>
+There have 3 players that will attack me.<br>
+We have known player3&rsquo;s attack is 10.<br>
+input player1&rsquo;s attack:20<br>
+input player2&rsquo;s attack:30<br>
+(<em>20 和 30 为运行时自己输入，可更改。</em>)<br>
+OK,Now I only have 100-20-30-10=40 hp.</p></blockquote>
+<h2 id="更多变量类型">更多变量类型
+</h2><p>在生活中，常用到小数；<br>
+例如 10/3 ，结果为3.33333333（循环）;<br>
+但如用C语言计算，如 <em>printf(&quot;%d\n&quot;,10/3)</em> ，答案却是3！</p>
+<p>这是在C语言中，整数的运算结果只能是整数；<br>
+因为10和3都是整数，所以，3.33333333（循环）进行了向下取整，得到10/3=3。<br>
+如此，便会得到10/3*3=9这样的离谱结果！</p>
+<p>此时，有一个解决方案，就是利用C语言中的浮点数。
+浮点数就是带小数点的数值。浮点这个词的本意就是指小数点是浮动的，
+是计算机内部表达非整数（包含分数和无理数）的一种方式。</p>
+<p>如下面的例子：(divider.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//dividend 被除数	divisor 除数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;It&#39;s a calculator for division.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input dividend and divisor in order:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d %d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span><span class="mf">1.0</span><span class="o">/</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d÷%d=%d...%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d÷%d=%f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">g</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以10/3为例，得到的结果为：</p>
+<blockquote>
+<p>10÷3=3&hellip;1 ；<br>
+10÷3=3.333333 ；</p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>与int类似，double也是类型名称；<br>
+只不过int类型的变量始终为整数，而double类型的变量始终为浮点数；<br>
+因此，初始值a=b=c=d=e=f=0;<br>
+而g=0.000000（其实还有更多位，但只显示6位小数）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">e</span> <span class="o">*</span><span class="mf">1.0</span><span class="o">/</span> <span class="n">f</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，<strong>不能直接写 g = e / f ;</strong><br>
+因为上面提到，整数的运算结果只能是整数；<br>
+而 e 和 f 都是 int 类型的变量，显然会抹掉结果的小数部分；<br>
+这样，即使 g 是 double 类型的变量，也不会得到正确结果；</p>
+<blockquote>
+<p>比如，当 e=10 ，f=3 时，显示 10÷3=3.000000 ;</p></blockquote>
+<p>而不幸的是，虽然问题出在 a 和 b 的类型名称 int 上，更改 int 为 double <strong>并不能</strong>解决问题;<br>
+因为，这样会让 e 变为10.000000， f 变为3.000000；
+显示的会是：</p>
+<blockquote>
+<p>10.000000÷3.000000=3.333333；</p></blockquote>
+<p>虽然结果对了，但是我输入的是整数，来这么多小数干啥！而且<strong>浮点数取余也会出错</strong>；</p>
+<p>因此，我们不更改 int 为 double ，而是 <strong>e * 1.0</strong> ；
+这样既利用1.0这个浮点数将结果设置为浮点数 3.333333 ，又不会影响结果；最终显示：</p>
+<blockquote>
+<p>10÷3=3.333333</p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d÷%d=%f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">g</span> <span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同理，在使用浮点数变量时，函数printf和scanf也有对应的改变；
+printf中 <strong>%d 变为 %f</strong> ；scanf中 <strong>%d 变为 %lf</strong> ；</p>
+<h3 id="用了d会发生什么">用了%d会发生什么
+</h3><p>如果在 double 类型的变量中，用了%d会发生什么?<br>
+下面是关于上述问题的探究。</p>
+<p>1.编写以下代码(%d-test.c)，输入1，观察输出结果；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">a</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.改变变量类型名称，printf，scanf，重复上述操作</p>
+<p>3.输出结果记录如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>定义</th>
+          <th>scanf</th>
+          <th>printf</th>
+          <th>输入<em>1</em>后的输出</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>int</td>
+          <td>%d</td>
+          <td>%d</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>int</td>
+          <td>%d</td>
+          <td>%f</td>
+          <td>0.000000</td>
+      </tr>
+      <tr>
+          <td>int</td>
+          <td>%lf</td>
+          <td>%d</td>
+          <td>0（代码报错）</td>
+      </tr>
+      <tr>
+          <td>int</td>
+          <td>%lf</td>
+          <td>%f</td>
+          <td>0.000000（代码报错）</td>
+      </tr>
+      <tr>
+          <td>double</td>
+          <td>%d</td>
+          <td>%d</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>double</td>
+          <td>%d</td>
+          <td>%f</td>
+          <td>-92559592117457364459447783688012762948756726027711679117131776.000000(<em>就离谱</em>)</td>
+      </tr>
+      <tr>
+          <td>double</td>
+          <td>%lf</td>
+          <td>%d</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>double</td>
+          <td>%lf</td>
+          <td>%f</td>
+          <td>1.000000</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>结论：只有 printf 和 scanf 与变量类型<strong>配套</strong>，才能输出正确结果，否则输出<strong>离谱结果</strong>！</p>
+<h2 id="数据类型">数据类型
+</h2><p>我们已经知道：C语言是有类型的语言； <br>
+C语言中的类型包含整数类型、浮点数类型、字符类型、逻辑类型、以及指针和自定义类型；
+接下来将详细讲解整数类型、浮点数类型、字符类型和逻辑类型；
+指针和自定义类型放到后面再讲；</p>
+<h3 id="整数类型">整数类型
+</h3><p>整数包括5种类型；<br>
+分别是 short char int long 和 long long ；
+它们的字节数不同；<br>
+char      1 (8 bit)<br>
+short     2<br>
+int       取决于编译器类型；一般为4个字节；<br>
+long      4<br>
+longlong  8
+具体可通过sizeof函数查验。<br>
+以int类型为例：(sizeof.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到输出结果是4；代表本编译器int类型变量为4个字节；</p>
+<p>bit是什么呢？
+就是二进制中的一个数，因此8个二进制数就表示一个字节；</p>
+<h4 id="补码">补码
+</h4><p>在计算机内部，一切都是二进制数，所有数都可以用二进制数表达；<br>
+那么，负数如何表达?</p>
+<blockquote>
+<p>答：补码</p></blockquote>
+<p><strong>一个正数的相反数与其相加可以得到0</strong>；<br>
+利用这个特性可以用补码来表达二进制下的负数；</p>
+<blockquote>
+<p>例如，对于char类型的变量，因为是一个字节，所以可以表达2^8=256个数；比如1是0000 0001；<br>
+已知-1+1=0；那么与0000 0001相加等于0的自然就是-1；<br>
+事实上，对于char类型的变量，我们只需得到<strong>八位是零</strong>即可，剩下一位会<strong>溢出</strong>；<br>
+因此，相加等于1 0000 0000即可；
+所以-1就是1111 1111，它就是0000 0001的补码；</p></blockquote>
+<p>这样做，会使变量在<strong>正数范围</strong>表达的数<strong>变少</strong>；<br>
+比如1111 1111如不当作补码看待，就是255；<br>
+为了不重复，char类型的变量范围将从0<del>255变为-128</del>127；<br>
+其中-128是1000 0000；127是0111 1111；<br>
+以此类推，short可以表达-32768~32767的整数;<br>
+而int、long、long long就更多了；<br>
+一个数的正负，<strong>主要看最高位</strong>，若为1则是负数，若为0则是正数或0；</p>
+<p>如果想让char类型的变量范围变回0~255，可以在前面加上<strong>unsigned</strong>；<br>
+比如，unsigned char的1111 1111 表达的就是255；
+但它仍不能表达高于255的数；</p>
+<p>如果超出了数据范围进行运算，变量可能会越界并溢出；
+如下面的例子(full.c)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">127</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;a=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果：</p>
+<blockquote>
+<p>a = -128；</p></blockquote>
+<p>这是因为0111 1111 + 0000 0001 = 1111 1111<br>
+而1111 1111 根据补码就是-128；<br>
+同理，也可以得到 -128+1=0这样的离谱结果；</p>
+<p>在初始化变量的值时，输入的值默认为int类型；
+如果想要输入其它形式，可以加上后缀字母；
+比如，加上u可以输出unsigned；加上l可以输出long和longlong；<br>
+此时可以省略int；</p>
+<p>除了后缀，数字还可以加上前缀；
+前缀一般表示数的进制；
+比如八进制在数字前面加上0，十六进制在数字前面加上0x；</p>
+<blockquote>
+<p>比如,输入012,就是十进制的10;<br>
+输入0x12，就是十进制的18；</p></blockquote>
+<p>对于在scanf和printf中整数的输入输出，之前提到了%d；
+事实上，一共有4种形式：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>%d</th>
+          <th>%u</th>
+          <th>%ld</th>
+          <th>%llu</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>int</td>
+          <td>unsigned (int)</td>
+          <td>long long (int)</td>
+          <td>unsigned long long (int)</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>其中字节小于等于int的变量，即char、short、int都按int类型输入输出；<br>
+字节大于int的变量，即long和long long都按long long类型输出；</p>
+<p>此外，还有%o和%x，它们分别表示八进制数和十六进制数，且输出的数不带有前缀；</p>
+<h3 id="浮点数类型">浮点数类型
+</h3><p>在数据类型中，与整数相对的就是浮点数；<br>
+浮点数包括三种类型，分别是：float、double、long double；<br>
+它们的内存分别是8个字节、16个字节、32个字节；<br>
+由于long double极少用到，这里只介绍float和double；</p>
+<p>float变量的范围为  ±(1.2e-38<del>3.4e38)和0；<br>
+double变量的范围为 ±(2.2e-308</del>1.79e308)和0；<br>
+这代表它们在极其接近0的部分仍有一小部分数无法表达（不包括0）；</p>
+<p>此外，浮点数可以输出 ±inf 和 nan；<br>
+inf即infinite，即无穷大；</p>
+<blockquote>
+<p>与一般的算数规则不同，正数除以0可以得到+inf，负数除以0可以得到-inf；</p></blockquote>
+<p>nan即not a number，表示非数；即不存在的数；</p>
+<blockquote>
+<p>0除以0可以得到nan；</p></blockquote>
+<p>另外，由于计算机内部的数均为二进制数，对于小数位数过多的数，计算机只能以近似的数去拟合；<br>
+这就是说，浮点数的范围区间并不是连续的，而是离散的；<br>
+拟合的精度有限。所以把浮点数准确的小数位数称为有效位数；
+float的有效位数为7，double的有效位数为15；
+所以double又叫“双精度浮点数”；
+因此，当两个浮点数的差小于1e-7时，就可以认为它们是相等的了；<br>
+用 == 判定两个浮点数相等反而是错误的；</p>
+<p>与整数类似，浮点数输入输出也有其特定形式；
+float输入用%f，输出也用%f；
+double输入用%lf，输出用%f；</p>
+<p>此外，还可以用%e输出，此时输出的是浮点数的科学计数法；
+浮点数输入可直接使用科学计数法形式；</p>
+<p>浮点数的二进制表达形式一般如下：<br>
+以double为例，它由64bit；
+第一位（最高位）用来记录数的正负（补码）；
+2-12位用来记录浮点数的数量级；<br>
+后面的位用来表示浮点数的有效数字；<br>
+由于用来表达有效数字的bit终究是有限的，所以在小数位数过多时会产生误差；</p>
+<p>正如整数输入的类型默认为int，浮点数输入的类型默认为double；
+想要表达float可以在数字后面加上f；</p>
+<p>如果没有特殊需要，整数类型用int，浮点数类型用float就行了；</p>
+<h3 id="字符类型">字符类型
+</h3><p>char除了表示整数，还可以表示字符；<br>
+因为char是character的缩写；<br>
+除了字母、符号，数字同时也可以是字符；</p>
+<p>输入输出char类型变量可以使用**%c**；</p>
+<p>由于计算机内部全部是二进制数，因此要想办法把字符转换为二进制数；<br>
+因此要使用ASCII编码，每个字符与ASCII中的一个数字编码一一对应；<br>
+再将ASCII编码转换为二进制数，就能实现字符在计算机内部的表达；</p>
+<p>想要初始化char类型的变量为字符，不管它是不是数字，都必须加上单引号； ‘1’，以将字符变量和一般变量做区分；<br>
+如果数字没加单引号，char将会存储数字对应的ASCII编码的字符；<br>
+如果非数字没加单引号，如果这不是一个变量，<strong>会报错</strong>；<br>
+值得一提的是，‘’也是一个字符，即使单引号里面没有任何东西；<br>
+它的ASCII码是0；</p>
+<p>字符也可以进行计算，但实际计算的是字符的ASCII编码；
+比如， 一个字符加一个数字得到ASCII码表中加上那个数之后的字符；
+两个字符运算，先将字符转换为ASCII编码，算完后再转换为字符；
+如下面的例子(char.c)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">x</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">y</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span><span class="o">-</span><span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%c</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果：</p>
+<blockquote>
+<p>x=‘b&rsquo;；y=1</p></blockquote>
+<p>除此之外，还有一类特殊的字符，称为“逃逸字符”；<br>
+它们以反斜杠 \ 开头，作用是控制 <strong>printf</strong> 输出的内容；
+逃逸字符主要包括以下这些：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>\b</th>
+          <th>\ &quot;</th>
+          <th>\t</th>
+          <th>\ '</th>
+          <th>\n</th>
+          <th>\ \</th>
+          <th>\r</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>回退一格</td>
+          <td>双引号</td>
+          <td>到下一个表格位</td>
+          <td>单引号</td>
+          <td>换行</td>
+          <td>反斜杠本身</td>
+          <td>回车</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>其中\t可以起到让数据在表格位对齐的作用（即输入一个TAB键）；</p></blockquote>
+<h4 id="类型转换">类型转换
+</h4><p>类型转换分为自动类型转换和强制类型转换；<br>
+当运算符(双目)的两个变量类型不同时，会发生自动类型转换；<br>
+自动类型转换很简单，一般是把小的往大的转换；<br>
+比如把整数转换为浮点数，内存小的转换为内存大的；</p>
+<p>有时，我们需要在各个变量类型之间做转换；
+这时，我们就要用到强制类型转换符；
+它的格式是 （类型名）值；<br>
+如下面的例子：</p>
+<blockquote>
+<p>int a;<br>
+a= (int) 3.5;<br>
+则a的值为3；</p></blockquote>
+<p>同时强制类型转换也是一个运算符；<br>
+它的优先级为1，比任何运算符都高；</p>
+<h3 id="bool类型">bool类型
+</h3><p>boll类型更像是逻辑类型。它的值<strong>只能是0和1</strong>；<br>
+0非1是；<br>
+因此，使用bool类型可以加快代码运行速度；</p>
+<h2 id="c语言中的简单运算">C语言中的简单运算
+</h2><h3 id="数学运算">数学运算
+</h3><p>一个表达式是一系列<strong>运算符</strong>和<strong>算子</strong>的组合，用来计算一个值；<br>
+<strong>运算符</strong>是指进行运算的动作；<br>
+<strong>算子</strong>是指参与运算的值，这个值可能是<strong>常数</strong>，也可能是<strong>变量</strong>，还可能是一个函数的<strong>返回值</strong>；</p>
+<p>运算符有很多种，比如 <strong>+ - * / %</strong> 都是运算符；<br>
+当多个运算符出现在同一个表达式中时，是如何进行运算的呢？<br>
+类似于“先乘除，后加减”，运算符之间也有<strong>优先级</strong>，用1，2，3&hellip;表示，<strong>数字小的优先级高</strong>；<br>
+下面是一些运算符的优先级：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>优先级</th>
+          <th>运算符</th>
+          <th>运算</th>
+          <th>结合关系</th>
+          <th>举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>()</td>
+          <td>括号</td>
+          <td>自左向右</td>
+          <td>a(b+c)</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>+</td>
+          <td>单目不变</td>
+          <td>自右向左</td>
+          <td>a*+b</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>-</td>
+          <td>单目取负</td>
+          <td>自右向左</td>
+          <td>a*-b</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>++</td>
+          <td>自增</td>
+          <td>自右向左</td>
+          <td>a++</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>&ndash;</td>
+          <td>自减</td>
+          <td>自右向左</td>
+          <td>a&ndash;</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>*</td>
+          <td>乘</td>
+          <td>自左向右</td>
+          <td>a*b</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>/</td>
+          <td>除</td>
+          <td>自左向右</td>
+          <td>a/b</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>%</td>
+          <td>取余</td>
+          <td>自左向右</td>
+          <td>a%b</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>+</td>
+          <td>加</td>
+          <td>自左向右</td>
+          <td>a+b</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>-</td>
+          <td>减</td>
+          <td>自左向右</td>
+          <td>a-b</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>=</td>
+          <td>赋值</td>
+          <td>自右向左</td>
+          <td>a=b</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>+=</td>
+          <td>加法赋值</td>
+          <td>自右向左</td>
+          <td>a+=b</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>-=</td>
+          <td>减法赋值</td>
+          <td>自右向左</td>
+          <td>a-=b</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>*=</td>
+          <td>乘法赋值</td>
+          <td>自右向左</td>
+          <td>a*=b</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>/=</td>
+          <td>除法赋值</td>
+          <td>自右向左</td>
+          <td>a/=b</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>%=</td>
+          <td>取余赋值</td>
+          <td>自右向左</td>
+          <td>a%=b</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>运算符可以以<strong>算子数目</strong>分类；<br>
+单目运算符指只有一个算子的运算符，此外还有双目和三目运算符；<br>
+一般来说，单目运算符的优先级更高；</p>
+<p><strong>单目不变</strong>和<strong>单目取负</strong>是指对它右边的数不变或取负；
+如 a*-b ，即a乘以b的相反数；
+因此它们的优先级最高；</p>
+<p>结合关系是当<strong>优先级相等</strong>时<strong>运算的顺序</strong>；例：</p>
+<blockquote>
+<p>a/b*c即为a/b后，再乘以c；<br>
+&ndash;a即-(-a)，因为单目取负结合关系为<strong>自右向左</strong>；<br>
+a=b=c 即先把c的值赋给b，再把b的值赋给a，因为赋值运算符结合关系为<strong>自右向左</strong>；</p></blockquote>
+<p>优先级一致的运算符结合关系<strong>也相同</strong>；</p>
+<p>此外，还有复合赋值和自增自减运算符；</p>
+<p>赋值运算符包含 *<em>+= -= <em>= /=</em></em> ，它们的作用是快速将变量变成新的值；</p>
+<blockquote>
+<p>如 a+=1 ，等价于 a = a + 1 ；</p></blockquote>
+<p>另外，要注意的是，*=和/=在使用时，由于运算优先级，会先将右边的结果算完再赋值；</p>
+<blockquote>
+<p>如 a *= 6+12 等价于 a *=(6+12) 等价于 a = a * (6+12);</p></blockquote>
+<p>自增自减运算符可快速将变量的值变化1；</p>
+<blockquote>
+<p>如 a++ 等价于 a+=1 等价于 a = a + 1 ：</p></blockquote>
+<p>此外，又有 <strong>a++</strong> 和 <strong>++a</strong> 两种表达方式；<br>
+a++的值是a加1<strong>以前</strong>的值，而++a的值是加了1<strong>以后</strong>的值；<br>
+无论哪个，a自己的值都加了1了；
+具体，可以看下面的例子：(Self-incrementing.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;a=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;a++=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="o">++</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;++a=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="o">++</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果：</p>
+<blockquote>
+<p>a=1<br>
+a++=1<br>
+++a=2</p></blockquote>
+<p>这就是因为++a先把值赋给了a再参与运算；
+而a++先参与运算再赋值；
+故 a++ =1；<strong>但此时a的值已经是2了</strong>；</p>
+<p>另外，表达式在使用时应该尽量简便；
+应避免使用复杂的表达式，而是拆成多个简单的，便于我们理解。<br>
+像 <em>++a++</em> 这样的就是典型的<strong>错误案例</strong>；</p>
+<h3 id="关系运算">关系运算
+</h3><p>if函数离不开的就是关系运算符；以下是常见的关系运算符：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>优先级</th>
+          <th>运算符</th>
+          <th>运算</th>
+          <th>结合关系</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>6</td>
+          <td>&gt;</td>
+          <td>大于</td>
+          <td>从左向右</td>
+          <td>a&gt;b</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>&gt;=</td>
+          <td>大于或等于</td>
+          <td>从左向右</td>
+          <td>a&gt;=b</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>&lt;</td>
+          <td>小于</td>
+          <td>从左向右</td>
+          <td>a&lt;b</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>&lt;=</td>
+          <td>小于或等于</td>
+          <td>从左向右</td>
+          <td>a&lt;=b</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>==</td>
+          <td>等于</td>
+          <td>从左向右</td>
+          <td>a==b</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>!=</td>
+          <td>不等于</td>
+          <td>从左向右</td>
+          <td>a!=b</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>当关系运算符所在的关系式<strong>为真</strong>时，输出1，反之输出0；
+实际上，if函数等正是通过检验括号内<strong>是否为0</strong>来决定要不要进行下面的内容的；</p>
+<p>注意：<strong>仍然遵循</strong>从左至右的结合关系；</p>
+<blockquote>
+<p>例如 5&gt;4&gt;3  -&gt;  1&gt;3  -&gt;  0</p></blockquote>
+<p>但 5&gt;3==4&gt;2 却是另一种算法，因为等于和不等于的<strong>优先级略低</strong>；
+因此 5&gt;3==4&gt;2 等价于 1==1 ；</p>
+<h3 id="逻辑运算">逻辑运算
+</h3><p>逻辑运算符如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>优先级</th>
+          <th>运算符</th>
+          <th>运算</th>
+          <th>结合关系</th>
+          <th>举例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2</td>
+          <td>!</td>
+          <td>逻辑非</td>
+          <td>从右向左</td>
+          <td>!a</td>
+      </tr>
+      <tr>
+          <td>11</td>
+          <td>&amp;&amp;</td>
+          <td>逻辑与</td>
+          <td>从左向右</td>
+          <td>a&amp;&amp;b</td>
+      </tr>
+      <tr>
+          <td>12</td>
+          <td>||</td>
+          <td>逻辑或</td>
+          <td>从左向右</td>
+          <td>a||b</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>逻辑运算符主要检测其附近的表达式的值<strong>是否为0</strong>；<br>
+对于逻辑与，只有两边的表达式结果<strong>均不为0</strong>时，才输出1；若有一个是0，则输出0；<br>
+对于逻辑或，只要两边的表达式有一个结果不是0，就输出1；只有两个<strong>均是0</strong>时才输出0；<br>
+对于逻辑非，它右边的表达式结果<strong>为0</strong>则输出1；<strong>不为0</strong>则输出0；</p>
+<p>例如</p>
+<blockquote>
+<p>2&amp;&amp;0=0；3||0=1；!4=0；</p></blockquote>
+<p>注意：计算机在进行&amp;&amp;和||的运算时，若左边边的值足以判定结果为1还是0时，就不会看右边了！<br>
+这种情况被称为<strong>短路</strong>。<br>
+对于&amp;&amp;，左边是0时就不做右边了； <br>
+对于||，左边是非0时就不做右边了；<br>
+具体可以看下面的例子：(logic.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">b</span><span class="o">+=</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到b的值仍然为0，b+=1<strong>并没有执行</strong>；<br>
+为了避免短路，应该<strong>避免在逻辑运算中插入赋值运算</strong>；</p>
+<h3 id="条件运算符">条件运算符
+</h3><p>它是<strong>唯一</strong>的<strong>三目运算符</strong>，其实也非常简单；
+格式如下：</p>
+<blockquote>
+<p>a ? b : c ;</p></blockquote>
+<p>可翻译为判断a是否成立，<strong>若是，进行b；若否，进行c</strong>；<br>
+作为运算符，它的运算优先级为13，仅仅高于一系列赋值运算符；</p>
+<h3 id="逗号运算符">逗号运算符
+</h3><p>逗号用来连接两个表达式，并以<strong>其右边的表达式的值作为它的结果</strong>。<br>
+逗号的优先级是所有的运算符中最低的，所以它两边的表达式会先计算；<br>
+逗号的组合关系是<strong>自左向右</strong>，所以左边的表达式会先计算，而右边的表达式的值就留下来作为逗号运算的结果。<br>
+<del>说实话这个运算符没什么用</del></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c-c&#43;&#43;/">C/C&#43;&#43;</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/readme/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/readme/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-00.简介"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-00.简介</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/01.helloworld/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/01.helloworld/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-01.hello world"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-01.hello world</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/02.i-o/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/02.i-o/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-02.输入输出"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-02.输入输出</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/04.choice-circle/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/04.choice-circle/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-04.条件与循环"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-04.条件与循环</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/05.function/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/05.function/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-05.函数"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-05.函数</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            1333 - 
+        
+        2025 solxr
+    </section>
+    
+    <section class="powerby">
+        
+            hello! <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.7a29dff201ee0368c44e0af4f547b64b31396aabcb62c662e5b8a998f20a8812.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

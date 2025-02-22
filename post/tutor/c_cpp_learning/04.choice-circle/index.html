@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="C分支与循环结构">
+<title>C/C&#43;&#43;基础-04.条件与循环</title>
+
+<link rel='canonical' href='http://localhost:1313/post/tutor/c_cpp_learning/04.choice-circle/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="C/C++基础-04.条件与循环">
+<meta property='og:description' content="C分支与循环结构">
+<meta property='og:url' content='http://localhost:1313/post/tutor/c_cpp_learning/04.choice-circle/'>
+<meta property='og:site_name' content='solxr'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C-C&#43;&#43;' /><meta property='article:published_time' content='2025-02-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-20T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/tutor/c_cpp_learning/04.choice-circle/c.png' />
+<meta name="twitter:title" content="C/C++基础-04.条件与循环">
+<meta name="twitter:description" content="C分支与循环结构"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/tutor/c_cpp_learning/04.choice-circle/c.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_376a18d0875bf4d4.png" width="300"
+                            height="201" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌞</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">solxr</a></h1>
+            <h2 class="site-description">33</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TSR-solar/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#ifelse--条件判断">if/else : 条件判断</a></li>
+    <li><a href="#switchcase--条件选择">switch/case : 条件选择</a></li>
+    <li><a href="#whiledo-while-循环操作">while/do-while ：循环操作</a></li>
+    <li><a href="#for--循环计数器">for : 循环计数器</a></li>
+    <li><a href="#breakcontinue--循环控制">break/continue : 循环控制</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/tutor/c_cpp_learning/04.choice-circle/">
+                <img src="/post/tutor/c_cpp_learning/04.choice-circle/c_hu_618700d8cdd69642.png"
+                        srcset="/post/tutor/c_cpp_learning/04.choice-circle/c_hu_618700d8cdd69642.png 800w, /post/tutor/c_cpp_learning/04.choice-circle/c_hu_d7ad109a27778894.png 1600w"
+                        width="800" 
+                        height="432" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-04.条件与循环" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
+                笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/tutor/c_cpp_learning/04.choice-circle/">C/C&#43;&#43;基础-04.条件与循环</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            C分支与循环结构
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 20, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 14 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="条件与循环">条件与循环
+</h1><p>在这一章里面，你将化身数个玩家来攻击<strong>solxr</strong>。<br>
+为了更好的<strong>折磨solxr</strong>，你需要设计一些程序，来模拟<strong>solxr</strong>的<strong>痛苦</strong>；<br>
+可是，在你设计程序的时候，却在面对<strong>选择</strong>和<strong>循环</strong>时无从下手；<br>
+幸运的是，你找到了下面这个教程，来帮助你快速掌握<strong>选择</strong>与<strong>循环</strong>的相应知识；</p>
+<h2 id="ifelse--条件判断">if/else : 条件判断
+</h2><p>编程不能仅限于输入输出，有时还要判断。<br>
+if函数就是用来<strong>做判断</strong>的；<br>
+一个基本的if语句由一个关键字if开头，跟上在圆括号()里的一个表达条件的逻辑表达式；<br>
+然后是一对大括号{}之间的若干条语句；<br>
+具体怎样发挥作用，看下面的例子：(if.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">ATK3</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">DEATH</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">originalhp</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have 100 hp now.</span><span class="se">\n</span><span class="s">There have 3 players that will attack me.</span><span class="se">\n</span><span class="s">We have known player3&#39;s attack is 10.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player1&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player2&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">hp</span> <span class="o">=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="n">atk1</span> <span class="o">-</span> <span class="n">atk2</span> <span class="o">-</span> <span class="n">ATK3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">hp</span><span class="o">&gt;</span> <span class="n">DEATH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK,Now I only have %d-%d-%d-%d=%d hp.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">,</span> <span class="n">atk1</span><span class="p">,</span> <span class="n">atk2</span><span class="p">,</span> <span class="n">ATK3</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Fantastic! I&#39;m still ALIVE!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">else</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK,Now I only have %d-%d-%d-%d=...</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">,</span> <span class="n">atk1</span><span class="p">,</span> <span class="n">atk2</span><span class="p">,</span> <span class="n">ATK3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DEAD!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success!Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入样例1：</p>
+<blockquote>
+<p>10<br>
+20</p></blockquote>
+<p>输出结果1：</p>
+<blockquote>
+<p>OK,Now I only have 100-10-20-10=60 hp.<br>
+Fantastic! I&rsquo;m still ALIVE!</p></blockquote>
+<p>输入样例2：</p>
+<blockquote>
+<p>50<br>
+90</p></blockquote>
+<p>输出结果：</p>
+<blockquote>
+<p>OK,Now I only have 100-50-90-10=&hellip;<br>
+No!!My hp come to the bottom!<br>
+Oops! I DIED!<br>
+Congratulation to your success! Goodbye!!</p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">hp</span><span class="o">&gt;</span> <span class="n">DEATH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK,Now I only have %d-%d-%d-%d=%d hp.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">,</span> <span class="n">atk1</span><span class="p">,</span> <span class="n">atk2</span><span class="p">,</span> <span class="n">ATK3</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Fantastic! I&#39;m still ALIVE!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK,Now I only have %d-%d-%d-%d=...</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">,</span> <span class="n">atk1</span><span class="p">,</span> <span class="n">atk2</span><span class="p">,</span> <span class="n">ATK3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DEAD!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success!Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>if函数如果<strong>条件为真</strong>，则执行大括号里的语句，<strong>否则跳过</strong>，继续执行下面的语句；<br>
+但如果if函数后面<strong>出现了else</strong>，则若不满足条件，就会执行<strong>else大括号里的语句</strong>，保证不会出现遗漏条件的情况；</p>
+<blockquote>
+<p>如上面的if函数，若hp &lt;= 0，会输出死亡对话；否则输出存活对话；
+而下面的if函数，如hp &gt; 0，则无事发生；</p></blockquote>
+<h2 id="switchcase--条件选择">switch/case : 条件选择
+</h2><p>if和else之间可以<strong>嵌套使用</strong>，形成形如下面的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当需要进行多次判断时，常用嵌套的if-else函数来解决；<br>
+但这样做有个坏处，就是会由于多个if的存在使得代码显得非常<strong>杂乱</strong>，还容易出错；<br>
+这时，就可以使用switch函数来解决问题；
+如下面的例子：使用switch函数来判定solxr的血量范围，进而输出对应的对话；(switch.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">ATK3</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">originalhp</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have 100 hp now.</span><span class="se">\n</span><span class="s">There have 3 players that will attack me.</span><span class="se">\n</span><span class="s">We have known player3&#39;s attack is 10.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player1&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player2&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">hp</span> <span class="o">=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="n">atk1</span> <span class="o">-</span> <span class="n">atk2</span> <span class="o">-</span> <span class="n">ATK3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="n">hp</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK,Now I only have %d-%d-%d-%d=&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">,</span> <span class="n">atk1</span><span class="p">,</span> <span class="n">atk2</span><span class="p">,</span> <span class="n">ATK3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="p">(</span><span class="n">level</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="mi">9</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp;</span><span class="se">\n</span><span class="s">I guess you didn&#39;t want to hurt me.</span><span class="se">\n</span><span class="s">thank you very much!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="mi">8</span><span class="o">:</span><span class="k">case</span> <span class="mi">7</span><span class="o">:</span><span class="k">case</span> <span class="mi">6</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp;</span><span class="se">\n</span><span class="s">My hp is still high now!</span><span class="se">\n</span><span class="s">Thanks for your mercy!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="mi">5</span><span class="o">:</span><span class="k">case</span> <span class="mi">4</span><span class="o">:</span><span class="k">case</span> <span class="mi">3</span><span class="o">:</span><span class="k">case</span> <span class="mi">2</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp.</span><span class="se">\n</span><span class="s">It&#39;s really hurt... But I&#39;m still alive!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="mi">1</span><span class="o">:</span><span class="k">case</span> <span class="mi">0</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp;</span><span class="se">\n</span><span class="s">Good! I think I&#39;m so lucky that I made it with such few hp!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;...No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DIED!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success! Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入样例1：</p>
+<blockquote>
+<p>0<br>
+0</p></blockquote>
+<p>输出结果1：</p>
+<blockquote>
+<p>OK,Now I only have 100-0-0-10=90 hp;<br>
+I guess you didn&rsquo;t want to hurt me.<br>
+thank you very much!</p></blockquote>
+<p>输入样例2：</p>
+<blockquote>
+<p>5<br>
+10</p></blockquote>
+<p>输出结果2：</p>
+<blockquote>
+<p>OK,Now I only have 100-5-10-10=75 hp;<br>
+My hp is still high now!<br>
+Thanks for your mercy!</p></blockquote>
+<p>输入样例3：</p>
+<blockquote>
+<p>30<br>
+30</p></blockquote>
+<p>输出结果3：</p>
+<blockquote>
+<p>OK,Now I only have 100-30-30-10=30 hp.<br>
+It&rsquo;s really hurt&hellip; But I&rsquo;m still alive!</p></blockquote>
+<p>输入样例4：</p>
+<blockquote>
+<p>50<br>
+45</p></blockquote>
+<p>输出结果4：</p>
+<blockquote>
+<p>OK,Now I only have 100-50-45-10=-5 hp;<br>
+Good! I think I&rsquo;m so lucky that I made it with such few hp!</p></blockquote>
+<p>输入样例5：</p>
+<blockquote>
+<p>100<br>
+200</p></blockquote>
+<p>输出结果5：</p>
+<blockquote>
+<p>OK,Now I only have 100-100-200-10=&hellip;No!! My hp come to the bottom!<br>
+Oops!I DIED!<br>
+Congratulation to your success! Goodbye!!</p></blockquote>
+<p>这里要根据“我”的剩余血量来触发对话内容，有多个判定节点；<br>
+因此如果要用if函数，就必须要嵌套；<br>
+下面是一种可能的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">hp</span><span class="o">&gt;=</span><span class="mi">90</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">hp</span><span class="o">&gt;=</span><span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">hp</span><span class="o">&gt;=</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">hp</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样写，编译器必须从上读到下，而且我们也难以第一时间读懂代码想表达什么；<br>
+因此，这时，就可以使用<strong>switch函数</strong>来解决问题，这时编译器只需读取一种情况就可以了；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">switch</span> <span class="p">(</span><span class="n">level</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="mi">9</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp;</span><span class="se">\n</span><span class="s">I guess you didn&#39;t want to hurt me.</span><span class="se">\n</span><span class="s">thank you very much!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="mi">8</span><span class="o">:</span><span class="k">case</span> <span class="mi">7</span><span class="o">:</span><span class="k">case</span> <span class="mi">6</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp;</span><span class="se">\n</span><span class="s">My hp is still high now!</span><span class="se">\n</span><span class="s">Thanks for your mercy!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="mi">5</span><span class="o">:</span><span class="k">case</span> <span class="mi">4</span><span class="o">:</span><span class="k">case</span> <span class="mi">3</span><span class="o">:</span><span class="k">case</span> <span class="mi">2</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp.</span><span class="se">\n</span><span class="s">It&#39;s really hurt... But I&#39;m still alive!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="mi">1</span><span class="o">:</span><span class="k">case</span> <span class="mi">0</span><span class="o">:</span><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp;</span><span class="se">\n</span><span class="s">Good! I think I&#39;m so lucky that I made it with such few hp!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DIED!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success! Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>switch函数由<strong>switch</strong> 和 <strong>case</strong> <strong>default</strong> 组成；<br>
+与if一致，switch函数也需要圆括号() ，它会检测圆括号里面的变量数值来执行case里面的内容；<br>
+注：case里面的数必须是正整数，这是switch相对于if的<strong>局限性</strong>；</p>
+<p>对于此代码，我们可以将100种hp换算为10种level，用hp/10就可以了！<br>
+不然，要我写100个case，还不如用if函数！</p>
+<p>case后面也要加大括号{}；<br>
+想要表示一种情况，case和数之间要加空格，之后要有冒号:<br>
+在冒号后面加上想要添加的代码，满足case后就可以执行以下的代码内容；</p>
+<p>在每种case最后，要加上 <strong>break;</strong><br>
+否则就会<strong>直接执行</strong>下一个case里面的内容；<br>
+不过，也可以利用这个特性，<strong>合并多种case</strong>，使它们执行相同的内容；</p>
+<blockquote>
+<p>如上面就将case01；case2345；case678合并了；</p></blockquote>
+<p>在switch函数的最后，还有一个东西，就是<strong>default</strong>； <br>
+当条件<strong>都不满足</strong>case时，执行default里面的内容；<br>
+如果你保证switch函数的所有条件都在你的case里面，<strong>可以不写</strong>default；<br>
+<strong>不然，忘记写了你就等着报错吧！</strong></p>
+<p>小技巧：如果想要使用switch函数，但又<strong>没有正整数</strong>，可以尝试将其化为正整数；<br>
+如利用<strong>关系运算符</strong>输出的结果<strong>只有0和1</strong>，把区间化为整数；</p>
+<h2 id="whiledo-while-循环操作">while/do-while ：循环操作
+</h2><p>无论是if还是switch函数，编译器都<strong>只会读取1次</strong>；<br>
+当需要多次执行判断时，使用if或switch都会显得<strong>非常麻烦</strong>；<br>
+特别是当<strong>不知道判断的次数</strong>时，if和switch都会<strong>无能为力</strong>；<br>
+这时，就需要<strong>while：循环函数</strong>来帮忙；<br>
+如下面的例子，当我们需要攻击多轮且记录solxr被战胜前攻击的回合数时，就需要用到while函数：(while.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">ATK3</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">originalhp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">hp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;There have 3 players that will attack me.</span><span class="se">\n</span><span class="s">We have known player3&#39;s attack is 10.</span><span class="se">\n\n</span><span class="s">input my hp:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">originalhp</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You&#39;re kidding me absolutely! I can&#39;t live with the hp of %d!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">hp</span> <span class="o">=</span> <span class="n">originalhp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">do</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Round %d begin!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have 100 hp now.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player1&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span> <span class="p">(</span><span class="n">atk1</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player2&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span> <span class="p">(</span><span class="n">atk2</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="n">hp</span> <span class="o">=</span> <span class="n">hp</span> <span class="o">-</span> <span class="n">atk1</span> <span class="o">-</span> <span class="n">atk2</span> <span class="o">-</span> <span class="n">ATK3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK;Now I only have&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="n">hp</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">/</span> <span class="n">originalhp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">I guess you didn&#39;t want to hurt me.</span><span class="se">\n</span><span class="s">thank you very much!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">My hp is still high now!</span><span class="se">\n</span><span class="s">Thanks for your mercy!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp.</span><span class="se">\n</span><span class="s">It&#39;s really hurt... But I&#39;m still alive!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">Good! I think I&#39;m so lucky that I made it with such few hp!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="n">n</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Although I don&#39;t want to die now,but I must help you succeed!</span><span class="se">\n</span><span class="s">Keep attacking!</span><span class="se">\n\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;...No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DIED!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You only take %d round(s) to defeat me!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success! Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>while循环包含两个重要组成部分，一是<strong>循环条件</strong>，二是<strong>循环内容</strong>；<br>
+循环条件指判断是否开始或继续循环的内容，需要在while后面用圆括号()括起来，与if类似；<br>
+循环内容也与if类似，用大括号{}括起来；</p>
+<p>循环成功搭建后，只要满足循环条件，就会<strong>不断的执行</strong>循环内容，直到条件不满足为止；
+因此，一定要有条件让系统<strong>有机会脱离循环</strong>，否则就会陷入<strong>死循环</strong>！</p>
+<p>while循环分为两种，一种循环条件写在前；另一种写在后面；<br>
+第一种：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(...)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第二种：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">do</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{...}</span>  
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(...);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在<strong>必须先判定</strong>时，应该用第一种；在<strong>必须要执行一次循环</strong>时，应该用第二种；
+需要注意的是，第二种最后<strong>依然需要分号</strong>，因为结尾不是大括号，<strong>不能成为语句</strong>；</p>
+<p>先看第一个循环：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="n">originalhp</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You&#39;re kidding me absolutely! I can&#39;t live with the hp of %d!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果你没有输入正确的血量，程序就无法继续正常进行；<br>
+因此设置了这个循环来提醒输错的玩家，并引导他们纠正；</p>
+<p>在这个循环中，先判断玩家有没有输对，如果不对，则报错提示玩家正确输入；<br>
+如再次输错，则循环此命令，<strong>直到玩家输对为止</strong>，再执行下面的程序；
+后面关于atk1和atk2的处理也是如此；</p>
+<p>这里一定要先判断，所以使用第一种循环；</p>
+<p>接下来是第二个循环：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Round %d begin!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have %d hp now.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player1&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">atk1</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player2&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">atk2</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">hp</span> <span class="o">=</span> <span class="n">hp</span> <span class="o">-</span> <span class="n">atk1</span> <span class="o">-</span> <span class="n">atk2</span> <span class="o">-</span> <span class="n">ATK3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Now I only have&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="n">hp</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">/</span> <span class="n">originalhp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">I guess you didn&#39;t want to hurt me.</span><span class="se">\n</span><span class="s">thank you very much!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp</span><span class="p">;</span><span class="err">\</span><span class="n">nMy</span> <span class="n">hp</span> <span class="n">is</span> <span class="n">still</span> <span class="n">high</span> <span class="n">now</span><span class="o">!</span><span class="err">\</span><span class="n">nThanks</span> <span class="k">for</span> <span class="n">your</span> <span class="n">mercy</span><span class="o">!</span><span class="err">\</span><span class="n">n</span><span class="s">&#34;, hp);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp.</span><span class="se">\n</span><span class="s">It&#39;s really hurt... But I&#39;m still alive!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d hp</span><span class="p">;</span><span class="err">\</span><span class="n">nGood</span><span class="o">!</span> <span class="n">I</span> <span class="n">think</span> <span class="n">I</span><span class="err">&#39;</span><span class="n">m</span> <span class="n">so</span> <span class="n">lucky</span> <span class="n">that</span> <span class="n">I</span> <span class="n">made</span> <span class="n">it</span> <span class="n">with</span> <span class="n">such</span> <span class="n">few</span> <span class="n">hp</span><span class="o">!</span><span class="err">\</span><span class="n">n</span><span class="s">&#34;, hp);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">n</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Although I don&#39;t want to die now,but I must help you succeed!</span><span class="se">\n</span><span class="s">Keep attacking!</span><span class="se">\n\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="k">while</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>1.先输入玩家1和2的攻击，必须为正，否则报错；<br>
+2.根据玩家123的攻击计算玩家的剩余血量；<br>
+3.输出“我”的剩余血量，并根据“我”的剩余血量来触发对话内容；</p>
+<blockquote>
+<p>（这里没有用switch而选择if else级联的原因是switch函数不好对hp=0的情况进行判定）</p></blockquote>
+<p>4.回合数+1；<br>
+5.若hp&gt;0，提示玩家继续攻击，并<strong>重复1-4步骤</strong>；直到hp&lt;=0为止；<br>
+6.结束循环；</p>
+<p>这里一定要进行第一回合，所以使用第二种循环；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;...No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DIED!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You only take %d round(s) to defeat me!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>	
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success! Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结算阶段，不完成上面的循环无法执行最后的结算代码；<br>
+用printf输出回合数；</p>
+<p>这里展示一种测试时终端输出的样例：</p>
+<blockquote>
+<p>There have 3 players that will attack me.<br>
+We have known player3&rsquo;s attack is 10.</p>
+<p>input my hp:<em>-1</em><br>
+You&rsquo;re kidding me absolutely! I can&rsquo;t live with the hp of -1!!<br>
+Please input it again:<em>5</em><br>
+You&rsquo;re kidding me absolutely! I can&rsquo;t live with the hp of 5!!<br>
+Please input it again:<em>100</em><br>
+OK;<br>
+Round 1 begin!<br>
+I have 100 hp now.<br>
+input player1&rsquo;s attack:<em>-1</em><br>
+I know you don&rsquo;t want to hurt me,but now the attack -1 is too ABNORMAL!<br>
+If you input this atk,it means you want to heal me!I refuse it!!<br>
+Please input it again:<em>0</em><br>
+input player2&rsquo;s attack:<em>-1</em><br>
+I know you don&rsquo;t want to hurt me,but now the attack -1 is too ABNORMAL!<br>
+If you input this atk,it means you want to heal me!I refuse it!! <br>
+Please input it again:<em>0</em> <br>
+OK;Now I only have 90 hp;<br>
+I guess you didn&rsquo;t want to hurt me.<br>
+thank you very much!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 2 begin!<br>
+I have 100 hp now.<br>
+input player1&rsquo;s attack:<em>5</em><br>
+input player2&rsquo;s attack:<em>5</em><br>
+OK;Now I only have 70 hp;<br>
+My hp is still high now!<br>
+Thanks for your mercy!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 3 begin!<br>
+I have 100 hp now.<br>
+input player1&rsquo;s attack:<em>10</em><br>
+input player2&rsquo;s attack:<em>10</em><br>
+OK;Now I only have 40 hp.<br>
+It&rsquo;s really hurt&hellip; But I&rsquo;m still alive!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 4 begin!<br>
+I have 100 hp now.<br>
+input player1&rsquo;s attack:<em>10</em><br>
+input player2&rsquo;s attack:<em>15</em><br>
+OK;Now I only have 5 hp;<br>
+Good! I think I&rsquo;m so lucky that I made it with such few hp!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 5 begin!<br>
+I have 100 hp now.<br>
+input player1&rsquo;s attack:<em>10</em><br>
+input player2&rsquo;s attack:<em>10</em><br>
+OK;Now I only have&hellip;No!!My hp come to the bottom!
+Oops!I DIED!<br>
+You only take 5 round(s) to defeat me!!<br>
+Congratulation to your success! Goodbye!!</p></blockquote>
+<h2 id="for--循环计数器">for : 循环计数器
+</h2><p>在C语言中，除了while循环和do-while循环，还存在第三种循环，即for循环；<br>
+作为最早的循环，for循环结构简单，也更难被理解；<br>
+以下就是一个使用for循环的例子(for.c)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">ATK10</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">sumatk</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">originalhp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">hp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">player</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;There have 10 players that will attack me.</span><span class="se">\n</span><span class="s">We have known player3&#39;s attack is 10.</span><span class="se">\n\n</span><span class="s">input my hp:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">originalhp</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You&#39;re kidding me absolutely! I can&#39;t live with the hp of %d!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">hp</span> <span class="o">=</span> <span class="n">originalhp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">do</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Round %d begin!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have %d hp now.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sumatk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="n">player</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">player</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">player</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player%d&#39;s attack:&#34;</span><span class="p">,</span><span class="n">player</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span><span class="p">(;</span><span class="n">atk</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">;)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sumatk</span> <span class="o">+=</span> <span class="n">atk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sumatk</span> <span class="o">+=</span> <span class="n">ATK10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">hp</span> <span class="o">-=</span> <span class="n">sumatk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK;You hurt me with the sum of %d attack in this round;</span><span class="se">\n</span><span class="s">Now I only have&#34;</span><span class="p">,</span><span class="n">sumatk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="n">hp</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">/</span> <span class="n">originalhp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">I guess you didn&#39;t want to hurt me.</span><span class="se">\n</span><span class="s">thank you very much!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">My hp is still high now!</span><span class="se">\n</span><span class="s">Thanks for your mercy!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp.</span><span class="se">\n</span><span class="s">It&#39;s really hurt... But I&#39;m still alive!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">Good! I think I&#39;m so lucky that I made it with such few hp!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">n</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Although I don&#39;t want to die now,but I must help you succeed!</span><span class="se">\n</span><span class="s">Keep attacking!</span><span class="se">\n\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;...No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DIED!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You only take %d round(s) to defeat me!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success! Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果把玩家人数提升到10位，使用for循环就会显得比while循环更加方便与简洁；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">player</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">player</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">player</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player%d&#39;s attack:&#34;</span><span class="p">,</span><span class="n">player</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">atk</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sumatk</span> <span class="o">+=</span> <span class="n">atk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>for循环在形式上与其它判断语句类似，也是由小括号()和大括号{}组成；<br>
+但不同的是，for循环的小括号里面有3条语句，中间用两个分号隔开；<br>
+即:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">a</span><span class="p">;</span><span class="n">b</span><span class="p">;</span><span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="n">d</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>三条语句分别代表<strong>初始动作</strong>，<strong>循环继续的条件</strong>和<strong>每次循环结束做的动作</strong>；<br>
+大括号里和其它循环相同，都用来做<strong>每次循环中做的动作</strong>；<br>
+例如第一个for，它的流程如下：
+1.初始化player的值为1；<br>
+2.判定player的值是否大于10，若大于，则继续进行下面的步骤，反之直接结束循环；<br>
+3.执行大括号内的代码；<br>
+4.让player的值加1，以便输入下一名玩家的攻击；<br>
+5.<strong>重复2-4步骤</strong>；</p>
+<p>为了理解方便，可将for翻译为“对于”；
+这样，for循环的流程可以理解为：</p>
+<blockquote>
+<p>对于 一开始的player=1，如果player&lt;10，就重复执行大括号里的内容，并让player的值加1，直到player&gt;=10为止；</p></blockquote>
+<p>（注意：循环结束时，<strong>player==11</strong>）<br>
+用字母来表示就是：</p>
+<blockquote>
+<p>对于<br>
+for(a;b;c)<br>
+{d}<br>
+执行顺序为a b d c b d c b d c&hellip;（<strong>直到b不满足为止</strong>）；</p></blockquote>
+<p>此外，for循环小括号里的<strong>三条语句都可以省略</strong>，但是<strong>两个分号不可以省略</strong>；
+如第二个for：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(;</span><span class="n">atk</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">;)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就省略了第一条和第三条语句；</p>
+<p>同为循环，for和while稍加改动就可以等价互换；<br>
+如第二个for：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(;</span><span class="n">atk</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">;)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就和之前的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(;</span><span class="n">atk</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">;)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>完全等价</strong>；</p>
+<p>值得一提的是，for语句在省略第一条和第三条语句的情况下，单词“for”完全可以被平替为单词“while”；</p>
+<p>在有三种循环时，用哪种循环最好呢？<br>
+一般遵循以下原则：<br>
+如果<strong>有固定次数</strong>，用for<br>
+如果<strong>必须执行一次</strong>，用do_while<br>
+如果<strong>必须先进行判断</strong>，用while</p>
+<p>这里展示一种测试时终端输出的样例：</p>
+<blockquote>
+<p>There have 10 players that will attack me.<br>
+We have known player3&rsquo;s attack is 10.</p>
+<p>input my hp:<em>-1</em><br>
+You&rsquo;re kidding me absolutely! I can&rsquo;t live with the hp of -1!!<br>
+Please input it again:<em>5</em><br>
+You&rsquo;re kidding me absolutely! I can&rsquo;t live with the hp of 5!!<br>
+Please input it again:<em>1000</em><br>
+OK;<br>
+Round 1 begin!<br>
+I have 1000 hp now.<br>
+input player1&rsquo;s attack:<em>-1</em><br>
+I know you don&rsquo;t want to hurt me,but now the attack -1 is too ABNORMAL!<br>
+If you input this atk,it means you want to heal me!I refuse it!!<br>
+Please input it again:<em>0</em><br>
+input player2&rsquo;s attack:<em>-1</em><br>
+I know you don&rsquo;t want to hurt me,but now the attack -1 is too ABNORMAL!<br>
+If you input this atk,it means you want to heal me!I refuse it!!<br>
+Please input it again:<em>0</em><br>
+input player3&rsquo;s attack:<em>0</em><br>
+input player4&rsquo;s attack:<em>0</em><br>
+input player5&rsquo;s attack:<em>0</em><br>
+input player6&rsquo;s attack:<em>0</em><br>
+input player7&rsquo;s attack:<em>0</em><br>
+input player8&rsquo;s attack:<em>0</em><br>
+input player9&rsquo;s attack:<em>0</em><br>
+OK;You hurt me with the sum of 10 attack in this round;<br>
+Now I only have 990 hp;<br>
+I guess you didn&rsquo;t want to hurt me.<br>
+thank you very much!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 2 begin!<br>
+I have 990 hp now.<br>
+input player1&rsquo;s attack:<em>10</em><br>
+input player2&rsquo;s attack:<em>10</em><br>
+input player3&rsquo;s attack:<em>10</em><br>
+input player4&rsquo;s attack:<em>10</em><br>
+input player5&rsquo;s attack:<em>10</em><br>
+input player6&rsquo;s attack:<em>10</em><br>
+input player7&rsquo;s attack:<em>10</em><br>
+input player8&rsquo;s attack:<em>10</em><br>
+input player9&rsquo;s attack:<em>10</em><br>
+OK;You hurt me with the sum of 100 attack in this round;<br>
+Now I only have 890 hp;<br>
+My hp is still high now!<br>
+Thanks for your mercy!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 3 begin!<br>
+I have 890 hp now.<br>
+input player1&rsquo;s attack:<em>4</em><br>
+input player2&rsquo;s attack:<em>40</em><br>
+input player3&rsquo;s attack:<em>40</em><br>
+input player4&rsquo;s attack:<em>50</em><br>
+input player5&rsquo;s attack:<em>4</em><br>
+input player6&rsquo;s attack:<em>40</em><br>
+input player7&rsquo;s attack:<em>50</em><br>
+input player8&rsquo;s attack:<em>50</em><br>
+input player9&rsquo;s attack:<em>40</em><br>
+OK;You hurt me with the sum of 328 attack in this round;<br>
+Now I only have 562 hp.<br>
+It&rsquo;s really hurt&hellip; But I&rsquo;m still alive!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 4 begin!<br>
+I have 562 hp now.<br>
+input player1&rsquo;s attack:<em>60</em><br>
+input player2&rsquo;s attack:<em>60</em><br>
+input player3&rsquo;s attack:<em>60</em><br>
+input player4&rsquo;s attack:<em>60</em><br>
+input player5&rsquo;s attack:<em>60</em><br>
+input player6&rsquo;s attack:<em>60</em><br>
+input player7&rsquo;s attack:<em>60</em><br>
+input player8&rsquo;s attack:<em>60</em><br>
+input player9&rsquo;s attack:<em>20</em><br>
+OK;You hurt me with the sum of 510 attack in this round;<br>
+Now I only have 52 hp;<br>
+Good! I think I&rsquo;m so lucky that I made it with such few hp!<br>
+Although I don&rsquo;t want to die now,but I must help you succeed!<br>
+Keep attacking!</p>
+<p>Round 5 begin!<br>
+I have 52 hp now.<br>
+input player1&rsquo;s attack:<em>52</em><br>
+input player2&rsquo;s attack:<em>20</em><br>
+input player3&rsquo;s attack:<em>20</em><br>
+input player4&rsquo;s attack:<em>20</em><br>
+input player5&rsquo;s attack:<em>20</em><br>
+input player6&rsquo;s attack:<em>20</em><br>
+input player7&rsquo;s attack:<em>20</em><br>
+input player8&rsquo;s attack:<em>20</em><br>
+input player9&rsquo;s attack:<em>20</em><br>
+OK;You hurt me with the sum of 222 attack in this round;<br>
+Now I only have&hellip;No!!My hp come to the bottom!<br>
+Oops!I DIED!<br>
+You only take 5 round(s) to defeat me!!<br>
+Congratulation to your success! Goodbye!!</p></blockquote>
+<h2 id="breakcontinue--循环控制">break/continue : 循环控制
+</h2><p>循环在解决实际问题方面有很广泛的应用；<br>
+然而，要想发挥其最大作用，必须引入控制循环的元素，即<strong>break和continue</strong>；</p>
+<blockquote>
+<p>此外，函数goto也可以控制循环，
+但由于其权限太大，可以跳到代码任意位置，破坏了代码的逻辑，故在此不做介绍；</p></blockquote>
+<p>简单来说，函数break可以<strong>跳出</strong>其<strong>所在循环</strong>；<br>
+而函数continue可以无视其所在循环体中接下来的所有内容，<strong>直接进入下一轮循环</strong>；<br>
+（对于for循环，仍会执行圆括号中的<strong>第三条语句</strong>）<br>
+具体可以看下面的例子:(break.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">solution</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">hp</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I have 100 hp now.</span><span class="se">\n</span><span class="s">There have still 3 players that will attack me.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;What&#39;s different is everyone can attck for 1 ~ 10 times;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;But you can&#39;t succeed unless my hp come to exactly 0;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Can you make it?</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">do</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player1&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span> <span class="p">(</span><span class="n">atk1</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player2&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span> <span class="p">(</span><span class="n">atk2</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player3&#39;s attack:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk3</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span> <span class="p">(</span><span class="n">atk3</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now the attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">atk3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">a</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">b</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">atk1</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">atk2</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">atk3</span> <span class="o">==</span> <span class="n">hp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">					<span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="n">solution</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">						<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">					<span class="p">}</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Pity! The players tried for so long... But still can&#39;t succeed!</span><span class="se">\n</span><span class="s">Try it again!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulations!</span><span class="se">\n</span><span class="s">Player1 attack for %d times, Player2 attack for %d times, Player3 attack for %d times can change my hp to exactly 0!</span><span class="se">\n</span><span class="s">YOU WIN!!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里我们要根据三个玩家的攻击来判定是否能刚好战胜“我”；<br>
+而每个人最多能攻击10次；<br>
+因此我们采用穷举法，判定是否有解法符合条件；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">a</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">b</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">atk1</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">atk2</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">atk3</span> <span class="o">==</span> <span class="n">hp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">solution</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上便是具体操作；<br>
+使用<strong>嵌套for循环</strong>，用<strong>排列组合</strong>的方式一个个判定结果是否符合；<br>
+一旦遇到符合的情况，就让<strong>solution=1</strong>，说明可以过关；<br>
+之后，便用break结束循环；</p>
+<p>但要注意的是，函数break只能跳出其<strong>所在循环</strong>，而上面共有3个循环；<br>
+因此，在剩下两个循环下面设置了两个 <code>if (solution == 1)break</code> 语句；<br>
+表明如果找到解法就一次性结束3个循环；<br>
+这样，3个break<strong>接力完成</strong>了对循环的控制；</p>
+<p>附：输入样例和输出结果：<br>
+输入样例1：</p>
+<blockquote>
+<p>3<br>
+5<br>
+7</p></blockquote>
+<p>输出结果1：</p>
+<blockquote>
+<p>Congratulations!<br>
+Player1 attack for 2 times, Player2 attack for 9 times, Player3 attack for 7 times can change my hp to exactly 0!<br>
+YOU WIN!!!</p></blockquote>
+<p>输入样例2：</p>
+<blockquote>
+<p>3<br>
+6<br>
+9</p></blockquote>
+<p>输出结果2：</p>
+<blockquote>
+<p>Pity! The players tried for so long&hellip; But still can&rsquo;t succeed!<br>
+Try it again!</p></blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c-c&#43;&#43;/">C/C&#43;&#43;</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/readme/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/readme/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-00.简介"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-00.简介</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/01.helloworld/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/01.helloworld/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-01.hello world"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-01.hello world</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/02.i-o/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/02.i-o/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-02.输入输出"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-02.输入输出</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/03.data-calc/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/03.data-calc/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-03.数据类型和运算"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-03.数据类型和运算</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/05.function/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/05.function/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-05.函数"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-05.函数</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            1333 - 
+        
+        2025 solxr
+    </section>
+    
+    <section class="powerby">
+        
+            hello! <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.7a29dff201ee0368c44e0af4f547b64b31396aabcb62c662e5b8a998f20a8812.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

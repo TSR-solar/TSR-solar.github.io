@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Python中函数的定义和调用，以及参数和返回值的规则">
+<title>Python基础-06.函数</title>
+
+<link rel='canonical' href='http://localhost:1313/post/tutor/python_learning/06.function/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Python基础-06.函数">
+<meta property='og:description' content="Python中函数的定义和调用，以及参数和返回值的规则">
+<meta property='og:url' content='http://localhost:1313/post/tutor/python_learning/06.function/'>
+<meta property='og:site_name' content='solxr'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Python' /><meta property='article:published_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/tutor/python_learning/06.function/py.png' />
+<meta name="twitter:title" content="Python基础-06.函数">
+<meta name="twitter:description" content="Python中函数的定义和调用，以及参数和返回值的规则"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/tutor/python_learning/06.function/py.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_376a18d0875bf4d4.png" width="300"
+                            height="201" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌞</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">solxr</a></h1>
+            <h2 class="site-description">33</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TSR-solar/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#函数的定义">函数的定义</a></li>
+    <li><a href="#函数的调用">函数的调用</a></li>
+    <li><a href="#函数的参数">函数的参数</a>
+      <ol>
+        <li><a href="#默认值参数">默认值参数</a></li>
+        <li><a href="#可变参数">可变参数</a></li>
+        <li><a href="#关键字参数">关键字参数</a></li>
+        <li><a href="#复杂的传参数情况">复杂的传参数情况</a></li>
+      </ol>
+    </li>
+    <li><a href="#函数的返回值">函数的返回值</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/tutor/python_learning/06.function/">
+                <img src="/post/tutor/python_learning/06.function/py_hu_c39a651de2ddf1ea.png"
+                        srcset="/post/tutor/python_learning/06.function/py_hu_c39a651de2ddf1ea.png 800w, /post/tutor/python_learning/06.function/py_hu_8bd68bee77d538d3.png 1600w"
+                        width="800" 
+                        height="682" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-06.函数" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
+                笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/tutor/python_learning/06.function/">Python基础-06.函数</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Python中函数的定义和调用，以及参数和返回值的规则
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 22, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="函数">函数
+</h1><p>Python内置了很多有用的函数，并且可以定义自己的函数。</p>
+<p>在交互模式中，使用<code>help()</code>可以查看参数对应函数的原型以及用法；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="nb">abs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Help</span> <span class="n">on</span> <span class="n">built</span><span class="o">-</span><span class="ow">in</span> <span class="n">function</span> <span class="nb">abs</span> <span class="ow">in</span> <span class="n">module</span> <span class="n">builtins</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">/</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Return</span> <span class="n">the</span> <span class="n">absolute</span> <span class="n">value</span> <span class="n">of</span> <span class="n">the</span> <span class="n">argument</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="函数的定义">函数的定义
+</h2><p>使用<code>def</code>定义函数；<br>
+当函数重复定义时，取后面一个定义；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该函数用于判断数的正负；</p>
+<h2 id="函数的调用">函数的调用
+</h2><p>在定义函数后可以在后面的程序中调用函数；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>         <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">elif</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>         <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">func</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">func</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">func</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="函数的参数">函数的参数
+</h2><h3 id="默认值参数">默认值参数
+</h3><p>在python中，函数的参数可以有默认值；<br>
+这样，在调用函数时如果少写了参数，就会使用默认值，而不是报错；</p>
+<p>给参数赋值以让参数有默认值；<br>
+比如下面计算两点之间的距离，如果没有足够数量的参数，就会默认为0；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">math</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">dis</span><span class="p">(</span><span class="n">x1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">x2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x1</span><span class="o">-</span><span class="n">x2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mf">1.4142135623730951</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>     
+</span></span><span class="line"><span class="cl"><span class="mf">1.4142135623730951</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="mf">0.0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用默认值参数时要注意，函数的参数必须是不可变对象，否则参数的默认值每次都会改变；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="p">[]):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">return</span> <span class="n">l</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">()</span>   
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时正确做法是将默认值设为<code>None</code>，等到它没有传入参数时才将其变成空列表<code>[]</code>；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">if</span><span class="p">(</span><span class="n">l</span><span class="o">==</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>             <span class="n">l</span><span class="o">=</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">return</span> <span class="n">l</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">add</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="可变参数">可变参数
+</h3><p>可变的是参数的数量，如下面一个函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">sum</span><span class="p">(</span><span class="o">*</span><span class="n">num</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>         <span class="nb">sum</span><span class="o">+=</span><span class="n">i</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>     <span class="k">return</span> <span class="nb">sum</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">75</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="mi">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里通过对参数加<code>*</code>的方式，使得参数变成了元组里面的元素；<br>
+这时无论是传入多少个参数，甚至不传，都不会出现问题；</p>
+<p>此外，序列无法作为函数参数，但是给序列加上<code>*</code>就可以将序列解开为多个元素；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="mi">6</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="关键字参数">关键字参数
+</h3><p>关键字参数在<strong>函数调用</strong>的时候，相对于位置参数而言的；<br>
+位置参数就是常规的调用参数方式，将参数按照位置顺序依次赋值给函数里的参数；</p>
+<p>这样有个坏处，就是参数太多容易搞混位置；<br>
+比如前面的<code>dis(x1,y1,x2,y2)</code>函数，<code>y1</code>和<code>x2</code>的位置就容易搞混；</p>
+<p>而关键字参数则通过指明形参的形式来定向给某参数赋值，无视位置限制；<br>
+还可以搭配默认值参数使用；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">math</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">dis</span><span class="p">(</span><span class="n">x1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">y1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">x2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>      <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x1</span><span class="o">-</span><span class="n">x2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>    
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">y1</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">x2</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">y2</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mf">5.0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是要注意的是，一旦前面使用了关键字参数，后面就不能再使用位置参数；
+比如下面的调用，由于前面2个参数是关键字参数，所以后面2个参数不能是位置参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">y1</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dis</span><span class="p">(</span><span class="n">y1</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">x1</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                     <span class="o">^</span>
+</span></span><span class="line"><span class="cl"><span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">positional</span> <span class="n">argument</span> <span class="n">follows</span> <span class="n">keyword</span> <span class="n">argument</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是在关键字参数前面使用位置参数是不影响的；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">y2</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">x2</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mf">3.605551275463989</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外，还可以使用关键字参数向函数传入没有的参数，此时需要用<code>**</code>来收集成一个<strong>字典</strong>；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name:&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;age:&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s1">&#39;other:&#39;</span><span class="p">,</span> <span class="n">kw</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时，<code>name</code>，<code>age</code>以外的关键字参数参数都会被收集进字典<code>kw</code>中；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s1">&#39;Beijing&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">Bob</span> <span class="n">age</span><span class="p">:</span> <span class="mi">35</span> <span class="n">other</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Beijing&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;Adam&#39;</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="n">job</span><span class="o">=</span><span class="s1">&#39;Engineer&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">Adam</span> <span class="n">age</span><span class="p">:</span> <span class="mi">45</span> <span class="n">other</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;job&#39;</span><span class="p">:</span> <span class="s1">&#39;Engineer&#39;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>和可变参数类似，也可以先组装出一个字典，然后，把该字典转换为关键字参数传进去：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Beijing&#39;</span><span class="p">,</span> <span class="s1">&#39;job&#39;</span><span class="p">:</span> <span class="s1">&#39;Engineer&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s1">&#39;Jack&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">Jack</span> <span class="n">age</span><span class="p">:</span> <span class="mi">24</span> <span class="n">other</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Beijing&#39;</span><span class="p">,</span> <span class="s1">&#39;job&#39;</span><span class="p">:</span> <span class="s1">&#39;Engineer&#39;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="复杂的传参数情况">复杂的传参数情况
+</h3><p>默认值参数、可变参数、关键字参数相结合可以极大地拓展函数的功能；<br>
+但是，也极大地复杂了函数的理解难度以及参数传入的规则；<br>
+因此在这里展示复杂的传入参数情况；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a =&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b =&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;c =&#39;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="s1">&#39;args =&#39;</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="s1">&#39;kw =&#39;</span><span class="p">,</span> <span class="n">kw</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">f1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">args</span> <span class="o">=</span> <span class="p">()</span> <span class="n">kw</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">f1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span> <span class="n">args</span> <span class="o">=</span> <span class="p">()</span> <span class="n">kw</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">f1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span> <span class="n">kw</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">f1</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">99</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span> <span class="n">kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">99</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">f2</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">99</span> <span class="n">kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ext&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>当参数个数较少时，会优先传给必有参数；</li>
+<li>如果还是不够，导致非默认值必有参数没有赋值，则报错；</li>
+<li>如果必有的参数（可变参数之前）满足了，剩下的参数都会传给可变参数，而可变参数之后的参数只能通过默认值参数来传；</li>
+</ol>
+<h2 id="函数的返回值">函数的返回值
+</h2><p>函数的返回值只有1个，没有返回值指的是返回值为<code>None</code>的情况；<br>
+但是，可以通过返回元组的方式返回多个值；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">twice</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">twice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">=</span><span class="n">twice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="mi">8</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，返回的其实是一个元组，只是省略了括号；
+相应地，也可以通过省略括号的元组来接收返回值；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">twice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl"><span class="mi">8</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/python/">Python</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/python_learning/readme/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/python_learning/readme/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-00.简介"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-00.简介</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/python_learning/01.helloworld/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/python_learning/01.helloworld/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-01.Hello World"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-01.Hello World</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/python_learning/02.data-calc/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/python_learning/02.data-calc/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-02.数据类型和运算"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-02.数据类型和运算</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/python_learning/03.sequence/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/python_learning/03.sequence/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-03.序列"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-03.序列</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/python_learning/04.sentence/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/python_learning/04.sentence/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-04.语句"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-04.语句</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            1333 - 
+        
+        2025 solxr
+    </section>
+    
+    <section class="powerby">
+        
+            hello! <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.7a29dff201ee0368c44e0af4f547b64b31396aabcb62c662e5b8a998f20a8812.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

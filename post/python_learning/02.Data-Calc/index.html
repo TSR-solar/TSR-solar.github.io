@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="python的简单数据类型以及算术运算">
+<title>Python基础-02.数据类型和运算</title>
+
+<link rel='canonical' href='http://localhost:1313/post/python_learning/02.data-calc/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Python基础-02.数据类型和运算">
+<meta property='og:description' content="python的简单数据类型以及算术运算">
+<meta property='og:url' content='http://localhost:1313/post/python_learning/02.data-calc/'>
+<meta property='og:site_name' content='solxr'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Python' /><meta property='article:published_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-22T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/python_learning/02.data-calc/py.png' />
+<meta name="twitter:title" content="Python基础-02.数据类型和运算">
+<meta name="twitter:description" content="python的简单数据类型以及算术运算"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/python_learning/02.data-calc/py.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_376a18d0875bf4d4.png" width="300"
+                            height="201" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌞</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">solxr</a></h1>
+            <h2 class="site-description">33</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TSR-solar/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#数据类型">数据类型</a>
+      <ol>
+        <li><a href="#整数">整数</a></li>
+        <li><a href="#浮点数">浮点数</a></li>
+        <li><a href="#字符串">字符串</a></li>
+        <li><a href="#布尔值">布尔值</a></li>
+        <li><a href="#复数">复数</a></li>
+      </ol>
+    </li>
+    <li><a href="#运算">运算</a>
+      <ol>
+        <li><a href="#数学运算">数学运算</a></li>
+        <li><a href="#逻辑运算">逻辑运算</a></li>
+        <li><a href="#数学库">数学库</a></li>
+      </ol>
+    </li>
+    <li><a href="#类型转换">类型转换</a>
+      <ol>
+        <li><a href="#类型转换函数">类型转换函数</a>
+          <ol>
+            <li><a href="#bool"><code>bool()</code></a></li>
+            <li><a href="#int-float-complex-str"><code>int()</code> <code>float()</code> <code>complex()</code> <code>str()</code></a></li>
+            <li><a href="#bin-oct-hex"><code>bin()</code> <code>oct()</code> <code>hex()</code></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#python字符串">python字符串</a>
+      <ol>
+        <li><a href="#unicode和utf-8编码字符串">Unicode和UTF-8编码字符串</a></li>
+        <li><a href="#字符和其编码之间的转换">字符和其编码之间的转换</a></li>
+        <li><a href="#字符串长度">字符串长度</a></li>
+        <li><a href="#格式化字符串">格式化字符串</a></li>
+        <li><a href="#转义字符">转义字符</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/python_learning/02.data-calc/">
+                <img src="/post/python_learning/02.data-calc/py_hu_c39a651de2ddf1ea.png"
+                        srcset="/post/python_learning/02.data-calc/py_hu_c39a651de2ddf1ea.png 800w, /post/python_learning/02.data-calc/py_hu_8bd68bee77d538d3.png 1600w"
+                        width="800" 
+                        height="682" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-02.数据类型和运算" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
+                笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/python_learning/02.data-calc/">Python基础-02.数据类型和运算</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            python的简单数据类型以及算术运算
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 22, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="数据类型与运算">数据类型与运算
+</h1><h2 id="数据类型">数据类型
+</h2><p>python不像C那么复杂，<strong>这使得C语言里的数据类型到了python里面就只有4种</strong>：整数、浮点数、字符串和布尔值;
+另外还有python<strong>特有</strong>的数据类型：复数；</p>
+<p>尽管有数据类型这种东西，但是由于python是<strong>动态语言</strong>（相对C、Java是<strong>静态语言</strong>），变量定义的时候并不需要指明数据类型，同时数据类型也是可变的；</p>
+<p>如下面的区分动态和静态语言的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># python:</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">=</span><span class="mi">123</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span>   <span class="c1"># 正确，python是动态语言，可以改变变量的类型</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// C
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">123</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">=</span><span class="s">&#34;hello&#34;</span>   <span class="c1">// 错误，C是静态语言，变量一旦定义，类型不可以改变
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="整数">整数
+</h3><p>没有大小限制。想写多大就多大。<br>
+支持二、八、十、十六进制；其中二进制是<code>0b</code>、八进制是<code>0o</code>、十六进制是<code>0x</code>，十进制不需要特别标注前缀；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mb">0b10</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mo">0o10</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mh">0x10</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">16</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="浮点数">浮点数
+</h3><p>也没有大小限制，无论是整数还是小数部分。支持e的科学计数法形式。<br>
+对于小数部分为0的数字，可以通过加上<code>.0</code>的方式让这个数默认为浮点数而不是整数；<br>
+有时候，浮点数会由于<strong>尾数问题</strong>产生奇怪的误差；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mf">0.1</span><span class="o">+</span><span class="mf">0.2</span>
+</span></span><span class="line"><span class="cl"><span class="mf">0.30000000000000004</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="字符串">字符串
+</h3><p>就像之前提到的，单双引号都可以的；<br>
+字符串内容甚至还可以是中文；</p>
+<h3 id="布尔值">布尔值
+</h3><p>True是1，False是0。注意<strong>大小写</strong>要写对；</p>
+<h3 id="复数">复数
+</h3><p>复数由实部和虚部组成，然而在python中虚数符号是<code>j</code>，而不是<code>i</code>；<br>
+当复数的虚部为1时，也不可以省略；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">0</span><span class="n">j</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>若要创建一个复数变量，除了使用<code>a+bj</code>形式以外，还可以使用complex函数进行创建；<br>
+比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">=</span><span class="nb">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">3</span><span class="n">j</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="运算">运算
+</h2><h3 id="数学运算">数学运算
+</h3><p>和C语言大部分相同；但要注意：<br>
+python里面的除法含有2种：<br>
+一种是普通除法<code>/</code>，相当于浮点数的除法；<br>
+另一种是<strong>地板除</strong><code>//</code>，相当于整数的除法；</p>
+<p>如下面的例子：<code>divide.py</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">=</span><span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="mf">3.3333333333333335</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">//</span><span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>除此之外，python新增了<strong>乘方</strong>的功能，它是<code>**</code>；<br>
+它的优先级在最前面；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="mi">8</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="逻辑运算">逻辑运算
+</h3><p>逻辑运算无非进行与或非运算；<br>
+不过运算符不再是<code>&amp;&amp;</code>、<code>||</code>、<code>!</code>这些，而是货真价实的英文单词！<br>
+与是<code>and</code>，或是<code>or</code>，非是<code>not</code>；</p>
+<h3 id="数学库">数学库
+</h3><p>经常要进行更加复杂的运算；<br>
+因此有了集合一些常见函数，比如乘方、开方以及常量，比如<code>pi</code>、<code>e</code>的数学库；</p>
+<p>在引用数学库的一些函数或常量之前，首先需要<strong>调用数学库</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这类似于C语言对头文件的<code>include</code>；</p>
+<p>接下来是使用其中一些函数和常量的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">math</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+</span></span><span class="line"><span class="cl"><span class="mf">3.141592653589793</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="mf">3.0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="类型转换">类型转换
+</h2><p>虽然前面提到python是动态语言，变量的类型不固定，但是不同类型的变量还是<strong>无法进行运算</strong>的；<br>
+因此类型转换还是十分有必要的；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">=</span><span class="nb">input</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="mi">9</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;9&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>   
+</span></span><span class="line"><span class="cl"><span class="mi">9</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;&lt;stdin&gt;&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="ne">TypeError</span><span class="p">:</span> <span class="n">can</span> <span class="n">only</span> <span class="n">concatenate</span> <span class="nb">str</span> <span class="p">(</span><span class="ow">not</span> <span class="s2">&#34;int&#34;</span><span class="p">)</span> <span class="n">to</span> <span class="nb">str</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">+</span><span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="mi">14</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：<code>int()</code>会直接将字符去掉引号，而不是转换为其<code>UTF-8</code>值；<br>
+这也就意味着，不是数字的字符串在python中将<strong>无法进行</strong>类型转换；</p>
+<h3 id="类型转换函数">类型转换函数
+</h3><p>类型转换是通过函数实现的，并不是运算符；<br>
+类型转换可能有<strong>不止一个</strong>参数；<br>
+下面是一些常见的类型转换函数；</p>
+<h4 id="bool"><code>bool()</code>
+</h4><p>根据参数的逻辑值将其转换为对应的布尔值；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">bool</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="kc">True</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="int-float-complex-str"><code>int()</code> <code>float()</code> <code>complex()</code> <code>str()</code>
+</h4><p>将传入的参数转换为对应数据类型的值；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">float</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mf">3.0</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="n">j</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;123&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="bin-oct-hex"><code>bin()</code> <code>oct()</code> <code>hex()</code>
+</h4><p>将整数转换为2、8、16进制的<strong>字符串</strong>；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">bin</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;0b11111&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">oct</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span>    
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;0o37&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">hex</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;0x1f&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="python字符串">python字符串
+</h2><p>python的字符串功能更加复杂，所以多写一点；</p>
+<h3 id="unicode和utf-8编码字符串">Unicode和UTF-8编码字符串
+</h3><p>python的字符串除了支持中文以外，还支持日文和韩文，以及更多奇形怪状的语言；<br>
+这是因为python采用了更加广泛的字符编码方式，即<code>Unicode</code>格式；<br>
+它可以看作是<code>ASCII</code>编码的<strong>拓展版本</strong>，可以容纳更多的字符；</p>
+<p>而<code>UTF-8</code>可以看成<code>Unicode</code>的<strong>缩减版本</strong>，即<strong>删去了前导的0</strong>；<br>
+这样，本来在<code>Unicode</code>里面，<br>
+英文字母需要占据2个字节，到了<code>UTF-8</code>里面就只需要1个字节；<br>
+汉字需要占据4个字节，到了<code>UTF-8</code>里面<strong>最少</strong>只需要2个字节；</p>
+<p>并且，那些较短的编码在<code>UTF-8</code>和<code>ASCII</code>编码里面是完全一致的，这也<strong>简化</strong>了两种编码之间的转换操作；</p>
+<p>一般来说，在应用场景，比如内存中使用<code>Unicode</code>编码，而在磁盘等存储场景中使用<code>UTF-8</code>编码；</p>
+<h3 id="字符和其编码之间的转换">字符和其编码之间的转换
+</h3><p>和<code>ASCII</code>一样，<code>UTF-8</code>编码也是和字符一一对应的，相对于C语言需要使用<code>%c</code>来输出所对应的字符，python有<strong>类型转换函数</strong>来实现字符和编码之间的相互转换；
+它们是<code>ord()</code>和<code>chr()</code>；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">65</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;中&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">20013</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">66</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;B&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">chr</span><span class="p">(</span><span class="mi">25991</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;文&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过，当字符串长度大于1时，函数<code>ord()</code>就会失效；</p>
+<h3 id="字符串长度">字符串长度
+</h3><p>使用函数<code>len()</code>；<br>
+汉字、字母、字符的长度<strong>都是1</strong>；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;中文&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;......&#39;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">6</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果字符串是以字节<code>byte</code>形式计算的，字符串长度就会计算字节数而不是字符数；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;中文&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;中文&#39;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="mi">6</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>encode('utf-8')</code>表示使用<code>UTF-8</code>改写字符串；</p>
+<h3 id="格式化字符串">格式化字符串
+</h3><p>python的字符串格式化与C语言相近，都是通过<code>%</code>实现的；<br>
+不同点是，python的格式化字符串<strong>不一定</strong>是要在<strong>输入输出函数</strong>里面才能使用，一般的字符串也可以使用； <br>
+换句话说，格式化字符串不是参数，而是python中<strong>独立存在的功能</strong>；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span>             
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">a</span>        
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">a</span><span class="p">)</span>    
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;1&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用该功能的方法是在字符串中加入需要被格式化的内容，如<code>%d</code>，然后在字符串后面马上跟一个<code>%</code>用括号括起格式化的内容，如有多个中间用逗号隔开；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此外还可以使用函数<code>format()</code>或者字符串<code>f-string</code>来格式化输出；<br>
+但是个人觉得没有<code>%</code>容易理解和操作；</p>
+<h3 id="转义字符">转义字符
+</h3><p>相应地，转义字符（如<code>\n</code>）也不再是输入输出函数特有的功能；
+然而它只对输入输出函数转义；<br>
+也就是说并不会像格式化字符串一样<strong>实时改变</strong>字符串的内容，只有在输入输出函数里面才会对字符串进行<strong>翻译</strong>，输出特定结果；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="o">=</span><span class="s1">&#39;hello</span><span class="se">\n</span><span class="s1">world&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;hello</span><span class="se">\n</span><span class="s1">world&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="n">hello</span>
+</span></span><span class="line"><span class="cl"><span class="n">world</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/python/">Python</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/python_learning/readme/">
+        
+        
+            <div class="article-image">
+                <img src="/post/python_learning/readme/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-00.简介"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-00.简介</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/python_learning/01.helloworld/">
+        
+        
+            <div class="article-image">
+                <img src="/post/python_learning/01.helloworld/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-01.Hello World"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-01.Hello World</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/python_learning/03.sequence/">
+        
+        
+            <div class="article-image">
+                <img src="/post/python_learning/03.sequence/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-03.序列"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-03.序列</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/python_learning/04.sentence/">
+        
+        
+            <div class="article-image">
+                <img src="/post/python_learning/04.sentence/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-04.语句"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-04.语句</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/python_learning/05.set-dict/">
+        
+        
+            <div class="article-image">
+                <img src="/post/python_learning/05.set-dict/py.50c4ab475b6f599c7906ca1e4e46e6d0_hu_4c02cb71c56a9574.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Python基础-05.集合与字典"
+                        
+                        data-hash="md5-UMSrR1tvWZx5BsoeTkbm0A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Python基础-05.集合与字典</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            1333 - 
+        
+        2025 solxr
+    </section>
+    
+    <section class="powerby">
+        
+            hello! <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.7a29dff201ee0368c44e0af4f547b64b31396aabcb62c662e5b8a998f20a8812.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

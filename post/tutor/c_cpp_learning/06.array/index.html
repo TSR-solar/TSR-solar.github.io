@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="C数组和高维数组">
+<title>C/C&#43;&#43;基础-06.数组</title>
+
+<link rel='canonical' href='http://localhost:1313/post/tutor/c_cpp_learning/06.array/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="C/C++基础-06.数组">
+<meta property='og:description' content="C数组和高维数组">
+<meta property='og:url' content='http://localhost:1313/post/tutor/c_cpp_learning/06.array/'>
+<meta property='og:site_name' content='solxr'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C-C&#43;&#43;' /><meta property='article:published_time' content='2025-02-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-20T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/tutor/c_cpp_learning/06.array/c.png' />
+<meta name="twitter:title" content="C/C++基础-06.数组">
+<meta name="twitter:description" content="C数组和高维数组"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/tutor/c_cpp_learning/06.array/c.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_376a18d0875bf4d4.png" width="300"
+                            height="201" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌞</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">solxr</a></h1>
+            <h2 class="site-description">33</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TSR-solar/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#同类型变量容器数组">同类型变量容器：数组</a></li>
+    <li><a href="#sizeof和数组">sizeof和数组</a></li>
+    <li><a href="#高维数组">高维数组</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/tutor/c_cpp_learning/06.array/">
+                <img src="/post/tutor/c_cpp_learning/06.array/c_hu_618700d8cdd69642.png"
+                        srcset="/post/tutor/c_cpp_learning/06.array/c_hu_618700d8cdd69642.png 800w, /post/tutor/c_cpp_learning/06.array/c_hu_d7ad109a27778894.png 1600w"
+                        width="800" 
+                        height="432" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-06.数组" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%AC%94%E8%AE%B0/" style="background-color: #2a9d8f; color: #fff;">
+                笔记
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/tutor/c_cpp_learning/06.array/">C/C&#43;&#43;基础-06.数组</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            C数组和高维数组
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 20, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 3 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="同类型变量容器数组">同类型变量容器：数组
+</h2><p>有一个东西，它和变量非常相似，但相比于变量只能储存值，它却能储存多个变量，它就是<strong>数组</strong>；<br>
+数组可以看成很多个变量；其中的变量必须具有<strong>相同的类型</strong>；</p>
+<p>定义一个数组和定义一个变量类似，区别是数组需要加上方括号[]，里面写上数组的大小；</p>
+<blockquote>
+<p>如 int a[3]；</p></blockquote>
+<p>数组的大小代表了它能存放变量的个数；<br>
+但要注意的是，数组的下标却是<strong>从0开始</strong>，因此数组a[3]实际上只有:</p>
+<blockquote>
+<p>a[0] a[1] a[2];</p></blockquote>
+<p>这样是为了编译器的方便；</p>
+<p>数组需要<strong>初始化</strong>；
+可以通过赋值大括号里面的数的方式来初始化；</p>
+<blockquote>
+<p>如 int a[3] = {0,1,2}<br>
+这样 a[0]=0 a[1]=1 a[2]=2；</p></blockquote>
+<p>需要注意的是，当输入的值不足的时候，剩下的值都将默认为0；<br>
+但是必须要输入第一个值,否则所有的数都是乱码；</p>
+<p>除此之外，在初始化的情况下，定义可以省略大小，此时的大小就是输入的数字个数；<br>
+这种方法又叫做集成初始化；<br>
+除此之外，还可以“精准”初始化，只需要用**[n]**在初始化数据中给出定位；</p>
+<p>在初始化后，就可以往数组内部赋值以存储多个数据；</p>
+<p>具体可以看下面的例子：(array.c)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">atk</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">sumatk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">,</span> <span class="n">hp</span><span class="p">,</span> <span class="n">player</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="kt">int</span> <span class="n">ATK10</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;There have 3 players that will attack me.</span><span class="se">\n</span><span class="s">We have known player3&#39;s attack is 10.</span><span class="se">\n\n</span><span class="s">input my hp:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">originalhp</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You&#39;re kidding me absolutely! I can&#39;t live with the hp of %d!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">,</span> <span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">originalhp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">hp</span> <span class="o">=</span> <span class="n">originalhp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">do</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Round %d begin!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sumatk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="n">player</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">player</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">player</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;input player%d&#39;s attack:&#34;</span><span class="p">,</span> <span class="n">player</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">while</span> <span class="p">(</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I know you don&#39;t want to hurt me,but now player %d&#39;s attack %d is too ABNORMAL!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">player</span><span class="o">+</span><span class="mi">1</span> <span class="p">,</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;If you input this atk,it means you want to heal me!I refuse it!!</span><span class="se">\n</span><span class="s">Please input it again:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;The 9 attacks you input are:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="n">player</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">player</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">player</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\t</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">sumatk</span> <span class="o">+=</span> <span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Then adds player 10&#39;s attack;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sumatk</span> <span class="o">+=</span> <span class="n">ATK10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">hp</span> <span class="o">-=</span> <span class="n">sumatk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;OK;You hurt me with the sum of %d attack in this round;</span><span class="se">\n</span><span class="s">Now I only have&#34;</span><span class="p">,</span> <span class="n">sumatk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="n">hp</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">/</span> <span class="n">originalhp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;=</span> <span class="n">originalhp</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">I guess you didn&#39;t want to hurt me.</span><span class="se">\n</span><span class="s">thank you very much!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">My hp is still high now!</span><span class="se">\n</span><span class="s">Thanks for your mercy!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp.</span><span class="se">\n</span><span class="s">It&#39;s really hurt... But I&#39;m still alive!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34; %d hp;</span><span class="se">\n</span><span class="s">Good! I think I&#39;m so lucky that I made it with such few hp!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">hp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">n</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Although I don&#39;t want to die now,but I must help you succeed!</span><span class="se">\n</span><span class="s">Keep attacking!</span><span class="se">\n\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">hp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;...No!!My hp come to the bottom!</span><span class="se">\n</span><span class="s">Oops!I DIED!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;You only take %d round(s) to defeat me!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>	
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Congratulation to your success! Goodbye!!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">player</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">player</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">;</span> <span class="n">player</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;请输入玩家%d的攻击:&#34;</span><span class="p">,</span> <span class="n">player</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;我知道你不想攻击我，但也别把玩家%d的攻击设置成“%d”啊！</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">player</span><span class="o">+</span><span class="mi">1</span> <span class="p">,</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;这可是个负数！我不接受治疗！请重新输入：&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">scanf</span><span class="p">(</span><span class="s">&#34;%d&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">atk</span><span class="p">[</span><span class="n">player</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上就是用for循环来给数组依次赋值的例子，需要注意player要<strong>从0开始</strong>；<br>
+用for循环对数组处理又称为<strong>遍历数组</strong>；</p>
+<h2 id="sizeof和数组">sizeof和数组
+</h2><p>sizeof可以给出整个数组所占据的内容的大小，单位是字节；<br>
+因此，用sizeof(a)/sizeof(a[0])就能得到数组的大小，不随数组数据的增减而变化；</p>
+<h2 id="高维数组">高维数组
+</h2><p>就像一维空间可以拓展到二维三维一样，数组也可以拓展维数；<br>
+因此，就有了二维，三维乃至n维数组；<br>
+以二维数组为例：<br>
+二维数组定义需要加上两个方括号，分别代表行、列；<br>
+若要集成初始化，只能省略第一个方括号里的内容；<br>
+初始化时，除了一整个大括号，每一行要加上一层大括号；</p>
+<blockquote>
+<p>如 int a[3][3]=<br>
+{<br>
+{1,1}<br>
+{1}<br>
+}<br>
+初始化后，a[0][0]=1;a[1][0]=1;a[0][1]=1;其余6个数都是0；</p></blockquote>
+<p>至于更高维度数组，以此类推就行了，只不过比较抽象；</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c-c&#43;&#43;/">C/C&#43;&#43;</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/readme/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/readme/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-00.简介"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-00.简介</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/01.helloworld/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/01.helloworld/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-01.hello world"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-01.hello world</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/02.i-o/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/02.i-o/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-02.输入输出"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-02.输入输出</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/03.data-calc/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/03.data-calc/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-03.数据类型和运算"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-03.数据类型和运算</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/tutor/c_cpp_learning/04.choice-circle/">
+        
+        
+            <div class="article-image">
+                <img src="/post/tutor/c_cpp_learning/04.choice-circle/c.e7e164efd129185a77fbde41fc4602c0_hu_a075e175feccc736.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post C/C&#43;&#43;基础-04.条件与循环"
+                        
+                        data-hash="md5-5&#43;Fk79EpGFp3&#43;95B/EYCwA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C/C&#43;&#43;基础-04.条件与循环</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            1333 - 
+        
+        2025 solxr
+    </section>
+    
+    <section class="powerby">
+        
+            hello! <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.7a29dff201ee0368c44e0af4f547b64b31396aabcb62c662e5b8a998f20a8812.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
