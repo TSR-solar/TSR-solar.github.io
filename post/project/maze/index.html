@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="EasyX环境下实现逃离迷宫游戏：Escape from MAZE">
+<title>Escape from MAZE</title>
+
+<link rel='canonical' href='http://localhost:1313/post/project/maze/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Escape from MAZE">
+<meta property='og:description' content="EasyX环境下实现逃离迷宫游戏：Escape from MAZE">
+<meta property='og:url' content='http://localhost:1313/post/project/maze/'>
+<meta property='og:site_name' content='solxr'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C-C&#43;&#43;' /><meta property='article:tag' content='EasyX' /><meta property='article:published_time' content='2025-02-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-23T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/project/maze/image.png' />
+<meta name="twitter:title" content="Escape from MAZE">
+<meta name="twitter:description" content="EasyX环境下实现逃离迷宫游戏：Escape from MAZE"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/project/maze/image.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_376a18d0875bf4d4.png" width="300"
+                            height="201" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌞</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">solxr</a></h1>
+            <h2 class="site-description">33</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TSR-solar/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a>
+      <ol>
+        <li><a href="#参考资料">参考资料</a></li>
+        <li><a href="#开发工具">开发工具</a></li>
+        <li><a href="#开发语言">开发语言</a></li>
+        <li><a href="#项目下载">项目下载</a></li>
+        <li><a href="#项目截图">项目截图</a></li>
+        <li><a href="#使用说明">使用说明</a></li>
+        <li><a href="#常见问题及解决方法">常见问题及解决方法</a></li>
+      </ol>
+    </li>
+    <li><a href="#项目内容">项目内容</a>
+      <ol>
+        <li><a href="#主要功能">主要功能</a></li>
+        <li><a href="#设计原理">设计原理</a></li>
+        <li><a href="#文件汇总单文件战神">文件汇总（单文件战神！）</a>
+          <ol>
+            <li><a href="#maincpp"><code>main.cpp</code></a></li>
+            <li><a href="#graphich"><code>graphic.h</code></a></li>
+            <li><a href="#timeh"><code>time.h</code></a></li>
+          </ol>
+        </li>
+        <li><a href="#主要函数">主要函数</a>
+          <ol>
+            <li><a href="#int-welcome"><code>int welcome()</code></a></li>
+            <li><a href="#int-checkbuttonbutton-btn"><code>int checkButton(button btn)</code></a></li>
+            <li><a href="#void-setting"><code>void Setting()</code></a></li>
+            <li><a href="#void-help"><code>void Help()</code></a></li>
+            <li><a href="#void-initimage"><code>void initImage()</code></a></li>
+            <li><a href="#void-initgame"><code>void initGame()</code></a></li>
+            <li><a href="#void-getmazesize"><code>void GetMazeSize()</code></a></li>
+            <li><a href="#void-makemazeint-width-int-height"><code>void MakeMaze(int width, int height)</code></a></li>
+            <li><a href="#void-travelmazeint-x-int-y"><code>void TravelMaze(int x, int y)</code></a></li>
+            <li><a href="#mapitem-getmazeitemint-x-int-y"><code>MAPITEM GetMazeItem(int x, int y)</code></a></li>
+            <li><a href="#void-paint"><code>void Paint()</code></a></li>
+            <li><a href="#int-getcmd"><code>int GetCmd()</code></a></li>
+            <li><a href="#void-dispatchcmdint-cmd"><code>void DispatchCmd(int cmd)</code></a></li>
+            <li><a href="#void-onup"><code>void OnUp()</code></a></li>
+            <li><a href="#void-ondown"><code>void OnDown()</code></a></li>
+            <li><a href="#void-onleft"><code>void OnLeft()</code></a></li>
+            <li><a href="#void-onright"><code>void OnRight()</code></a></li>
+            <li><a href="#void-onmarkmapitem-value"><code>void OnMark(MAPITEM value)</code></a></li>
+            <li><a href="#bool-checkwin"><code>bool CheckWin()</code></a></li>
+            <li><a href="#bool-quit"><code>bool Quit()</code></a></li>
+            <li><a href="#bool-endgame"><code>bool EndGame()</code></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#项目总结">项目总结</a></li>
+    <li><a href="#源代码查看">源代码查看</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/project/maze/">
+                <img src="/post/project/maze/image_hu_ed3c63cfea36cee4.png"
+                        srcset="/post/project/maze/image_hu_ed3c63cfea36cee4.png 800w, /post/project/maze/image_hu_cd2435aaf3fcdc04.png 1600w"
+                        width="800" 
+                        height="494" 
+                        loading="lazy"
+                        alt="Featured image of post Escape from MAZE" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%A1%B9%E7%9B%AE/" style="background-color: #ffff00; color: #fff;">
+                项目
+            </a>
+        
+            <a href="/categories/%E5%A4%A7%E4%BD%9C%E4%B8%9A/" style="background-color: #0099ff; color: #fff;">
+                大作业
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/project/maze/">Escape from MAZE</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            EasyX环境下实现逃离迷宫游戏：Escape from MAZE
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 23, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 15 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><img src="/post/project/maze/maze1.png"
+	width="668"
+	height="74"
+	srcset="/post/project/maze/maze1_hu_d520dd487756b5a8.png 480w, /post/project/maze/maze1_hu_7a5f1de99cd5b4e3.png 1024w"
+	loading="lazy"
+	
+		alt="MAZE means AMAZING!!!"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="902"
+		data-flex-basis="2166px"
+	
+></p>
+<h1 id="easyx环境下实现逃离迷宫游戏escape-from-maze">EasyX环境下实现逃离迷宫游戏：Escape from MAZE
+</h1><h2 id="前言">前言
+</h2><h3 id="参考资料">参考资料
+</h3><blockquote>
+<p>EasyX官方中文教程： <a class="link" href="https://docs.easyx.cn/zh-cn/intro"  target="_blank" rel="noopener"
+    >https://docs.easyx.cn/zh-cn/intro</a></p></blockquote>
+<blockquote>
+<p>迷宫项目模板（这也是官网里面的）： <a class="link" href="https://codebus.cn/zhaoh/maze-game"  target="_blank" rel="noopener"
+    >https://codebus.cn/zhaoh/maze-game</a></p></blockquote>
+<h3 id="开发工具">开发工具
+</h3><p><strong>Visual Studio 2022</strong><br>
+<strong>EasyX_202440601</strong></p>
+<h3 id="开发语言">开发语言
+</h3><p>C（主要）、C++</p>
+<h3 id="项目下载">项目下载
+</h3><blockquote>
+<p>百度网盘: <a class="link" href="https://pan.baidu.com/s/18o6Wn49p3gW8MeKb9AEecg"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/18o6Wn49p3gW8MeKb9AEecg</a> 提取码: 2uz1</p></blockquote>
+<blockquote>
+<p>夸克网盘： <a class="link" href="https://pan.quark.cn/s/af2ad575b024"  target="_blank" rel="noopener"
+    >https://pan.quark.cn/s/af2ad575b024</a> 提取码：1wy5</p></blockquote>
+<h3 id="项目截图">项目截图
+</h3><p><img src="/post/project/maze/maze2.png"
+	width="963"
+	height="595"
+	srcset="/post/project/maze/maze2_hu_3194afd036af7cb4.png 480w, /post/project/maze/maze2_hu_267e53a9fb3e7ec8.png 1024w"
+	loading="lazy"
+	
+		alt="开始界面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="161"
+		data-flex-basis="388px"
+	
+></p>
+<p><img src="/post/project/maze/maze3.png"
+	width="963"
+	height="598"
+	srcset="/post/project/maze/maze3_hu_e5349efb1c78c92a.png 480w, /post/project/maze/maze3_hu_abba20f9a8edcd84.png 1024w"
+	loading="lazy"
+	
+		alt="调整难度"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="161"
+		data-flex-basis="386px"
+	
+></p>
+<p><img src="/post/project/maze/maze4.png"
+	width="963"
+	height="595"
+	srcset="/post/project/maze/maze4_hu_9af55cbf9e9661ec.png 480w, /post/project/maze/maze4_hu_9cf4c82a63372461.png 1024w"
+	loading="lazy"
+	
+		alt="游戏界面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="161"
+		data-flex-basis="388px"
+	
+></p>
+<p><img src="/post/project/maze/maze5.png"
+	width="454"
+	height="279"
+	srcset="/post/project/maze/maze5_hu_b2a081ac464c2ddc.png 480w, /post/project/maze/maze5_hu_51b77a118aea87cf.png 1024w"
+	loading="lazy"
+	
+		alt="返回主界面"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="162"
+		data-flex-basis="390px"
+	
+>
+<img src="/post/project/maze/maze6.png"
+	width="427"
+	height="276"
+	srcset="/post/project/maze/maze6_hu_935d839f821a980f.png 480w, /post/project/maze/maze6_hu_dda0e5dc478d4113.png 1024w"
+	loading="lazy"
+	
+		alt="退出游戏"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="154"
+		data-flex-basis="371px"
+	
+></p>
+<h3 id="使用说明">使用说明
+</h3><p>点击<code>Escape from MAZE</code>文件夹里面的<code>Escape from MAZE</code>应用程序即可运行；</p>
+<p>若没有找到<code>Escape from MAZE.exe</code>，可以使用<code>Visual Studio</code>打开<code>Escape from MAZE.sln</code>，按CTRL+F5运行；</p>
+<p>查看源代码可以使用<code>Visual Studio</code>打开<code>Escape from MAZE.sln</code>，查看源文件<code>main.cpp</code>；</p>
+<h3 id="常见问题及解决方法">常见问题及解决方法
+</h3><p>若无法运行应用程序，请先关闭上一次运行打开的终端；再重新尝试； <br>
+若仍无法运行，且显示项目<strong>里面有错误</strong>，尝试点击<code>Visual Studio</code>项目上面的项目，选择“Escape From Maze和属性”，在“C/C++”目录里面选择“预处理器”，在预处理器里面点击“编辑”，在最后一行加上<code>_CRT_SECURE_NO_WARNING</code>；然后点击确定，再重新运行；</p>
+<h2 id="项目内容">项目内容
+</h2><h3 id="主要功能">主要功能
+</h3><ol>
+<li>运行<code>Escape from MAZE.exe</code> 后，显示开始页面，内有4个按钮，通过捕获鼠标信息来检测按钮是否被按下，从而执行接下来的操作。</li>
+<li>游戏设置里可以调整迷宫大小；游戏说明里面有帮助。</li>
+<li>点开始后，会绘制游戏图片到另一个<code>image</code>中；该过程在<code>.exe</code>运行直到结束<strong>不会进行第二次</strong>。</li>
+<li>弹出对话框提醒用户输入长宽（不能超出约定范围）；若此前已经设置过则不会弹出此提示。</li>
+<li>使用动态内存分配分配迷宫内存；当游戏结束后迷宫内存会被释放。该过程涉及了C++相关内容。</li>
+<li>使用广度优先搜索生成迷宫元素，包括墙、空地、起点、终点；用函数<code>rand()</code>、<code>srand()</code>和<code>time</code>随机生成迷宫，迷宫保证有唯一解。</li>
+<li>根据迷宫生成的数据在对应的地方绘制元素对应的游戏图片，游戏过程中由于涉及视角转换所以每0.1s都会重新绘制。</li>
+<li>记录起始时间，此后每0.1s记录一次时间，将其与开始时间之差显示在屏幕右上角。</li>
+<li>捕获键盘数据来实现玩家的移动和标记、取消标记操作，以及返回开始界面，每0.1s才会捕获一次，以免玩家移动过快；</li>
+<li>玩家移动时，不会穿墙。</li>
+<li>到达终点后，会询问用户是否重新开始；如果不重新开始则返回主界面；</li>
+<li>按ESC和在初始界面点击退出游戏都会询问，以免误触；</li>
+</ol>
+<h3 id="设计原理">设计原理
+</h3><ol>
+<li>文件的拓展名是<code>.cpp</code>而不是<code>.c</code>，是因为EasyX的库、动态内存分配、迷宫生成中涉及到了C++的内容；</li>
+<li>由于Visual Studio的安全问题，有关<code>TCHAR</code>的字符串操作必须要在预处理器里面加入宏<code>_CRT_SECURE_NO_WARNING</code>；</li>
+<li>在等待用户操作、主界面的离开与返回、游戏进行阶段使用循环结构，只有达到了特定的条件才会用<code>break</code>结束循环；</li>
+<li>将迷宫元素和键盘操作数据常量均封装在<strong>枚举数据结构</strong>中，将所有按钮封装在结构体数据结构中，提高程序易读性；</li>
+<li>将迷宫图片提前绘制在<code>g_imgItem</code>中缓存，不会显示在游戏界面；</li>
+<li>迷宫生成方面，先把整个地图变成墙，再采用<strong>广度优先搜索算法</strong>生成路（把墙变成空地）；<br>
+每次搜索前随机打乱遍历方向，如果路径之间可以联通就停止搜索；因此保证了随机的迷宫有<strong>唯一的解</strong>；</li>
+<li>视野会随着玩家的移动而转换，防止玩家走到屏幕外面，但不会移出地图。因此地图必须<strong>不停地绘制</strong>；</li>
+<li>捕获鼠标信息方面采用了<code>easyx.h</code>里的<code>getmessage()</code>函数，主要用于检测按钮是否被按下；当鼠标移到按钮上时按钮会高亮显示；如果同时按下左键就会执行按钮相应功能；</li>
+<li>捕获键盘信息方面采用了<code>WinUser.h</code>里的<code>GetAsyncKeyState()</code>函数；并采用位运算处理按下多个按键的情形，最后使用<code>DispatchCmd()</code>函数处理这些信息并执行相关功能；</li>
+<li>采用<code>sleep(100)</code>来保证每0.1s才捕获一次键盘信息；防止玩家移动速度过快；</li>
+<li>游戏开始时记录起始时间，此后每0.1s记录一次时间，将其与开始时间之差显示在屏幕右上角（计时器）。</li>
+<li>使用<code>WinUser.h</code>里的<code>MessageBox</code>来生成对话框，包含输入数据、选择是/否等功能；</li>
+<li>开始界面通过for循环连续绘制矩形的功能，绘制了一个渐变色的<strong>外框</strong>；</li>
+</ol>
+<h3 id="文件汇总单文件战神">文件汇总（单文件战神！）
+</h3><h4 id="maincpp"><code>main.cpp</code>
+</h4><p>程序的源文件；</p>
+<h4 id="graphich"><code>graphic.h</code>
+</h4><p>EasyX中用于绘图的头文件；</p>
+<h4 id="timeh"><code>time.h</code>
+</h4><p>用于生成随机数种子以及计时；</p>
+<h3 id="主要函数">主要函数
+</h3><h4 id="int-welcome"><code>int welcome()</code>
+</h4><p>显示初始界面。</p>
+<h4 id="int-checkbuttonbutton-btn"><code>int checkButton(button btn)</code>
+</h4><p>检测按钮是否被按下。</p>
+<h4 id="void-setting"><code>void Setting()</code>
+</h4><p>显示设置界面。</p>
+<h4 id="void-help"><code>void Help()</code>
+</h4><p>显示帮助界面。</p>
+<h4 id="void-initimage"><code>void initImage()</code>
+</h4><p>初始化游戏图片。</p>
+<h4 id="void-initgame"><code>void initGame()</code>
+</h4><p>初始化游戏数据。</p>
+<h4 id="void-getmazesize"><code>void GetMazeSize()</code>
+</h4><p>提示用户输入迷宫大小。</p>
+<h4 id="void-makemazeint-width-int-height"><code>void MakeMaze(int width, int height)</code>
+</h4><p>生成迷宫：初始化（注意：宽高必须是奇数）</p>
+<h4 id="void-travelmazeint-x-int-y"><code>void TravelMaze(int x, int y)</code>
+</h4><p>生成迷宫：遍历(x,y)四周。</p>
+<h4 id="mapitem-getmazeitemint-x-int-y"><code>MAPITEM GetMazeItem(int x, int y)</code>
+</h4><p>获取指定坐标的迷宫元素。</p>
+<h4 id="void-paint"><code>void Paint()</code>
+</h4><p>绘制视野范围内的迷宫。</p>
+<h4 id="int-getcmd"><code>int GetCmd()</code>
+</h4><p>获取用户输入的指令。</p>
+<h4 id="void-dispatchcmdint-cmd"><code>void DispatchCmd(int cmd)</code>
+</h4><p>处理用户输入的指令。</p>
+<h4 id="void-onup"><code>void OnUp()</code>
+</h4><p>向上移动。</p>
+<h4 id="void-ondown"><code>void OnDown()</code>
+</h4><p>向下移动。</p>
+<h4 id="void-onleft"><code>void OnLeft()</code>
+</h4><p>向左移动。</p>
+<h4 id="void-onright"><code>void OnRight()</code>
+</h4><p>向右移动。</p>
+<h4 id="void-onmarkmapitem-value"><code>void OnMark(MAPITEM value)</code>
+</h4><p>在地图中做标记。</p>
+<h4 id="bool-checkwin"><code>bool CheckWin()</code>
+</h4><p>检测是否到出口以及是否再来一局。</p>
+<h4 id="bool-quit"><code>bool Quit()</code>
+</h4><p>询问用户是否退出游戏。</p>
+<h4 id="bool-endgame"><code>bool EndGame()</code>
+</h4><p>询问用户是否结束游戏并返回主界面。</p>
+<h2 id="项目总结">项目总结
+</h2><p>这是我首次利用程序设计制作游戏，其实很多东西很不熟悉，包括不知道图形库里的函数怎么用，迷宫是怎样生成的，如何读取鼠标和键盘操作，如何控制视角转换，如何进入和退出游戏。</p>
+<p>总之，从0开始确实困难，因此直接看了网上现有的代码，然后自己绘制了一个开始页面，并调大了游戏的窗口，然后把墙体、角色以及标记的图案换了一下，其它像绘制迷宫、视角移动、迷宫生成、内存管理、读取鼠标和键盘信息都是现有的。。总之我并没有做什么工作。。。</p>
+<p>但是也对源代码进行了深入分析，现已读懂所有内容，知道每一步要干什么了。</p>
+<p>虽然现在这个项目还有许多未实现的功能，也有一些地方不尽人意，比如无法缩放窗口，迷宫难度太大，没有倒计时功能等等，但是总体来说，我基本掌握了EasyX图形库的基本功能，也让我的C语言的基本语法、数据结构、算法有了实战的机会。</p>
+<p>所以还会有下次的，把这次的不足弥补回来。</p>
+<h2 id="源代码查看">源代码查看
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span><span class="lnt">309
+</span><span class="lnt">310
+</span><span class="lnt">311
+</span><span class="lnt">312
+</span><span class="lnt">313
+</span><span class="lnt">314
+</span><span class="lnt">315
+</span><span class="lnt">316
+</span><span class="lnt">317
+</span><span class="lnt">318
+</span><span class="lnt">319
+</span><span class="lnt">320
+</span><span class="lnt">321
+</span><span class="lnt">322
+</span><span class="lnt">323
+</span><span class="lnt">324
+</span><span class="lnt">325
+</span><span class="lnt">326
+</span><span class="lnt">327
+</span><span class="lnt">328
+</span><span class="lnt">329
+</span><span class="lnt">330
+</span><span class="lnt">331
+</span><span class="lnt">332
+</span><span class="lnt">333
+</span><span class="lnt">334
+</span><span class="lnt">335
+</span><span class="lnt">336
+</span><span class="lnt">337
+</span><span class="lnt">338
+</span><span class="lnt">339
+</span><span class="lnt">340
+</span><span class="lnt">341
+</span><span class="lnt">342
+</span><span class="lnt">343
+</span><span class="lnt">344
+</span><span class="lnt">345
+</span><span class="lnt">346
+</span><span class="lnt">347
+</span><span class="lnt">348
+</span><span class="lnt">349
+</span><span class="lnt">350
+</span><span class="lnt">351
+</span><span class="lnt">352
+</span><span class="lnt">353
+</span><span class="lnt">354
+</span><span class="lnt">355
+</span><span class="lnt">356
+</span><span class="lnt">357
+</span><span class="lnt">358
+</span><span class="lnt">359
+</span><span class="lnt">360
+</span><span class="lnt">361
+</span><span class="lnt">362
+</span><span class="lnt">363
+</span><span class="lnt">364
+</span><span class="lnt">365
+</span><span class="lnt">366
+</span><span class="lnt">367
+</span><span class="lnt">368
+</span><span class="lnt">369
+</span><span class="lnt">370
+</span><span class="lnt">371
+</span><span class="lnt">372
+</span><span class="lnt">373
+</span><span class="lnt">374
+</span><span class="lnt">375
+</span><span class="lnt">376
+</span><span class="lnt">377
+</span><span class="lnt">378
+</span><span class="lnt">379
+</span><span class="lnt">380
+</span><span class="lnt">381
+</span><span class="lnt">382
+</span><span class="lnt">383
+</span><span class="lnt">384
+</span><span class="lnt">385
+</span><span class="lnt">386
+</span><span class="lnt">387
+</span><span class="lnt">388
+</span><span class="lnt">389
+</span><span class="lnt">390
+</span><span class="lnt">391
+</span><span class="lnt">392
+</span><span class="lnt">393
+</span><span class="lnt">394
+</span><span class="lnt">395
+</span><span class="lnt">396
+</span><span class="lnt">397
+</span><span class="lnt">398
+</span><span class="lnt">399
+</span><span class="lnt">400
+</span><span class="lnt">401
+</span><span class="lnt">402
+</span><span class="lnt">403
+</span><span class="lnt">404
+</span><span class="lnt">405
+</span><span class="lnt">406
+</span><span class="lnt">407
+</span><span class="lnt">408
+</span><span class="lnt">409
+</span><span class="lnt">410
+</span><span class="lnt">411
+</span><span class="lnt">412
+</span><span class="lnt">413
+</span><span class="lnt">414
+</span><span class="lnt">415
+</span><span class="lnt">416
+</span><span class="lnt">417
+</span><span class="lnt">418
+</span><span class="lnt">419
+</span><span class="lnt">420
+</span><span class="lnt">421
+</span><span class="lnt">422
+</span><span class="lnt">423
+</span><span class="lnt">424
+</span><span class="lnt">425
+</span><span class="lnt">426
+</span><span class="lnt">427
+</span><span class="lnt">428
+</span><span class="lnt">429
+</span><span class="lnt">430
+</span><span class="lnt">431
+</span><span class="lnt">432
+</span><span class="lnt">433
+</span><span class="lnt">434
+</span><span class="lnt">435
+</span><span class="lnt">436
+</span><span class="lnt">437
+</span><span class="lnt">438
+</span><span class="lnt">439
+</span><span class="lnt">440
+</span><span class="lnt">441
+</span><span class="lnt">442
+</span><span class="lnt">443
+</span><span class="lnt">444
+</span><span class="lnt">445
+</span><span class="lnt">446
+</span><span class="lnt">447
+</span><span class="lnt">448
+</span><span class="lnt">449
+</span><span class="lnt">450
+</span><span class="lnt">451
+</span><span class="lnt">452
+</span><span class="lnt">453
+</span><span class="lnt">454
+</span><span class="lnt">455
+</span><span class="lnt">456
+</span><span class="lnt">457
+</span><span class="lnt">458
+</span><span class="lnt">459
+</span><span class="lnt">460
+</span><span class="lnt">461
+</span><span class="lnt">462
+</span><span class="lnt">463
+</span><span class="lnt">464
+</span><span class="lnt">465
+</span><span class="lnt">466
+</span><span class="lnt">467
+</span><span class="lnt">468
+</span><span class="lnt">469
+</span><span class="lnt">470
+</span><span class="lnt">471
+</span><span class="lnt">472
+</span><span class="lnt">473
+</span><span class="lnt">474
+</span><span class="lnt">475
+</span><span class="lnt">476
+</span><span class="lnt">477
+</span><span class="lnt">478
+</span><span class="lnt">479
+</span><span class="lnt">480
+</span><span class="lnt">481
+</span><span class="lnt">482
+</span><span class="lnt">483
+</span><span class="lnt">484
+</span><span class="lnt">485
+</span><span class="lnt">486
+</span><span class="lnt">487
+</span><span class="lnt">488
+</span><span class="lnt">489
+</span><span class="lnt">490
+</span><span class="lnt">491
+</span><span class="lnt">492
+</span><span class="lnt">493
+</span><span class="lnt">494
+</span><span class="lnt">495
+</span><span class="lnt">496
+</span><span class="lnt">497
+</span><span class="lnt">498
+</span><span class="lnt">499
+</span><span class="lnt">500
+</span><span class="lnt">501
+</span><span class="lnt">502
+</span><span class="lnt">503
+</span><span class="lnt">504
+</span><span class="lnt">505
+</span><span class="lnt">506
+</span><span class="lnt">507
+</span><span class="lnt">508
+</span><span class="lnt">509
+</span><span class="lnt">510
+</span><span class="lnt">511
+</span><span class="lnt">512
+</span><span class="lnt">513
+</span><span class="lnt">514
+</span><span class="lnt">515
+</span><span class="lnt">516
+</span><span class="lnt">517
+</span><span class="lnt">518
+</span><span class="lnt">519
+</span><span class="lnt">520
+</span><span class="lnt">521
+</span><span class="lnt">522
+</span><span class="lnt">523
+</span><span class="lnt">524
+</span><span class="lnt">525
+</span><span class="lnt">526
+</span><span class="lnt">527
+</span><span class="lnt">528
+</span><span class="lnt">529
+</span><span class="lnt">530
+</span><span class="lnt">531
+</span><span class="lnt">532
+</span><span class="lnt">533
+</span><span class="lnt">534
+</span><span class="lnt">535
+</span><span class="lnt">536
+</span><span class="lnt">537
+</span><span class="lnt">538
+</span><span class="lnt">539
+</span><span class="lnt">540
+</span><span class="lnt">541
+</span><span class="lnt">542
+</span><span class="lnt">543
+</span><span class="lnt">544
+</span><span class="lnt">545
+</span><span class="lnt">546
+</span><span class="lnt">547
+</span><span class="lnt">548
+</span><span class="lnt">549
+</span><span class="lnt">550
+</span><span class="lnt">551
+</span><span class="lnt">552
+</span><span class="lnt">553
+</span><span class="lnt">554
+</span><span class="lnt">555
+</span><span class="lnt">556
+</span><span class="lnt">557
+</span><span class="lnt">558
+</span><span class="lnt">559
+</span><span class="lnt">560
+</span><span class="lnt">561
+</span><span class="lnt">562
+</span><span class="lnt">563
+</span><span class="lnt">564
+</span><span class="lnt">565
+</span><span class="lnt">566
+</span><span class="lnt">567
+</span><span class="lnt">568
+</span><span class="lnt">569
+</span><span class="lnt">570
+</span><span class="lnt">571
+</span><span class="lnt">572
+</span><span class="lnt">573
+</span><span class="lnt">574
+</span><span class="lnt">575
+</span><span class="lnt">576
+</span><span class="lnt">577
+</span><span class="lnt">578
+</span><span class="lnt">579
+</span><span class="lnt">580
+</span><span class="lnt">581
+</span><span class="lnt">582
+</span><span class="lnt">583
+</span><span class="lnt">584
+</span><span class="lnt">585
+</span><span class="lnt">586
+</span><span class="lnt">587
+</span><span class="lnt">588
+</span><span class="lnt">589
+</span><span class="lnt">590
+</span><span class="lnt">591
+</span><span class="lnt">592
+</span><span class="lnt">593
+</span><span class="lnt">594
+</span><span class="lnt">595
+</span><span class="lnt">596
+</span><span class="lnt">597
+</span><span class="lnt">598
+</span><span class="lnt">599
+</span><span class="lnt">600
+</span><span class="lnt">601
+</span><span class="lnt">602
+</span><span class="lnt">603
+</span><span class="lnt">604
+</span><span class="lnt">605
+</span><span class="lnt">606
+</span><span class="lnt">607
+</span><span class="lnt">608
+</span><span class="lnt">609
+</span><span class="lnt">610
+</span><span class="lnt">611
+</span><span class="lnt">612
+</span><span class="lnt">613
+</span><span class="lnt">614
+</span><span class="lnt">615
+</span><span class="lnt">616
+</span><span class="lnt">617
+</span><span class="lnt">618
+</span><span class="lnt">619
+</span><span class="lnt">620
+</span><span class="lnt">621
+</span><span class="lnt">622
+</span><span class="lnt">623
+</span><span class="lnt">624
+</span><span class="lnt">625
+</span><span class="lnt">626
+</span><span class="lnt">627
+</span><span class="lnt">628
+</span><span class="lnt">629
+</span><span class="lnt">630
+</span><span class="lnt">631
+</span><span class="lnt">632
+</span><span class="lnt">633
+</span><span class="lnt">634
+</span><span class="lnt">635
+</span><span class="lnt">636
+</span><span class="lnt">637
+</span><span class="lnt">638
+</span><span class="lnt">639
+</span><span class="lnt">640
+</span><span class="lnt">641
+</span><span class="lnt">642
+</span><span class="lnt">643
+</span><span class="lnt">644
+</span><span class="lnt">645
+</span><span class="lnt">646
+</span><span class="lnt">647
+</span><span class="lnt">648
+</span><span class="lnt">649
+</span><span class="lnt">650
+</span><span class="lnt">651
+</span><span class="lnt">652
+</span><span class="lnt">653
+</span><span class="lnt">654
+</span><span class="lnt">655
+</span><span class="lnt">656
+</span><span class="lnt">657
+</span><span class="lnt">658
+</span><span class="lnt">659
+</span><span class="lnt">660
+</span><span class="lnt">661
+</span><span class="lnt">662
+</span><span class="lnt">663
+</span><span class="lnt">664
+</span><span class="lnt">665
+</span><span class="lnt">666
+</span><span class="lnt">667
+</span><span class="lnt">668
+</span><span class="lnt">669
+</span><span class="lnt">670
+</span><span class="lnt">671
+</span><span class="lnt">672
+</span><span class="lnt">673
+</span><span class="lnt">674
+</span><span class="lnt">675
+</span><span class="lnt">676
+</span><span class="lnt">677
+</span><span class="lnt">678
+</span><span class="lnt">679
+</span><span class="lnt">680
+</span><span class="lnt">681
+</span><span class="lnt">682
+</span><span class="lnt">683
+</span><span class="lnt">684
+</span><span class="lnt">685
+</span><span class="lnt">686
+</span><span class="lnt">687
+</span><span class="lnt">688
+</span><span class="lnt">689
+</span><span class="lnt">690
+</span><span class="lnt">691
+</span><span class="lnt">692
+</span><span class="lnt">693
+</span><span class="lnt">694
+</span><span class="lnt">695
+</span><span class="lnt">696
+</span><span class="lnt">697
+</span><span class="lnt">698
+</span><span class="lnt">699
+</span><span class="lnt">700
+</span><span class="lnt">701
+</span><span class="lnt">702
+</span><span class="lnt">703
+</span><span class="lnt">704
+</span><span class="lnt">705
+</span><span class="lnt">706
+</span><span class="lnt">707
+</span><span class="lnt">708
+</span><span class="lnt">709
+</span><span class="lnt">710
+</span><span class="lnt">711
+</span><span class="lnt">712
+</span><span class="lnt">713
+</span><span class="lnt">714
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;graphics.h&gt;</span><span class="cp">				</span><span class="c1">// EasyX 绘图工具头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">					</span><span class="c1">// 用于计时器和生成随机数头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//全局变量与宏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define LENTH 1600					</span><span class="c1">// 窗口的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define WIDTH 960					</span><span class="c1">// 窗口的宽度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define ROUNDRATE 30				</span><span class="c1">// 按钮圆弧的弧度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define STRLEN 50					</span><span class="c1">// 按钮文字的字符串长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">ExMessage</span> <span class="n">m</span><span class="p">;</span>						<span class="c1">// 记录鼠标信息的结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">BYTE</span><span class="o">**</span> <span class="n">g_aryMap</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>				<span class="c1">// 迷宫地图
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">IMAGE</span>	<span class="nf">g_imgItem</span><span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>			<span class="c1">// 地图元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">IMAGE</span>	<span class="nf">g_imgSight</span><span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">960</span><span class="p">);</span>		<span class="c1">// 游戏的视野（与窗口大小一致）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">POINT</span>	<span class="n">g_ptPlayer</span><span class="p">;</span>					<span class="c1">// 游戏者的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">RECT</span>	<span class="n">g_rtSight</span><span class="p">;</span>					<span class="c1">// 游戏的视野的范围
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">SIZE</span>	<span class="n">g_szMap</span><span class="p">;</span>					<span class="c1">// 迷宫地图的尺寸
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 枚举地图元素，兼做元素位置的 x 坐标
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">enum</span> <span class="nc">MAPITEM</span> <span class="p">{</span> <span class="n">MAP_WALL</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MAP_PLAYER</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">MAP_GROUND</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">MAP_MARK</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">MAP_ENTRANCE</span> <span class="o">=</span> <span class="mi">120</span><span class="p">,</span> <span class="n">MAP_EXIT</span> <span class="o">=</span> <span class="mi">140</span><span class="p">,</span> <span class="n">MAP_OUTSIDE</span> <span class="o">=</span> <span class="mi">160</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">enum</span> <span class="nc">CMD</span> <span class="p">{</span> <span class="n">CMD_QUIT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CMD_UP</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">CMD_DOWN</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">CMD_LEFT</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">CMD_RIGHT</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">CMD_MARK</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">CMD_CLEARMARK</span> <span class="o">=</span> <span class="mi">64</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="nc">tagBUTTON</span>	<span class="c1">// 定义按钮结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">left</span><span class="p">;</span>					<span class="c1">// 按钮的左部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>					<span class="c1">// 按钮的顶部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">right</span><span class="p">;</span>					<span class="c1">// 按钮的右部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">bottom</span><span class="p">;</span>					<span class="c1">// 按钮的底部
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">TCHAR</span> <span class="n">str</span><span class="p">[</span><span class="n">STRLEN</span><span class="p">];</span>			<span class="c1">// 按钮的文字提示
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="n">button</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">button</span> <span class="n">start</span><span class="p">,</span> <span class="n">set</span><span class="p">,</span> <span class="n">help</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">,</span> <span class="n">back</span><span class="p">,</span> <span class="n">quit</span><span class="p">;</span>				<span class="c1">// 定义游戏中的所有按钮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">clock_t</span> <span class="n">tStart</span><span class="p">,</span> <span class="n">tNow</span><span class="p">,</span> <span class="n">tPass</span><span class="p">;</span>	<span class="c1">// 记录起始、现在和经过的时间					
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">Game</span><span class="p">;</span>						<span class="c1">// 记录游戏状态（欢迎、开始、退出）							
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 函数声明
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">welcome</span><span class="p">();</span>							<span class="c1">// 显示初始界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">checkButton</span><span class="p">(</span><span class="n">button</span> <span class="n">btn</span><span class="p">);</span>			<span class="c1">// 检测按钮是否被按下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">Setting</span><span class="p">();</span>							<span class="c1">// 显示设置界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">Help</span><span class="p">();</span>							<span class="c1">// 显示帮助界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initImage</span><span class="p">();</span>						<span class="c1">// 初始化游戏图片
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initGame</span><span class="p">();</span>						<span class="c1">// 初始化游戏数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">GetMazeSize</span><span class="p">();</span>						<span class="c1">// 提示用户输入迷宫大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">MakeMaze</span><span class="p">(</span><span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">);</span>	<span class="c1">// 生成迷宫：初始化（注意：宽高必须是奇数）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">TravelMaze</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>			<span class="c1">// 生成迷宫：遍历(x,y)四周
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MAPITEM</span> <span class="nf">GetMazeItem</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>		<span class="c1">// 获取指定坐标的迷宫元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">Paint</span><span class="p">();</span>							<span class="c1">// 绘制视野范围内的迷宫
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">GetCmd</span><span class="p">();</span>							<span class="c1">// 获取用户输入的指令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">DispatchCmd</span><span class="p">(</span><span class="kt">int</span> <span class="n">cmd</span><span class="p">);</span>				<span class="c1">// 处理用户输入的指令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnUp</span><span class="p">();</span>							<span class="c1">// 向上移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnDown</span><span class="p">();</span>							<span class="c1">// 向下移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnLeft</span><span class="p">();</span>							<span class="c1">// 向左移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnRight</span><span class="p">();</span>							<span class="c1">// 向右移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnMark</span><span class="p">(</span><span class="n">MAPITEM</span> <span class="n">value</span><span class="p">);</span>				<span class="c1">// 在地图中做标记
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="nf">CheckWin</span><span class="p">();</span>						<span class="c1">// 检测是否到出口以及是否再来一局
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="nf">Quit</span><span class="p">();</span>							<span class="c1">// 询问用户是否退出游戏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="nf">EndGame</span><span class="p">();</span>							<span class="c1">// 询问用户是否结束游戏并返回主界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//函数定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">initgraph</span><span class="p">(</span><span class="n">LENTH</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">);</span>			<span class="c1">// 创建绘图窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">srand</span><span class="p">((</span><span class="kt">unsigned</span><span class="p">)</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>			<span class="c1">// 用时间设置随机数种子
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 窗口页面循环，若离开循环则关闭窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>	
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 初始界面循环，若离开循环则退出初始界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">cleardevice</span><span class="p">();</span>					<span class="c1">// 清屏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// 通过初始页面按钮给 Game 赋值，决定要跳转的窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">Game</span> <span class="o">=</span> <span class="n">welcome</span><span class="p">();</span>				
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">Game</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">Game</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">break</span><span class="p">;</span> <span class="c1">//如果 Game 为 1 则开始游戏，为 -1 则退出游戏 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 退出游戏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">Game</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="n">cleardevice</span><span class="p">();</span>	<span class="c1">// 清屏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">initImage</span><span class="p">();</span>	<span class="c1">// 初始化游戏图片
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">error</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">initGame</span><span class="p">();</span>		<span class="c1">// 初始化游戏数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 游戏过程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kt">int</span> <span class="n">c</span><span class="p">;</span>				
+</span></span><span class="line"><span class="cl">		<span class="n">tStart</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>	<span class="c1">// 记录游戏开始的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(((</span><span class="n">c</span> <span class="o">=</span> <span class="n">GetCmd</span><span class="p">())</span> <span class="o">&amp;</span> <span class="n">CMD_QUIT</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">EndGame</span><span class="p">()))</span>	<span class="c1">//如果按 ESC 则询问是否返回初始界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">tNow</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>	<span class="c1">// 记录当前的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// 根据开始时间和当前时间判断游戏进行的时间，并转换为以秒为单位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">tPass</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)((</span><span class="n">tNow</span> <span class="o">-</span> <span class="n">tStart</span><span class="p">)</span> <span class="o">/</span> <span class="n">CLOCKS_PER_SEC</span><span class="p">);</span>	
+</span></span><span class="line"><span class="cl">			<span class="n">DispatchCmd</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>	<span class="c1">// 检测按下的按键
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">Paint</span><span class="p">();</span>		<span class="c1">// 实时 绘制游戏画面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">if</span> <span class="p">(</span><span class="n">CheckWin</span><span class="p">())</span> <span class="c1">// 如果到出口就询问是否再来一局，否则返回初始界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="c1">// 延时0.1s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">Sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">cleardevice</span><span class="p">();</span>		<span class="c1">// 清屏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">closegraph</span><span class="p">();</span>			<span class="c1">// 关闭窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 显示初始界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">welcome</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 打印游戏名称及作者
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">114</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Consolas&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Escape from MAZE&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Consolas&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;By solxr&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制渐变色外框（背景）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">setlinecolor</span><span class="p">(</span><span class="n">RGB</span><span class="p">((</span><span class="mi">127</span> <span class="o">-</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="n">rectangle</span><span class="p">(</span><span class="mi">256</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="mi">128</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1344</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">832</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 定义按钮的各项参数属性；包括开始、设置、说明、退出；
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">start</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">470</span><span class="p">;</span> <span class="n">start</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span> <span class="n">start</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">730</span><span class="p">;</span> <span class="n">start</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">570</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">set</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">870</span><span class="p">;</span> <span class="n">set</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span> <span class="n">set</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">1130</span><span class="p">;</span> <span class="n">set</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">570</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">help</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">470</span><span class="p">;</span> <span class="n">help</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">650</span><span class="p">;</span> <span class="n">help</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">730</span><span class="p">;</span> <span class="n">help</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">720</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">quit</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">870</span><span class="p">;</span> <span class="n">quit</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">650</span><span class="p">;</span> <span class="n">quit</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">1130</span><span class="p">;</span> <span class="n">quit</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">720</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_tcscpy</span><span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;开始游戏&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_tcscpy</span><span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;游戏设置&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_tcscpy</span><span class="p">(</span><span class="n">help</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;游戏说明&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_tcscpy</span><span class="p">(</span><span class="n">quit</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;退出游戏&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制按钮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setlinestyle</span><span class="p">(</span><span class="n">PS_SOLID</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setlinecolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;黑体&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">roundrect</span><span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">roundrect</span><span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">set</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">set</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">set</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">roundrect</span><span class="p">(</span><span class="n">help</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">help</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">help</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">help</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">roundrect</span><span class="p">(</span><span class="n">quit</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">quit</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">quit</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">quit</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">RECT</span> <span class="n">r1</span> <span class="o">=</span> <span class="p">{</span> <span class="n">start</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">RECT</span> <span class="n">r2</span> <span class="o">=</span> <span class="p">{</span> <span class="n">set</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">set</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">set</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">set</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">RECT</span> <span class="n">r3</span> <span class="o">=</span> <span class="p">{</span> <span class="n">help</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">help</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">help</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">help</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">RECT</span> <span class="n">r4</span> <span class="o">=</span> <span class="p">{</span> <span class="n">quit</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">quit</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">quit</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">quit</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">start</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r1</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r2</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">help</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r3</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">quit</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r4</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 等待用户点击按钮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">m</span> <span class="o">=</span> <span class="n">getmessage</span><span class="p">(</span><span class="n">EX_MOUSE</span><span class="p">);</span>			<span class="c1">//读取鼠标信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 定义变量，检测按钮是否被按下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="kt">bool</span> <span class="n">cbStart</span> <span class="o">=</span> <span class="n">checkButton</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">bool</span> <span class="n">cbSet</span> <span class="o">=</span> <span class="n">checkButton</span><span class="p">(</span><span class="n">set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">bool</span> <span class="n">cbHelp</span> <span class="o">=</span> <span class="n">checkButton</span><span class="p">(</span><span class="n">help</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">bool</span> <span class="n">cbQuit</span> <span class="o">=</span> <span class="n">checkButton</span><span class="p">(</span><span class="n">quit</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">//按下 start 则开始游戏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">cbStart</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//按下 set 则进入游戏设置界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cbSet</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">Setting</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//按下 help 则进入游戏说明界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cbHelp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">Help</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//按下 quit 则退出游戏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cbQuit</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">Quit</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>	<span class="c1">//其它操作则返回0；什么也不做
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//检测按钮是否被按下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">checkButton</span><span class="p">(</span><span class="n">button</span> <span class="n">btn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 确定按钮的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">RECT</span> <span class="n">r</span> <span class="o">=</span> <span class="p">{</span> <span class="n">btn</span><span class="p">.</span><span class="n">left</span><span class="p">,</span><span class="n">btn</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span><span class="n">btn</span><span class="p">.</span><span class="n">right</span><span class="p">,</span><span class="n">btn</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 如果鼠标在按钮里面，则高亮显示按钮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">btn</span><span class="p">.</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">m</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">btn</span><span class="p">.</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">m</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">btn</span><span class="p">.</span><span class="n">top</span> <span class="o">&amp;&amp;</span> <span class="n">m</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="n">btn</span><span class="p">.</span><span class="n">bottom</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">setlinecolor</span><span class="p">(</span><span class="n">LIGHTRED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">settextcolor</span><span class="p">(</span><span class="n">LIGHTRED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">roundrect</span><span class="p">(</span><span class="n">btn</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">btn</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">btn</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">btn</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">drawtext</span><span class="p">(</span><span class="n">btn</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 如果按下左键，则执行按钮内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">switch</span> <span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">case</span> <span class="nl">WM_LBUTTONDOWN</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 如果鼠标不在按钮里面，则恢复原来的颜色
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">else</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">setlinecolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">roundrect</span><span class="p">(</span><span class="n">btn</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">btn</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">btn</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">btn</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">drawtext</span><span class="p">(</span><span class="n">btn</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 显示设置界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">Setting</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cleardevice</span><span class="p">();</span>	<span class="c1">// 清屏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 背景不能消失！
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">114</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Consolas&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Escape from MAZE&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Consolas&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;By solxr&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">setlinecolor</span><span class="p">(</span><span class="n">RGB</span><span class="p">((</span><span class="mi">127</span> <span class="o">-</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="n">rectangle</span><span class="p">(</span><span class="mi">256</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="mi">128</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1344</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">832</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 定义调整难度、返回按钮并绘制
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">difficulty</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">670</span><span class="p">;</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">930</span><span class="p">;</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">570</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">back</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">670</span><span class="p">;</span> <span class="n">back</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">700</span><span class="p">;</span> <span class="n">back</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">930</span><span class="p">;</span> <span class="n">back</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">770</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">roundrect</span><span class="p">(</span><span class="n">difficulty</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">roundrect</span><span class="p">(</span><span class="n">back</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;黑体&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">_tcscpy</span><span class="p">(</span><span class="n">difficulty</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;调整难度&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_tcscpy</span><span class="p">(</span><span class="n">back</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;返回&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">RECT</span> <span class="n">r1</span> <span class="o">=</span> <span class="p">{</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">RECT</span> <span class="n">r2</span> <span class="o">=</span> <span class="p">{</span> <span class="n">back</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">difficulty</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r1</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">back</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r2</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//等待玩家操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">m</span> <span class="o">=</span> <span class="n">getmessage</span><span class="p">(</span><span class="n">EX_MOUSE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kt">bool</span> <span class="n">cbDifficulty</span> <span class="o">=</span> <span class="n">checkButton</span><span class="p">(</span><span class="n">difficulty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">bool</span> <span class="n">cbBack</span> <span class="o">=</span> <span class="n">checkButton</span><span class="p">(</span><span class="n">back</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">cbDifficulty</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// 提示用户输入迷宫大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">GetMazeSize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 若点击返回，则返回初始界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cbBack</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 显示游戏说明界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">Help</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cleardevice</span><span class="p">();</span><span class="c1">//清屏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 重新绘制背景
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">114</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Consolas&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Escape from MAZE&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;Consolas&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">1100</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;By solxr&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">256</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">setlinecolor</span><span class="p">(</span><span class="n">RGB</span><span class="p">((</span><span class="mi">127</span> <span class="o">-</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="n">rectangle</span><span class="p">(</span><span class="mi">256</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="mi">128</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1344</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">832</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;黑体&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 打印说明以及绘制返回按钮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">RECT</span> <span class="n">r0</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">430</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">860</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">_T</span><span class="p">(</span><span class="s">&#34;MAZE means AMAZING!!!</span><span class="se">\n</span><span class="s">现在,你被困在了一个叫做“MAZE”的地方;</span><span class="se">\n</span><span class="s">出口在右下角,赶快逃离出去!</span><span class="se">\n</span><span class="s">按方向键或者WSAD进行移动;</span><span class="se">\n</span><span class="s">按空格键做标记,按C取消标记;</span><span class="se">\n</span><span class="s">按ESC返回主界面;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">r0</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">back</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">670</span><span class="p">;</span> <span class="n">back</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">700</span><span class="p">;</span> <span class="n">back</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">930</span><span class="p">;</span> <span class="n">back</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">770</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;黑体&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_tcscpy</span><span class="p">(</span><span class="n">back</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;返回&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">RECT</span> <span class="n">r1</span> <span class="o">=</span> <span class="p">{</span> <span class="n">back</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">top</span> <span class="o">+</span> <span class="mi">15</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">bottom</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">roundrect</span><span class="p">(</span><span class="n">back</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">top</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">back</span><span class="p">.</span><span class="n">bottom</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">,</span> <span class="n">ROUNDRATE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">drawtext</span><span class="p">(</span><span class="n">back</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">r1</span><span class="p">,</span> <span class="n">DT_CENTER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 等待用户操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">m</span> <span class="o">=</span> <span class="n">getmessage</span><span class="p">(</span><span class="n">EX_MOUSE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="kt">bool</span> <span class="n">cbBack</span> <span class="o">=</span> <span class="n">checkButton</span><span class="p">(</span><span class="n">back</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">cbBack</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 初始化游戏图片
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initImage</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 预绘制游戏图片到 IMAGE 缓存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">SetWorkingImage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_imgItem</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cleardevice</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制 PLAYER
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setorigin</span><span class="p">(</span><span class="n">MAP_PLAYER</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setfillcolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setlinecolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fillellipse</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">17</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setlinecolor</span><span class="p">(</span><span class="n">BLACK</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">line</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">line</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制墙壁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setorigin</span><span class="p">(</span><span class="n">MAP_WALL</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">LIGHTRED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setfillstyle</span><span class="p">((</span><span class="n">BYTE</span><span class="o">*</span><span class="p">)</span><span class="s">&#34;</span><span class="se">\x20\x20\x20\xff\x04\x04\x04\xff</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setlinecolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">solidrectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">19</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制入口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setorigin</span><span class="p">(</span><span class="n">MAP_ENTRANCE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setlinecolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;宋体&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;入&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制出口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setorigin</span><span class="p">(</span><span class="n">MAP_EXIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;出&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制标记（ 一个绿色的 “ X ” ）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setorigin</span><span class="p">(</span><span class="n">MAP_MARK</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setlinestyle</span><span class="p">(</span><span class="n">PS_SOLID</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setlinecolor</span><span class="p">(</span><span class="n">GREEN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">line</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">line</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制迷宫外面的空地
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setorigin</span><span class="p">(</span><span class="n">MAP_OUTSIDE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">setfillstyle</span><span class="p">((</span><span class="n">BYTE</span><span class="o">*</span><span class="p">)</span><span class="s">&#34;</span><span class="se">\x50\x55\x22\x20\x05\x55\x22\x02</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">solidrectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">19</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 恢复坐标系
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">setorigin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 初始化游戏数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initGame</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 提示用户输入迷宫大小(如果没有调整难度的话)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">GetMazeSize</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 初始化参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">g_aryMap</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>	<span class="c1">// 清理迷宫地图占用的内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">delete</span><span class="p">[]</span> <span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="k">delete</span><span class="p">[]</span> <span class="n">g_aryMap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">MakeMaze</span><span class="p">(</span><span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span><span class="p">,</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span><span class="p">);</span>		<span class="c1">// 创建迷宫
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>						<span class="c1">// 设置游戏者的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>						<span class="c1">// 设置视野范围
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_rtSight</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_rtSight</span><span class="p">.</span><span class="n">bottom</span> <span class="o">=</span> <span class="mi">48</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制游戏区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Paint</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 提示用户输入迷宫大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">GetMazeSize</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">=</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 获取用户输入的宽高
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">TCHAR</span> <span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">&lt;</span> <span class="mi">80</span> <span class="o">||</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">&gt;</span> <span class="mi">150</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">InputBox</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;请输入Maze的长度</span><span class="se">\n</span><span class="s">范围：80～150(默认为100)&#34;</span><span class="p">),</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;输入&#34;</span><span class="p">),</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;100&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">=</span> <span class="n">_ttoi</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span> <span class="o">&lt;</span> <span class="mi">40</span> <span class="o">||</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">&gt;</span> <span class="mi">150</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">InputBox</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;请输入Maze的宽度</span><span class="se">\n</span><span class="s">范围：48～150(默认为60)&#34;</span><span class="p">),</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;输入&#34;</span><span class="p">),</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;60&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span> <span class="o">=</span> <span class="n">_ttoi</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 确保宽高为奇数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 生成迷宫：初始化（注：宽高必须是奇数）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">MakeMaze</span><span class="p">(</span><span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 确保宽高为奇数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">width</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">height</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 定义迷宫尺寸，并分配迷宫内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">g_aryMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BYTE</span> <span class="o">*</span> <span class="p">[</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BYTE</span><span class="p">[</span><span class="n">height</span> <span class="o">+</span> <span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="n">memset</span><span class="p">(</span><span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">MAP_WALL</span><span class="p">,</span> <span class="n">height</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 定义边界
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">height</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAP_GROUND</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_aryMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_aryMap</span><span class="p">[</span><span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAP_GROUND</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 定义入口和出口( 左上和右下 )
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">g_aryMap</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAP_ENTRANCE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_aryMap</span><span class="p">[</span><span class="n">width</span><span class="p">][</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAP_EXIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 从任意点开始遍历生成迷宫
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">TravelMaze</span><span class="p">(((</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0xfffe</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="p">((</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0xfffe</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 将边界标记为迷宫外
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">height</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAP_OUTSIDE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_aryMap</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">g_aryMap</span><span class="p">[</span><span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAP_OUTSIDE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 生成迷宫：遍历 (x, y) 四周
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">TravelMaze</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 定义遍历方向
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">d</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 将遍历方向乱序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">n</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">t</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">t</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 尝试周围四个方向
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">MAP_GROUND</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">y</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">==</span> <span class="n">MAP_WALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">y</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">MAP_GROUND</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">TravelMaze</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>		<span class="c1">// 递归
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取指定坐标的迷宫元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MAPITEM</span> <span class="nf">GetMazeItem</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">(</span><span class="n">MAPITEM</span><span class="p">)</span><span class="n">g_aryMap</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 绘制视野范围内的迷宫
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">Paint</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">SetWorkingImage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_imgSight</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制视野内的迷宫
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">right</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">bottom</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">x1</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span><span class="p">)</span> <span class="o">*</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">y1</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span><span class="p">)</span> <span class="o">*</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">putimage</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">g_imgItem</span><span class="p">,</span> <span class="n">GetMazeItem</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制游戏者
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">x1</span> <span class="o">=</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span><span class="p">)</span> <span class="o">*</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">y1</span> <span class="o">=</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span><span class="p">)</span> <span class="o">*</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">putimage</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">g_imgItem</span><span class="p">,</span> <span class="n">MAP_PLAYER</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 绘制计时器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">settextstyle</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;黑体&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">settextcolor</span><span class="p">(</span><span class="n">RED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">TCHAR</span> <span class="n">strTime</span><span class="p">[</span><span class="n">STRLEN</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_stprintf</span><span class="p">(</span><span class="n">strTime</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;%lds&#34;</span><span class="p">),</span> <span class="n">tPass</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">outtextxy</span><span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">strTime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 更新到绘图窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">SetWorkingImage</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">putimage</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">960</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">g_imgSight</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取用户输入的命令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">GetCmd</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 使用位运算节省空间，同时处理多个按键；
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="n">VK_LEFT</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_LEFT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="n">VK_RIGHT</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_RIGHT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="n">VK_UP</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_UP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="n">VK_DOWN</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_DOWN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="sc">&#39;A&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_LEFT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="sc">&#39;D&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_RIGHT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="sc">&#39;W&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_UP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="sc">&#39;S&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_DOWN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_MARK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="sc">&#39;C&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_CLEARMARK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">GetAsyncKeyState</span><span class="p">(</span><span class="n">VK_ESCAPE</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x8000</span><span class="p">)</span>		<span class="n">c</span> <span class="o">|=</span> <span class="n">CMD_QUIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 处理用户输入的命令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">DispatchCmd</span><span class="p">(</span><span class="kt">int</span> <span class="n">cmd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 将按键转换为操作再转换为函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">&amp;</span> <span class="n">CMD_UP</span><span class="p">)</span>			<span class="n">OnUp</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">&amp;</span> <span class="n">CMD_DOWN</span><span class="p">)</span>			<span class="n">OnDown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">&amp;</span> <span class="n">CMD_LEFT</span><span class="p">)</span>			<span class="n">OnLeft</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">&amp;</span> <span class="n">CMD_RIGHT</span><span class="p">)</span>		<span class="n">OnRight</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">&amp;</span> <span class="n">CMD_MARK</span><span class="p">)</span>			<span class="n">OnMark</span><span class="p">(</span><span class="n">MAP_MARK</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">cmd</span> <span class="o">&amp;</span> <span class="n">CMD_CLEARMARK</span><span class="p">)</span>	<span class="n">OnMark</span><span class="p">(</span><span class="n">MAP_GROUND</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 向上移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnUp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 上方有空间且不是墙壁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">GetMazeItem</span><span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">MAP_WALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 当移动到边缘时，挪动视野，以防游戏者离开视野
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span> <span class="o">&lt;</span> <span class="mi">8</span> <span class="o">&amp;&amp;</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">bottom</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 向左移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnLeft</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">GetMazeItem</span><span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">!=</span> <span class="n">MAP_WALL</span> <span class="o">&amp;&amp;</span> <span class="n">GetMazeItem</span><span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">!=</span> <span class="n">MAP_ENTRANCE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">right</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 向右移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnRight</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">&amp;&amp;</span> <span class="n">GetMazeItem</span><span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">!=</span> <span class="n">MAP_WALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">g_rtSight</span><span class="p">.</span><span class="n">right</span> <span class="o">-</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">&amp;&amp;</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">right</span> <span class="o">&lt;=</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">left</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">right</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 向下移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnDown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span> <span class="o">&amp;&amp;</span> <span class="n">GetMazeItem</span><span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">MAP_WALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">g_rtSight</span><span class="p">.</span><span class="n">bottom</span> <span class="o">-</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">8</span> <span class="o">&amp;&amp;</span> <span class="n">g_rtSight</span><span class="p">.</span><span class="n">bottom</span> <span class="o">&lt;=</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">top</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">g_rtSight</span><span class="p">.</span><span class="n">bottom</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//在地图中做标记
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">OnMark</span><span class="p">(</span><span class="n">MAPITEM</span> <span class="n">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">g_aryMap</span><span class="p">[</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 检查是否到出口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="nf">CheckWin</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cx</span> <span class="o">&amp;&amp;</span> <span class="n">g_ptPlayer</span><span class="p">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">g_szMap</span><span class="p">.</span><span class="n">cy</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 创建对话框
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">GetHWnd</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">MessageBoxW</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;恭喜你逃离了MAZE！</span><span class="se">\n</span><span class="s">您想再来一局吗？&#34;</span><span class="p">),</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;恭喜&#34;</span><span class="p">),</span> <span class="n">MB_YESNO</span> <span class="o">|</span> <span class="n">MB_ICONQUESTION</span><span class="p">)</span> <span class="o">==</span> <span class="n">IDYES</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">initGame</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 询问用户是否退出游戏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="nf">Quit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">GetHWnd</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">(</span><span class="n">MessageBox</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;您确定要退出游戏吗？&#34;</span><span class="p">),</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;ヽ（≧□≦）ノ&#34;</span><span class="p">),</span> <span class="n">MB_OKCANCEL</span> <span class="o">|</span> <span class="n">MB_ICONQUESTION</span><span class="p">)</span> <span class="o">==</span> <span class="n">IDOK</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 询问用户是否返回初始界面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="nf">EndGame</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">GetHWnd</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">(</span><span class="n">MessageBox</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;您确定要结束游戏并返回主界面吗？&#34;</span><span class="p">),</span> <span class="n">_T</span><span class="p">(</span><span class="s">&#34;结束游戏&#34;</span><span class="p">),</span> <span class="n">MB_OKCANCEL</span> <span class="o">|</span> <span class="n">MB_ICONQUESTION</span><span class="p">)</span> <span class="o">==</span> <span class="n">IDOK</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c-c&#43;&#43;/">C/C&#43;&#43;</a>
+        
+            <a href="/tags/easyx/">EasyX</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/project/mine/">
+        
+        
+            <div class="article-image">
+                <img src="/post/project/mine/image.318dfba7696516325b5844ec2b423c6e_hu_ba83d4cc159fe9f4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MineSweeper"
+                        
+                        data-hash="md5-MY37p2llFjJbWETsK0I8bg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MineSweeper</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/project/sort/">
+        
+        
+            <div class="article-image">
+                <img src="/post/project/sort/image.beee4a6d4da239581ea724b0fda9203a_hu_764d4d0be9f85bab.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Sort"
+                        
+                        data-hash="md5-vu5KbU2iOVgepySw/akgOg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Sort</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            1333 - 
+        
+        2025 solxr
+    </section>
+    
+    <section class="powerby">
+        
+            hello! <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.7a29dff201ee0368c44e0af4f547b64b31396aabcb62c662e5b8a998f20a8812.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

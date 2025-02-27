@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="多种排序算法的复现与比较">
+<title>Sort</title>
+
+<link rel='canonical' href='http://localhost:1313/post/project/sort/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Sort">
+<meta property='og:description' content="多种排序算法的复现与比较">
+<meta property='og:url' content='http://localhost:1313/post/project/sort/'>
+<meta property='og:site_name' content='solxr'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C-C&#43;&#43;' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2025-02-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-23T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/post/project/sort/image.png' />
+<meta name="twitter:title" content="Sort">
+<meta name="twitter:description" content="多种排序算法的复现与比较"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/post/project/sort/image.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_376a18d0875bf4d4.png" width="300"
+                            height="201" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🌞</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">solxr</a></h1>
+            <h2 class="site-description">33</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/TSR-solar/'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a>
+      <ol>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#开发工具">开发工具</a></li>
+        <li><a href="#开发语言">开发语言</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+        <li><a href="#项目下载">项目下载</a></li>
+        <li><a href="#项目截图">项目截图</a></li>
+        <li><a href="#使用说明">使用说明</a></li>
+      </ol>
+    </li>
+    <li><a href="#项目内容">项目内容</a>
+      <ol>
+        <li><a href="#主要功能">主要功能</a></li>
+        <li><a href="#设计原理">设计原理</a></li>
+        <li><a href="#文件汇总">文件汇总</a>
+          <ol>
+            <li><a href="#mainc"><code>main.c</code></a></li>
+            <li><a href="#sorth"><code>sort.h</code></a></li>
+            <li><a href="#sortc"><code>sort.c</code></a></li>
+            <li><a href="#bubblec-choosec-insertc-quickc-mergec-heapc"><code>bubble.c</code> <code>choose.c</code> <code>insert.c</code> <code>quick.c</code> <code>merge.c</code> <code>heap.c</code></a></li>
+            <li><a href="#origintxt"><code>origin.txt</code></a></li>
+            <li><a href="#sortedtxt"><code>sorted.txt</code></a></li>
+          </ol>
+        </li>
+        <li><a href="#主要函数">主要函数</a>
+          <ol>
+            <li><a href="#void-sortint-aint-nint-cnt"><code>void sort(int a[],int n,int cnt)</code></a></li>
+            <li><a href="#void-bubbleint-a-int-n"><code>void bubble(int a[], int n)</code></a></li>
+            <li><a href="#void-chooseint-a-int-n"><code>void choose(int a[], int n);</code></a></li>
+            <li><a href="#void-insertint-a-int-n"><code>void insert(int a[], int n)</code></a></li>
+            <li><a href="#void-quickint-a-int-l-int-r"><code>void quick(int a[], int l, int r)</code></a></li>
+            <li><a href="#void-mergeint-sourcearr-int-temparr-int-startindex-int-midindex-int-endindex"><code>void Merge(int sourceArr[], int tempArr[], int startIndex, int midIndex, int endIndex)</code></a></li>
+            <li><a href="#void-mergesortint-sourcearr-int-temparr-int-startindex-int-endindex"><code>void MergeSort(int sourceArr[], int tempArr[], int startIndex, int endIndex)</code></a></li>
+            <li><a href="#void-heapsortint-arr-int-len"><code>void HeapSort(int* arr, int len)</code></a></li>
+            <li><a href="#void-heapadjustint-arr-int-start-int-end"><code>void HeapAdjust(int* arr, int start, int end)</code></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#项目总结">项目总结</a></li>
+    <li><a href="#源代码查看">源代码查看</a>
+      <ol>
+        <li><a href="#sorth-1"><code>sort.h</code></a></li>
+        <li><a href="#bubblec"><code>bubble.c</code></a></li>
+        <li><a href="#choosec"><code>choose.c</code></a></li>
+        <li><a href="#heapc"><code>heap.c</code></a></li>
+        <li><a href="#insertc"><code>insert.c</code></a></li>
+        <li><a href="#mergec"><code>merge.c</code></a></li>
+        <li><a href="#quickc"><code>quick.c</code></a></li>
+        <li><a href="#sortc-1"><code>sort.c</code></a></li>
+        <li><a href="#mainc-1"><code>main.c</code></a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/project/sort/">
+                <img src="/post/project/sort/image_hu_7e3b793f9905f9bb.png"
+                        srcset="/post/project/sort/image_hu_7e3b793f9905f9bb.png 800w, /post/project/sort/image_hu_b31e41722a0ed05f.png 1600w"
+                        width="800" 
+                        height="449" 
+                        loading="lazy"
+                        alt="Featured image of post Sort" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%A1%B9%E7%9B%AE/" style="background-color: #ffff00; color: #fff;">
+                项目
+            </a>
+        
+            <a href="/categories/%E5%A4%A7%E4%BD%9C%E4%B8%9A/" style="background-color: #0099ff; color: #fff;">
+                大作业
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/project/sort/">Sort</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            多种排序算法的复现与比较
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 23, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 7 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="多种排序算法的复现与比较">多种排序算法的复现与比较
+</h1><h2 id="前言">前言
+</h2><h3 id="背景">背景
+</h3><p>大数据时代，对数据进行排序是必不可少的模块；<br>
+通过快速排序，我们能更加容易发现数据之中的规律，进而为实现统计、快速查找等操作打下基础。</p>
+<p>而找到更加快速、简洁易懂的排序算法也成了当下重要的任务。</p>
+<p>这个项目的目的就是为了比较现在流行的各个排序算法的实现难易程度与时间复杂度，以筛选出最适宜大家的排序算法。</p>
+<h3 id="开发工具">开发工具
+</h3><p>Visual Studio 2022</p>
+<h3 id="开发语言">开发语言
+</h3><p>C</p>
+<h3 id="参考资料">参考资料
+</h3><blockquote>
+<p>归并排序： <a class="link" href="https://blog.csdn.net/justidle/article/details/104203958"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/justidle/article/details/104203958</a></p></blockquote>
+<blockquote>
+<p>堆排序： <a class="link" href="https://blog.csdn.net/weixin_51609435/article/details/122982075"  target="_blank" rel="noopener"
+    >https://blog.csdn.net/weixin_51609435/article/details/122982075</a></p></blockquote>
+<h3 id="项目下载">项目下载
+</h3><blockquote>
+<p>百度网盘： <a class="link" href="https://pan.baidu.com/s/1GhMTe3T710_YC1AHjfCgXw"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/1GhMTe3T710_YC1AHjfCgXw</a> 提取码: vivy</p></blockquote>
+<blockquote>
+<p>夸克网盘： <a class="link" href="https://pan.quark.cn/s/a286260cca24"  target="_blank" rel="noopener"
+    >https://pan.quark.cn/s/a286260cca24</a> 提取码：uCXC</p></blockquote>
+<h3 id="项目截图">项目截图
+</h3><p><img src="/post/project/sort/sort1.png"
+	width="830"
+	height="409"
+	srcset="/post/project/sort/sort1_hu_a00a1ce3f0c566b.png 480w, /post/project/sort/sort1_hu_c73c162ef9c25696.png 1024w"
+	loading="lazy"
+	
+		alt="排序前后数组比较"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="487px"
+	
+>
+<img src="/post/project/sort/sort2.png"
+	width="377"
+	height="302"
+	srcset="/post/project/sort/sort2_hu_17f1b6aafaef5a16.png 480w, /post/project/sort/sort2_hu_cbd665037d12ceb7.png 1024w"
+	loading="lazy"
+	
+		alt="单次排序结果"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="124"
+		data-flex-basis="299px"
+	
+></p>
+<p><img src="/post/project/sort/sort3.png"
+	width="873"
+	height="859"
+	srcset="/post/project/sort/sort3_hu_db5767f2e8ef4d00.png 480w, /post/project/sort/sort3_hu_1d06a904a2058f34.png 1024w"
+	loading="lazy"
+	
+		alt="项目文件一览"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="101"
+		data-flex-basis="243px"
+	
+>
+<img src="/post/project/sort/sort4.png"
+	width="838"
+	height="949"
+	srcset="/post/project/sort/sort4_hu_4bceadb4e4c47454.png 480w, /post/project/sort/sort4_hu_724766479979be98.png 1024w"
+	loading="lazy"
+	
+		alt="源文件及其注释"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="88"
+		data-flex-basis="211px"
+	
+></p>
+<h3 id="使用说明">使用说明
+</h3><ol>
+<li>打开Visual Studio运行解决方案<code>sort.sln</code>;</li>
+<li>直接运行！</li>
+<li>点击运行后，将会自动生成随机数数组并自动运行6种排序算法，其中不需要任何输入和操作；</li>
+<li>等待30秒左右后，将会在终端输出各个排序所花费的时间；</li>
+<li>此时打开项目文件夹，在里面有两个文本文件<code>origin.txt</code>和<code>sorted.txt</code>，分别代表数组排序前后的数据；</li>
+</ol>
+<h2 id="项目内容">项目内容
+</h2><h3 id="主要功能">主要功能
+</h3><ol>
+<li>复现以下排序算法：冒泡排序、选择排序、插入排序、快速排序、归并排序、堆排序。</li>
+<li>对每种排序算法进行测试，并记录其在不同数据规模下的消耗时间。</li>
+</ol>
+<h3 id="设计原理">设计原理
+</h3><ol>
+<li>编写各个排序算法的函数，并将所有排序函数的定义分别保存在<strong>不同源文件</strong>中。然后在<code>main()</code>函数中分别调用各个排序算法对同一个数组排序，并将各个算法的消耗时间打印出来。</li>
+<li>使用<code>&lt;stdlib.h&gt;</code>里的函数<code>rand()</code>来生成伪随机数(用<code>&lt;time.h&gt;</code>初始化伪随机数生成器)，以用0~32767的随机数填充数组（<em>数组里面有100000个数</em>）。</li>
+<li>将排序前和排序后的数组保存到文本文件中，确保所有算法排序的是同一个数组。</li>
+<li>使用<code>&lt;time.h&gt;</code>里面的<code>clock()</code>函数来计算排序所需的时间，结果精确到毫秒。</li>
+<li>运行5-10次，然后将平均运行时间作为排序算法快慢的依据。</li>
+</ol>
+<h3 id="文件汇总">文件汇总
+</h3><h4 id="mainc"><code>main.c</code>
+</h4><p>主函数，用于实现随机生成数组、打印排序前后的数据等功能；</p>
+<h4 id="sorth"><code>sort.h</code>
+</h4><p>存放函数声明的头文件；</p>
+<h4 id="sortc"><code>sort.c</code>
+</h4><p>排序主函数，用于选择排序算法分支，记录排序花费的时间；</p>
+<h4 id="bubblec-choosec-insertc-quickc-mergec-heapc"><code>bubble.c</code> <code>choose.c</code> <code>insert.c</code> <code>quick.c</code> <code>merge.c</code> <code>heap.c</code>
+</h4><p>各种排序算法的函数；</p>
+<h4 id="origintxt"><code>origin.txt</code>
+</h4><p>打印初始数组数据；</p>
+<h4 id="sortedtxt"><code>sorted.txt</code>
+</h4><p>打印排序后数组数据；</p>
+<h3 id="主要函数">主要函数
+</h3><h4 id="void-sortint-aint-nint-cnt"><code>void sort(int a[],int n,int cnt)</code>
+</h4><p>读入给定的已知大小的数组，并根据cnt的值决定将要使用的排序算法。<br>
+在程序执行过程中，实际会将cnt从1-6全部遍历一遍。</p>
+<h4 id="void-bubbleint-a-int-n"><code>void bubble(int a[], int n)</code>
+</h4><p>对给定的已知大小的数组进行冒泡排序；</p>
+<h4 id="void-chooseint-a-int-n"><code>void choose(int a[], int n);</code>
+</h4><p>对给定的已知大小的数组进行选择排序；</p>
+<h4 id="void-insertint-a-int-n"><code>void insert(int a[], int n)</code>
+</h4><p>对给定的已知大小的数组进行插入排序；</p>
+<h4 id="void-quickint-a-int-l-int-r"><code>void quick(int a[], int l, int r)</code>
+</h4><p>对给定的已知左右下标的数组进行快速排序；</p>
+<h4 id="void-mergeint-sourcearr-int-temparr-int-startindex-int-midindex-int-endindex"><code>void Merge(int sourceArr[], int tempArr[], int startIndex, int midIndex, int endIndex)</code>
+</h4><p>对给定的已知左右下标的数组进行归并排序，其中使用调用的临时数组存储未合并的子数组；</p>
+<h4 id="void-mergesortint-sourcearr-int-temparr-int-startindex-int-endindex"><code>void MergeSort(int sourceArr[], int tempArr[], int startIndex, int endIndex)</code>
+</h4><p>归并排序使用期间调用的递归函数；</p>
+<h4 id="void-heapsortint-arr-int-len"><code>void HeapSort(int* arr, int len)</code>
+</h4><p>对给定的已知大小的数组进行堆排序；</p>
+<h4 id="void-heapadjustint-arr-int-start-int-end"><code>void HeapAdjust(int* arr, int start, int end)</code>
+</h4><p>堆排序过程中对建立的大根堆进行调整；</p>
+<h2 id="项目总结">项目总结
+</h2><p>测试之后，发现冒泡、选择运行时间都在10秒以上；而插入也在2秒以上；<br>
+但是，剩下三种排序算法运行时间都在<strong>0.01秒以内</strong>，效率提高了数百倍；</p>
+<p>后续上网查找发现，冒泡、选择、插入时间复杂度均为$O(n^2)$，而快速、归并、堆排序时间复杂度均为$O(nlogn)$，因此后三种排序算法应当在现实中的应用应当较为广泛；</p>
+<p>而快速、归并、堆排序中，代码最简洁易懂的就是快速排序，而且它的运行时间也是所有算法中最快的，因此猜想快速排序应当就是最好最流行的排序算法；</p>
+<p>事实上，经查阅资料得知，头文件<code>&lt;stdlib.h&gt;</code>里面自带的排序算法就是快速排序函数<code>qsort()</code>，这也验证了我的猜想；</p>
+<p>不过，我认为其它算法也可能在代码简洁性、空间、递归复杂度上更具优势，可能也有应用空间；</p>
+<h2 id="源代码查看">源代码查看
+</h2><h3 id="sorth-1"><code>sort.h</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 存放函数声明的头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">cnt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bubble</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">choose</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">quick</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">sourceArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">tempArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">startIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">midIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">endIndex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">MergeSort</span><span class="p">(</span><span class="kt">int</span> <span class="n">sourceArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">tempArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">startIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">endIndex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HeapAdjust</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HeapSort</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="bubblec"><code>bubble.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bubble</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//遍历n遍数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//比较相邻元素大小，然后小的在左大的在右
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">				<span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">				<span class="n">a</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//每次遍历都能保证最大的元素在最右边
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="choosec"><code>choose.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">choose</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//遍历n遍数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//如果元素比最左边的数小，就把它与最左边的元素交换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">if</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">				<span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">				<span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//每次遍历都能保证最小的元素在最左边
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="heapc"><code>heap.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// It is clear that I&#39;m not the origin writer; It comes from CSDN;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// And I don&#39;t understand it at all.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">HeapAdjust</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span> <span class="n">start</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">]</span> <span class="p">)</span><span class="c1">//有右孩子并且左孩子小于右孩子
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span><span class="c1">//i一定是左右孩子的最大值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span> <span class="n">arr</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">&gt;</span> <span class="n">tmp</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">arr</span><span class="p">[</span> <span class="n">start</span> <span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span> <span class="n">i</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">			<span class="n">start</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">arr</span><span class="p">[</span> <span class="n">start</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HeapSort</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//第一次建立大根堆，从后往前依次调整
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="p">(</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">HeapAdjust</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//每次将根和待排序的最后一次交换，然后在调整
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span> <span class="mi">0</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="n">arr</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="n">arr</span><span class="p">[</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">HeapAdjust</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="insertc"><code>insert.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//遍历数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">];</span><span class="c1">//记录要插入的元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//元素如果大于它则右移，否则留出空位让其插入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">if</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">&gt;</span> <span class="n">tmp</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">else</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span><span class="c1">//将元素插入空位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mergec"><code>merge.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// It is clear that I&#39;m not the origin writer; In fact it comes from CSDN;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="nf">Merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">sourceArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">tempArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">startIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">midIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">endIndex</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">startIndex</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">midIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">startIndex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">midIndex</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">endIndex</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">sourceArr</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">&gt;</span> <span class="n">sourceArr</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tempArr</span><span class="p">[</span> <span class="n">k</span><span class="o">++</span> <span class="p">]</span> <span class="o">=</span> <span class="n">sourceArr</span><span class="p">[</span> <span class="n">j</span><span class="o">++</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tempArr</span><span class="p">[</span> <span class="n">k</span><span class="o">++</span> <span class="p">]</span> <span class="o">=</span> <span class="n">sourceArr</span><span class="p">[</span> <span class="n">i</span><span class="o">++</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">midIndex</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tempArr</span><span class="p">[</span> <span class="n">k</span><span class="o">++</span> <span class="p">]</span> <span class="o">=</span> <span class="n">sourceArr</span><span class="p">[</span> <span class="n">i</span><span class="o">++</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">endIndex</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tempArr</span><span class="p">[</span> <span class="n">k</span><span class="o">++</span> <span class="p">]</span> <span class="o">=</span> <span class="n">sourceArr</span><span class="p">[</span> <span class="n">j</span><span class="o">++</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="n">startIndex</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">endIndex</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sourceArr</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tempArr</span><span class="p">[</span> <span class="n">i</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//内部使用递归
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">MergeSort</span><span class="p">(</span><span class="kt">int</span> <span class="n">sourceArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">tempArr</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">startIndex</span><span class="p">,</span> <span class="kt">int</span> <span class="n">endIndex</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">midIndex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">startIndex</span> <span class="o">&lt;</span> <span class="n">endIndex</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">midIndex</span> <span class="o">=</span> <span class="n">startIndex</span> <span class="o">+</span> <span class="p">(</span> <span class="n">endIndex</span> <span class="o">-</span> <span class="n">startIndex</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span><span class="c1">//避免溢出int
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">MergeSort</span><span class="p">(</span><span class="n">sourceArr</span><span class="p">,</span> <span class="n">tempArr</span><span class="p">,</span> <span class="n">startIndex</span><span class="p">,</span> <span class="n">midIndex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MergeSort</span><span class="p">(</span><span class="n">sourceArr</span><span class="p">,</span> <span class="n">tempArr</span><span class="p">,</span> <span class="n">midIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">endIndex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Merge</span><span class="p">(</span><span class="n">sourceArr</span><span class="p">,</span> <span class="n">tempArr</span><span class="p">,</span> <span class="n">startIndex</span><span class="p">,</span> <span class="n">midIndex</span><span class="p">,</span> <span class="n">endIndex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="quickc"><code>quick.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">quick</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span> <span class="n">flag</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="p">(</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">],</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//记录左右下标、以及哨兵元素（数组中间的元素）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">do</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//寻找左边大于哨兵的元素和右边小于哨兵的元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">while</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">&lt;</span> <span class="n">flag</span> <span class="p">)</span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span> <span class="p">(</span> <span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">&gt;</span> <span class="n">flag</span> <span class="p">)</span><span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">//如果i和j没有相遇，就将这两个元素换位，并继续搜索
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">			<span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">			<span class="n">a</span><span class="p">[</span> <span class="n">j</span> <span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">i</span><span class="o">++</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//当i和j相遇时，在哨兵的左侧都是小于其的值，右侧都是大于其的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span> <span class="k">while</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="c1">//如果i和j还没有到边界，就调用递归函数对小份的数组再次进行快速排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="p">(</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="p">)</span><span class="n">quick</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="p">)</span><span class="n">quick</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="sortc-1"><code>sort.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 实现排序功能的主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;sort.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="nf">sort</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">int</span> <span class="n">cnt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">clock_t</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">duration</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//用clock()函数记录排序所花的时间，精确到0.001秒；
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">start</span> <span class="o">=</span> <span class="n">clock</span><span class="p">(</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="p">(</span> <span class="n">cnt</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//根据cnt的数值选择分支，决定使用排序的类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s">&#34;bubble:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">bubble</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s">&#34;choose:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">choose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s">&#34;insert:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// &lt;stdlib.h&gt;里面也有快排函数qsort()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">printf</span><span class="p">(</span><span class="s">&#34;quick:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">quick</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">5</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//这东西得开两个数组才能带到函数里面去，故使用动态内存分配
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">printf</span><span class="p">(</span><span class="s">&#34;merge:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="kt">int</span><span class="o">*</span> <span class="n">b</span> <span class="o">=</span> <span class="p">(</span> <span class="kt">int</span><span class="o">*</span> <span class="p">)</span> <span class="n">malloc</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">			<span class="n">MergeSort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">free</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">6</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s">&#34;heap:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">HeapSort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">end</span> <span class="o">=</span> <span class="n">clock</span><span class="p">(</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">duration</span> <span class="o">=</span> <span class="p">(</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span> <span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">CLOCKS_PER_SEC</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%.3fs</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mainc-1"><code>main.c</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;sort.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define N 100000
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span> <span class="n">N</span> <span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">tmp</span><span class="p">[</span> <span class="n">N</span> <span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">time_t</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span><span class="o">*</span> <span class="n">fp1</span><span class="p">,</span> <span class="o">*</span> <span class="n">fp2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//生成0 ~ 32767范围的随机数数组;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">srand</span><span class="p">((</span> <span class="kt">unsigned</span> <span class="p">)</span> <span class="n">time</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//将数组数据存储到临时数组中，进行6次序的排;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">cnt</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">cnt</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">tmp</span><span class="p">[</span> <span class="n">i</span> <span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sort</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">cnt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//将排序前后的数组数据写到文本文件中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">fp1</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;origin.txt&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fp2</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;sorted.txt&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">fprintf</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="s">&#34;%7d&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span> <span class="n">i</span> <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">fprintf</span><span class="p">(</span><span class="n">fp2</span><span class="p">,</span> <span class="s">&#34;%7d&#34;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">[</span> <span class="n">i</span> <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span> <span class="p">(</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">fprintf</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="n">fprintf</span><span class="p">(</span><span class="n">fp2</span><span class="p">,</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span> <span class="p">(</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">)</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">fprintf</span><span class="p">(</span><span class="n">fp1</span><span class="p">,</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fclose</span><span class="p">(</span><span class="n">fp1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fclose</span><span class="p">(</span><span class="n">fp2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c-c&#43;&#43;/">C/C&#43;&#43;</a>
+        
+            <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/project/maze/">
+        
+        
+            <div class="article-image">
+                <img src="/post/project/maze/image.515e6cafbae3474848c7bf2d3c81a3e8_hu_27b055cb33d5e303.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Escape from MAZE"
+                        
+                        data-hash="md5-UV5sr7rjR0hIx78tPIGj6A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Escape from MAZE</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/project/mine/">
+        
+        
+            <div class="article-image">
+                <img src="/post/project/mine/image.318dfba7696516325b5844ec2b423c6e_hu_ba83d4cc159fe9f4.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post MineSweeper"
+                        
+                        data-hash="md5-MY37p2llFjJbWETsK0I8bg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">MineSweeper</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            1333 - 
+        
+        2025 solxr
+    </section>
+    
+    <section class="powerby">
+        
+            hello! <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.7a29dff201ee0368c44e0af4f547b64b31396aabcb62c662e5b8a998f20a8812.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

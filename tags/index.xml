@@ -7,21 +7,37 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>solxr</copyright>
-        <lastBuildDate>Sat, 22 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 23 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>C/C&#43;&#43;</title>
+        <link>http://localhost:1313/tags/c-c&#43;&#43;/</link>
+        <pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/c-c&#43;&#43;/</guid>
+        <description>&lt;img src="http://localhost:1313/tags/c-c&#43;&#43;/image.png" alt="Featured image of post C/C&#43;&#43;" /&gt;</description>
+        </item>
+        <item>
+        <title>EasyX</title>
+        <link>http://localhost:1313/tags/easyx/</link>
+        <pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/easyx/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>算法</title>
+        <link>http://localhost:1313/tags/%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E7%AE%97%E6%B3%95/</guid>
+        <description>&lt;img src="http://localhost:1313/tags/%E7%AE%97%E6%B3%95/image.png" alt="Featured image of post 算法" /&gt;</description>
+        </item>
+        <item>
         <title>Python</title>
         <link>http://localhost:1313/tags/python/</link>
         <pubDate>Sat, 22 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/tags/python/</guid>
         <description>&lt;img src="http://localhost:1313/tags/python/image.png" alt="Featured image of post Python" /&gt;</description>
-        </item>
-        <item>
-        <title>C/C&#43;&#43;</title>
-        <link>http://localhost:1313/tags/c-c&#43;&#43;/</link>
-        <pubDate>Thu, 20 Feb 2025 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/c-c&#43;&#43;/</guid>
-        <description>&lt;img src="http://localhost:1313/tags/c-c&#43;&#43;/image.png" alt="Featured image of post C/C&#43;&#43;" /&gt;</description>
         </item>
         
     </channel>
