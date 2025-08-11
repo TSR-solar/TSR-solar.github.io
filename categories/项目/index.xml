@@ -7,7 +7,230 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>solxr</copyright>
-        <lastBuildDate>Sun, 23 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%E9%A1%B9%E7%9B%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 27 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%E9%A1%B9%E7%9B%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MineSweeper</title>
+        <link>http://localhost:1313/post/project/mine/</link>
+        <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/project/mine/</guid>
+        <description>&lt;img src="http://localhost:1313/post/project/mine/image.png" alt="Featured image of post MineSweeper" /&gt;&lt;h1 id=&#34;easyx环境下实现扫雷&#34;&gt;EasyX环境下实现扫雷
+&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
+&lt;/h2&gt;&lt;h3 id=&#34;开发工具&#34;&gt;开发工具
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Visual Studio 2022&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;EasyX_202440601&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;开发语言&#34;&gt;开发语言
+&lt;/h3&gt;&lt;p&gt;C++&lt;/p&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;EasyX官方中文教程： &lt;a class=&#34;link&#34; href=&#34;https://docs.easyx.cn/zh-cn/intro&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://docs.easyx.cn/zh-cn/intro&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;项目下载&#34;&gt;项目下载
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;百度网盘： &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1dhvY02UOOAVBnHm2uqUs5Q&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.baidu.com/s/1dhvY02UOOAVBnHm2uqUs5Q&lt;/a&gt; 提取码: iube&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;夸克网盘： &lt;a class=&#34;link&#34; href=&#34;https://pan.quark.cn/s/533f41786df9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://pan.quark.cn/s/533f41786df9&lt;/a&gt; 提取码：Fx7i&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Github： &lt;a class=&#34;link&#34; href=&#34;https://github.com/TSR-solar/MineSweeper&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://github.com/TSR-solar/MineSweeper&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Gitee： &lt;a class=&#34;link&#34; href=&#34;https://gitee.com/solxr/MineSweeper&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://gitee.com/solxr/MineSweeper&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;项目截图&#34;&gt;项目截图
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine1.png&#34;
+	width=&#34;2399&#34;
+	height=&#34;1347&#34;
+	srcset=&#34;http://localhost:1313/post/project/mine/mine1_hu_4fbf73460abe4b8a.png 480w, http://localhost:1313/post/project/mine/mine1_hu_3217363ca63a44e1.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;开始界面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;178&#34;
+		data-flex-basis=&#34;427px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine2.png&#34;
+	width=&#34;2395&#34;
+	height=&#34;1348&#34;
+	srcset=&#34;http://localhost:1313/post/project/mine/mine2_hu_d29972dbd2be28df.png 480w, http://localhost:1313/post/project/mine/mine2_hu_3b2213ca44e1a5f6.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;调整难度&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine3.png&#34;
+	width=&#34;2394&#34;
+	height=&#34;1346&#34;
+	srcset=&#34;http://localhost:1313/post/project/mine/mine3_hu_c8af38bed0bd1c33.png 480w, http://localhost:1313/post/project/mine/mine3_hu_d5b63e1a411e229a.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;数据统计&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/image.png&#34;
+	width=&#34;2397&#34;
+	height=&#34;1350&#34;
+	srcset=&#34;http://localhost:1313/post/project/mine/image_hu_89d216609fecddf.png 480w, http://localhost:1313/post/project/mine/image_hu_8c481bb11a80908f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;游戏界面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine4.png&#34;
+	width=&#34;393&#34;
+	height=&#34;317&#34;
+	srcset=&#34;http://localhost:1313/post/project/mine/mine4_hu_ce51085e6272d7c3.png 480w, http://localhost:1313/post/project/mine/mine4_hu_191a9aeb21d4dd14.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;胜利画面&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;123&#34;
+		data-flex-basis=&#34;297px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用说明&#34;&gt;使用说明
+&lt;/h3&gt;&lt;h4 id=&#34;进入游戏方法&#34;&gt;进入游戏方法
+&lt;/h4&gt;&lt;p&gt;点击&lt;code&gt;Minesweeper&lt;/code&gt;应用程序即可开始游玩。&lt;br&gt;
+里面有进一步的游戏帮助。&lt;/p&gt;
+&lt;h4 id=&#34;游玩须知&#34;&gt;游玩须知
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;不要删掉&lt;code&gt;diff.txt&lt;/code&gt; &lt;code&gt;Tbest.txt&lt;/code&gt; &lt;code&gt;rate.txt&lt;/code&gt;。原因同第一条。&lt;/li&gt;
+&lt;li&gt;如果发现计时器不动了，移动鼠标即可恢复。&lt;/li&gt;
+&lt;li&gt;该游戏没有设置保护机制，所以你第一下就有可能点到雷而失败。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;查看源代码&#34;&gt;查看源代码
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;源代码在名为“源代码”的文件夹中，打开文件夹后点击&lt;code&gt;Minesweeper.sln&lt;/code&gt;打开&lt;code&gt;Visual Studio&lt;/code&gt;解决方案，即可查看所有头文件和源文件。&lt;/li&gt;
+&lt;li&gt;或者也可以点击“源代码”里的&lt;code&gt;Minesweeper&lt;/code&gt;文件夹查看。&lt;/li&gt;
+&lt;li&gt;如果你在解决方案内直接运行，统计数据可能会出错，原因是两个应用程序读取的不是同一个文本文件。&lt;/li&gt;
+&lt;li&gt;内置外挂：打开i&lt;code&gt;nitGame.cpp&lt;/code&gt;，然后取消掉调试下方代码的注释，并重新编译运行，这时候就会产生一个自带透视的应用程序（在&lt;code&gt;x64\Debug&lt;/code&gt;中），开始游戏后可以在终端查看所有地块的状态。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;项目内容&#34;&gt;项目内容
+&lt;/h2&gt;&lt;h3 id=&#34;主要功能&#34;&gt;主要功能
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;支持调整难度、自定义地图大小和地雷数量。&lt;/li&gt;
+&lt;li&gt;支持右键标记地雷、连锁挖开地块以及双击数字快速挖开地块。&lt;/li&gt;
+&lt;li&gt;游戏中显示计时器和未标记地雷数量。&lt;/li&gt;
+&lt;li&gt;支持数据统计和重置，包括各难度最快纪录和胜负局数。&lt;/li&gt;
+&lt;li&gt;除了游戏主体玩法之外，大部分内容和&lt;code&gt;Escape from MAZE&lt;/code&gt;相近，比如祖传的开始页面，以及退出时的对话框。但是这次由于使用了一些C++的新功能，所以代码要更加简洁。&lt;/li&gt;
+&lt;li&gt;实时检测游戏是否达到胜利或者失败条件。&lt;/li&gt;
+&lt;li&gt;当所有安全地块被挖开后，判定为胜利，此时将所有未标记的地块标记，并弹出对话框。&lt;/li&gt;
+&lt;li&gt;当任意地雷地块被挖开后，判定为失败，此时将所有地雷翻开，并弹出对话框。&lt;/li&gt;
+&lt;li&gt;胜利后根据计时器的时间来判定是否打破纪录，并提醒玩家。如果打破纪录会刷新统计信息。&lt;/li&gt;
+&lt;li&gt;本项目没有使用图片，所有的图案都是字符。&lt;/li&gt;
+&lt;li&gt;支持游戏中重新开始和退出（通过键盘操作）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;设计原理&#34;&gt;设计原理
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;由于Visual Studio的安全问题，有关&lt;code&gt;TCHAR&lt;/code&gt;的字符串操作必须要在预处理器里面加入宏&lt;code&gt;_CRT_SECURE_NO_WARNING&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;在等待用户操作、主界面的离开与返回、游戏进行阶段使用循环结构，只有达到了特定的条件才会用&lt;code&gt;break&lt;/code&gt;结束循环；&lt;br&gt;
+一般来说，各个判定的函数如果有2个值，则是返回1，否返回0。&lt;br&gt;
+如果有3个值，则进入下一步返回1，退出该界面返回-1，不做任何操作返回0。&lt;/li&gt;
+&lt;li&gt;将游戏中的图案提前用&lt;code&gt;initImage()&lt;/code&gt;函数绘制在备用窗口&lt;code&gt;img1&lt;/code&gt;上，等到要用的时候直接放出来，不需要重新绘制。&lt;/li&gt;
+&lt;li&gt;连锁挖开地块使用了广度优先搜索算法，将空地块周围8个地块全部设置成已经挖开，再对这8个地块分别判定是否连锁。&lt;/li&gt;
+&lt;li&gt;游戏会实时绘制地块状态，同时为了防止过快刷新导致的屏幕闪烁，使用了&lt;code&gt;Batchdraw&lt;/code&gt;系列函数，先缓存操作再一次性绘制。&lt;/li&gt;
+&lt;li&gt;捕获鼠标信息方面采用了&lt;code&gt;easyx.h&lt;/code&gt;里的&lt;code&gt;getmessage()&lt;/code&gt;函数，主要用于按钮或者地块的操作。&lt;/li&gt;
+&lt;li&gt;读取键盘的操作不再使用&lt;code&gt;GetAsyncKeyState()&lt;/code&gt;函数，因为就2个按键。&lt;/li&gt;
+&lt;li&gt;摆脱了单文件结构。实现了以函数为单位的多文件结构。&lt;/li&gt;
+&lt;li&gt;将所有的头文件、宏、函数声明、变量声明都放到一个大的头文件里面，便于调用。其中变量采用了&lt;code&gt;extern&lt;/code&gt;修饰符。&lt;/li&gt;
+&lt;li&gt;游戏开始时记录起始时间，此后，将记录的时间与开始时间之差显示在屏幕右上角（计时器）。&lt;/li&gt;
+&lt;li&gt;采用了文件读写的形式来记录统计信息，但是文件地址采用的是相对路径，意味着无法移动应用程序（但可以创建快捷方式）。&lt;/li&gt;
+&lt;li&gt;地块的生成采用了2重指针的动态内存分配，好处是可以变换大小。游戏退出后释放内存。&lt;/li&gt;
+&lt;li&gt;项目中共有4个类，分别记录模式信息，地块信息，按钮信息以及图案信息。成员全部都是&lt;code&gt;public&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;模式类包含地图的长、宽和地雷数。&lt;/li&gt;
+&lt;li&gt;图案类包含了图案左上角的横纵坐标以及构造函数。&lt;/li&gt;
+&lt;li&gt;按钮类包含了四条边的位置坐标以及绘制按钮和检测按钮的成员函数。当然也有构造函数。&lt;/li&gt;
+&lt;li&gt;地块类包含4个成员变量，3个成员函数。&lt;br&gt;
+成员变量包含&lt;code&gt;dig&lt;/code&gt; &lt;code&gt;mine&lt;/code&gt; &lt;code&gt;type&lt;/code&gt;。&lt;br&gt;
+&lt;code&gt;dig&lt;/code&gt;表示该地块是否被挖，0是没被挖，1是被挖，2是旗无法被挖，3是准备挖（高亮显示）。
+&lt;code&gt;mine&lt;/code&gt;表示该地块是否含有地雷。0是没有，1是有雷。&lt;br&gt;
+&lt;code&gt;type&lt;/code&gt;表示该地块的类型。0是空格，1~8是数字，X是雷。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;typeset()&lt;/code&gt;函数可以根据自己以及周围8个地块的&lt;code&gt;mine&lt;/code&gt;值来设置&lt;code&gt;type&lt;/code&gt;的属性。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;chain()&lt;/code&gt;函数会将&lt;code&gt;mine=0&lt;/code&gt;的地块周围8个中&lt;code&gt;dig=0&lt;/code&gt;的设置成&lt;code&gt;dig=2&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;check()&lt;/code&gt;函数可以检测鼠标操作。光标移动会令&lt;code&gt;dig=3&lt;/code&gt;，离开时令&lt;code&gt;dig=0&lt;/code&gt;。左右键仅对&lt;code&gt;dig=3&lt;/code&gt;的地块有用。左键双击仅对&lt;code&gt;dig=2&lt;/code&gt;的地块有用，且要满足地块周围有足够多的标记。会执行一次&lt;code&gt;chain()&lt;/code&gt;函数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;文件汇总&#34;&gt;文件汇总
+&lt;/h3&gt;&lt;h4 id=&#34;minesweeperh&#34;&gt;&lt;code&gt;minesweeper.h&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;总头文件。&lt;/p&gt;
+&lt;h4 id=&#34;blockh&#34;&gt;&lt;code&gt;block.h&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;扫雷时的地块类的头文件。&lt;/p&gt;
+&lt;h4 id=&#34;blockcpp&#34;&gt;&lt;code&gt;block.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;扫雷时的地块类的源文件。&lt;/p&gt;
+&lt;h4 id=&#34;buttonh&#34;&gt;&lt;code&gt;button.h&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;按钮类的头文件。&lt;/p&gt;
+&lt;h4 id=&#34;buttoncpp&#34;&gt;&lt;code&gt;button.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;按钮类的源文件。&lt;/p&gt;
+&lt;h4 id=&#34;itemh&#34;&gt;&lt;code&gt;item.h&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;游戏中的图片的头文件。&lt;/p&gt;
+&lt;h4 id=&#34;itemcpp&#34;&gt;&lt;code&gt;item.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;游戏中的图片的源文件。&lt;/p&gt;
+&lt;h4 id=&#34;modeh&#34;&gt;&lt;code&gt;Mode.h&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;模式类的头文件。&lt;/p&gt;
+&lt;h4 id=&#34;modecpp&#34;&gt;&lt;code&gt;Mode.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;模式类的源文件。&lt;/p&gt;
+&lt;h4 id=&#34;maincpp&#34;&gt;&lt;code&gt;main.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;主函数。&lt;/p&gt;
+&lt;h4 id=&#34;welcomecpp&#34;&gt;&lt;code&gt;welcome.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;绘制初始界面以及跳转。&lt;/p&gt;
+&lt;h4 id=&#34;setcpp&#34;&gt;&lt;code&gt;Set.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;绘制设置界面以及跳转。&lt;/p&gt;
+&lt;h4 id=&#34;helpcpp&#34;&gt;&lt;code&gt;Help.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;绘制设置界面以及跳转。&lt;/p&gt;
+&lt;h4 id=&#34;diffcpp&#34;&gt;&lt;code&gt;Diff.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;绘制难度界面以及跳转。&lt;/p&gt;
+&lt;h4 id=&#34;statscpp&#34;&gt;&lt;code&gt;Stats.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;绘制统计界面以及跳转。&lt;/p&gt;
+&lt;h4 id=&#34;resetcpp&#34;&gt;&lt;code&gt;Reset.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;询问是否重置统计数据。&lt;/p&gt;
+&lt;h4 id=&#34;loadcpp&#34;&gt;&lt;code&gt;load.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;读取文件信息（主要是统计数据）。&lt;/p&gt;
+&lt;h4 id=&#34;initimagecpp&#34;&gt;&lt;code&gt;initImage.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;预绘制图片到缓冲窗口。&lt;/p&gt;
+&lt;h4 id=&#34;initgamecpp&#34;&gt;&lt;code&gt;initGame.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;游戏初始化。&lt;/p&gt;
+&lt;h4 id=&#34;endgamecpp&#34;&gt;&lt;code&gt;EndGame.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;游戏结束收尾操作。&lt;/p&gt;
+&lt;h4 id=&#34;paintcpp&#34;&gt;&lt;code&gt;paint.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;绘制游戏画面。&lt;/p&gt;
+&lt;h4 id=&#34;ingamecpp&#34;&gt;&lt;code&gt;inGame.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;游戏内操作以及跳转。&lt;/p&gt;
+&lt;h4 id=&#34;quitcpp&#34;&gt;&lt;code&gt;Quit.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;询问是否退出游戏。&lt;/p&gt;
+&lt;h4 id=&#34;endcpp&#34;&gt;&lt;code&gt;End.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;询问是否结束游戏并返回初始界面。&lt;/p&gt;
+&lt;h4 id=&#34;restartcpp&#34;&gt;&lt;code&gt;Restart.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;询问是否开始新的游戏。&lt;/p&gt;
+&lt;h4 id=&#34;wincpp&#34;&gt;&lt;code&gt;Win.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;游戏胜利时操作。&lt;/p&gt;
+&lt;h4 id=&#34;failcpp&#34;&gt;&lt;code&gt;Fail.cpp&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;游戏失败时操作。&lt;/p&gt;
+&lt;h2 id=&#34;项目总结&#34;&gt;项目总结
+&lt;/h2&gt;&lt;p&gt;这一次项目开发相比上次简单了很多，虽然文件体量更大，功能更加多样，但是开发时间却从一周减少到了3天。这主要还是得益于使用了类的功能以及多文件结构来增加开发效率。&lt;/p&gt;
+&lt;h2 id=&#34;源代码查看&#34;&gt;源代码查看
+&lt;/h2&gt;&lt;p&gt;太多了，请到文件夹中查看。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Escape from MAZE</title>
         <link>http://localhost:1313/post/project/maze/</link>
         <pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate>
@@ -1651,223 +1874,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
-        </item>
-        <item>
-        <title>MineSweeper</title>
-        <link>http://localhost:1313/post/project/mine/</link>
-        <pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/post/project/mine/</guid>
-        <description>&lt;img src="http://localhost:1313/post/project/mine/image.png" alt="Featured image of post MineSweeper" /&gt;&lt;h1 id=&#34;easyx环境下实现扫雷&#34;&gt;EasyX环境下实现扫雷
-&lt;/h1&gt;&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;h3 id=&#34;开发工具&#34;&gt;开发工具
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Visual Studio 2022&lt;/strong&gt;&lt;br&gt;
-&lt;strong&gt;EasyX_202440601&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;开发语言&#34;&gt;开发语言
-&lt;/h3&gt;&lt;p&gt;C++&lt;/p&gt;
-&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
-&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;EasyX官方中文教程： &lt;a class=&#34;link&#34; href=&#34;https://docs.easyx.cn/zh-cn/intro&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://docs.easyx.cn/zh-cn/intro&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h3 id=&#34;项目下载&#34;&gt;项目下载
-&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;百度网盘： &lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1dhvY02UOOAVBnHm2uqUs5Q&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://pan.baidu.com/s/1dhvY02UOOAVBnHm2uqUs5Q&lt;/a&gt; 提取码: iube&lt;/p&gt;&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;夸克网盘： &lt;a class=&#34;link&#34; href=&#34;https://pan.quark.cn/s/533f41786df9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://pan.quark.cn/s/533f41786df9&lt;/a&gt; 提取码：Fx7i&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h3 id=&#34;项目截图&#34;&gt;项目截图
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine1.png&#34;
-	width=&#34;2399&#34;
-	height=&#34;1347&#34;
-	srcset=&#34;http://localhost:1313/post/project/mine/mine1_hu_4fbf73460abe4b8a.png 480w, http://localhost:1313/post/project/mine/mine1_hu_3217363ca63a44e1.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;开始界面&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;178&#34;
-		data-flex-basis=&#34;427px&#34;
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine2.png&#34;
-	width=&#34;2395&#34;
-	height=&#34;1348&#34;
-	srcset=&#34;http://localhost:1313/post/project/mine/mine2_hu_d29972dbd2be28df.png 480w, http://localhost:1313/post/project/mine/mine2_hu_3b2213ca44e1a5f6.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;调整难度&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;177&#34;
-		data-flex-basis=&#34;426px&#34;
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine3.png&#34;
-	width=&#34;2394&#34;
-	height=&#34;1346&#34;
-	srcset=&#34;http://localhost:1313/post/project/mine/mine3_hu_c8af38bed0bd1c33.png 480w, http://localhost:1313/post/project/mine/mine3_hu_d5b63e1a411e229a.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;数据统计&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;177&#34;
-		data-flex-basis=&#34;426px&#34;
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/image.png&#34;
-	width=&#34;2397&#34;
-	height=&#34;1350&#34;
-	srcset=&#34;http://localhost:1313/post/project/mine/image_hu_89d216609fecddf.png 480w, http://localhost:1313/post/project/mine/image_hu_8c481bb11a80908f.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;游戏界面&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;177&#34;
-		data-flex-basis=&#34;426px&#34;
-	
-&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/project/mine/mine4.png&#34;
-	width=&#34;393&#34;
-	height=&#34;317&#34;
-	srcset=&#34;http://localhost:1313/post/project/mine/mine4_hu_ce51085e6272d7c3.png 480w, http://localhost:1313/post/project/mine/mine4_hu_191a9aeb21d4dd14.png 1024w&#34;
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;胜利画面&#34;
-	
-	
-		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;123&#34;
-		data-flex-basis=&#34;297px&#34;
-	
-&gt;&lt;/p&gt;
-&lt;h3 id=&#34;使用说明&#34;&gt;使用说明
-&lt;/h3&gt;&lt;h4 id=&#34;进入游戏方法&#34;&gt;进入游戏方法
-&lt;/h4&gt;&lt;p&gt;点击&lt;code&gt;Minesweeper&lt;/code&gt;应用程序即可开始游玩。&lt;br&gt;
-里面有进一步的游戏帮助。&lt;/p&gt;
-&lt;h4 id=&#34;游玩须知&#34;&gt;游玩须知
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;不要删掉&lt;code&gt;diff.txt&lt;/code&gt; &lt;code&gt;Tbest.txt&lt;/code&gt; &lt;code&gt;rate.txt&lt;/code&gt;。原因同第一条。&lt;/li&gt;
-&lt;li&gt;如果发现计时器不动了，移动鼠标即可恢复。&lt;/li&gt;
-&lt;li&gt;该游戏没有设置保护机制，所以你第一下就有可能点到雷而失败。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;查看源代码&#34;&gt;查看源代码
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;源代码在名为“源代码”的文件夹中，打开文件夹后点击&lt;code&gt;Minesweeper.sln&lt;/code&gt;打开&lt;code&gt;Visual Studio&lt;/code&gt;解决方案，即可查看所有头文件和源文件。&lt;/li&gt;
-&lt;li&gt;或者也可以点击“源代码”里的&lt;code&gt;Minesweeper&lt;/code&gt;文件夹查看。&lt;/li&gt;
-&lt;li&gt;如果你在解决方案内直接运行，统计数据可能会出错，原因是两个应用程序读取的不是同一个文本文件。&lt;/li&gt;
-&lt;li&gt;内置外挂：打开i&lt;code&gt;nitGame.cpp&lt;/code&gt;，然后取消掉调试下方代码的注释，并重新编译运行，这时候就会产生一个自带透视的应用程序（在&lt;code&gt;x64\Debug&lt;/code&gt;中），开始游戏后可以在终端查看所有地块的状态。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;项目内容&#34;&gt;项目内容
-&lt;/h2&gt;&lt;h3 id=&#34;主要功能&#34;&gt;主要功能
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;支持调整难度、自定义地图大小和地雷数量。&lt;/li&gt;
-&lt;li&gt;支持右键标记地雷、连锁挖开地块以及双击数字快速挖开地块。&lt;/li&gt;
-&lt;li&gt;游戏中显示计时器和未标记地雷数量。&lt;/li&gt;
-&lt;li&gt;支持数据统计和重置，包括各难度最快纪录和胜负局数。&lt;/li&gt;
-&lt;li&gt;除了游戏主体玩法之外，大部分内容和&lt;code&gt;Escape from MAZE&lt;/code&gt;相近，比如祖传的开始页面，以及退出时的对话框。但是这次由于使用了一些C++的新功能，所以代码要更加简洁。&lt;/li&gt;
-&lt;li&gt;实时检测游戏是否达到胜利或者失败条件。&lt;/li&gt;
-&lt;li&gt;当所有安全地块被挖开后，判定为胜利，此时将所有未标记的地块标记，并弹出对话框。&lt;/li&gt;
-&lt;li&gt;当任意地雷地块被挖开后，判定为失败，此时将所有地雷翻开，并弹出对话框。&lt;/li&gt;
-&lt;li&gt;胜利后根据计时器的时间来判定是否打破纪录，并提醒玩家。如果打破纪录会刷新统计信息。&lt;/li&gt;
-&lt;li&gt;本项目没有使用图片，所有的图案都是字符。&lt;/li&gt;
-&lt;li&gt;支持游戏中重新开始和退出（通过键盘操作）。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;设计原理&#34;&gt;设计原理
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;由于Visual Studio的安全问题，有关&lt;code&gt;TCHAR&lt;/code&gt;的字符串操作必须要在预处理器里面加入宏&lt;code&gt;_CRT_SECURE_NO_WARNING&lt;/code&gt;；&lt;/li&gt;
-&lt;li&gt;在等待用户操作、主界面的离开与返回、游戏进行阶段使用循环结构，只有达到了特定的条件才会用&lt;code&gt;break&lt;/code&gt;结束循环；&lt;br&gt;
-一般来说，各个判定的函数如果有2个值，则是返回1，否返回0。&lt;br&gt;
-如果有3个值，则进入下一步返回1，退出该界面返回-1，不做任何操作返回0。&lt;/li&gt;
-&lt;li&gt;将游戏中的图案提前用&lt;code&gt;initImage()&lt;/code&gt;函数绘制在备用窗口&lt;code&gt;img1&lt;/code&gt;上，等到要用的时候直接放出来，不需要重新绘制。&lt;/li&gt;
-&lt;li&gt;连锁挖开地块使用了广度优先搜索算法，将空地块周围8个地块全部设置成已经挖开，再对这8个地块分别判定是否连锁。&lt;/li&gt;
-&lt;li&gt;游戏会实时绘制地块状态，同时为了防止过快刷新导致的屏幕闪烁，使用了&lt;code&gt;Batchdraw&lt;/code&gt;系列函数，先缓存操作再一次性绘制。&lt;/li&gt;
-&lt;li&gt;捕获鼠标信息方面采用了&lt;code&gt;easyx.h&lt;/code&gt;里的&lt;code&gt;getmessage()&lt;/code&gt;函数，主要用于按钮或者地块的操作。&lt;/li&gt;
-&lt;li&gt;读取键盘的操作不再使用&lt;code&gt;GetAsyncKeyState()&lt;/code&gt;函数，因为就2个按键。&lt;/li&gt;
-&lt;li&gt;摆脱了单文件结构。实现了以函数为单位的多文件结构。&lt;/li&gt;
-&lt;li&gt;将所有的头文件、宏、函数声明、变量声明都放到一个大的头文件里面，便于调用。其中变量采用了&lt;code&gt;extern&lt;/code&gt;修饰符。&lt;/li&gt;
-&lt;li&gt;游戏开始时记录起始时间，此后，将记录的时间与开始时间之差显示在屏幕右上角（计时器）。&lt;/li&gt;
-&lt;li&gt;采用了文件读写的形式来记录统计信息，但是文件地址采用的是相对路径，意味着无法移动应用程序（但可以创建快捷方式）。&lt;/li&gt;
-&lt;li&gt;地块的生成采用了2重指针的动态内存分配，好处是可以变换大小。游戏退出后释放内存。&lt;/li&gt;
-&lt;li&gt;项目中共有4个类，分别记录模式信息，地块信息，按钮信息以及图案信息。成员全部都是&lt;code&gt;public&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;模式类包含地图的长、宽和地雷数。&lt;/li&gt;
-&lt;li&gt;图案类包含了图案左上角的横纵坐标以及构造函数。&lt;/li&gt;
-&lt;li&gt;按钮类包含了四条边的位置坐标以及绘制按钮和检测按钮的成员函数。当然也有构造函数。&lt;/li&gt;
-&lt;li&gt;地块类包含4个成员变量，3个成员函数。&lt;br&gt;
-成员变量包含&lt;code&gt;dig&lt;/code&gt; &lt;code&gt;mine&lt;/code&gt; &lt;code&gt;type&lt;/code&gt;。&lt;br&gt;
-&lt;code&gt;dig&lt;/code&gt;表示该地块是否被挖，0是没被挖，1是被挖，2是旗无法被挖，3是准备挖（高亮显示）。
-&lt;code&gt;mine&lt;/code&gt;表示该地块是否含有地雷。0是没有，1是有雷。&lt;br&gt;
-&lt;code&gt;type&lt;/code&gt;表示该地块的类型。0是空格，1~8是数字，X是雷。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;typeset()&lt;/code&gt;函数可以根据自己以及周围8个地块的&lt;code&gt;mine&lt;/code&gt;值来设置&lt;code&gt;type&lt;/code&gt;的属性。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;chain()&lt;/code&gt;函数会将&lt;code&gt;mine=0&lt;/code&gt;的地块周围8个中&lt;code&gt;dig=0&lt;/code&gt;的设置成&lt;code&gt;dig=2&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;check()&lt;/code&gt;函数可以检测鼠标操作。光标移动会令&lt;code&gt;dig=3&lt;/code&gt;，离开时令&lt;code&gt;dig=0&lt;/code&gt;。左右键仅对&lt;code&gt;dig=3&lt;/code&gt;的地块有用。左键双击仅对&lt;code&gt;dig=2&lt;/code&gt;的地块有用，且要满足地块周围有足够多的标记。会执行一次&lt;code&gt;chain()&lt;/code&gt;函数。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;文件汇总&#34;&gt;文件汇总
-&lt;/h3&gt;&lt;h4 id=&#34;minesweeperh&#34;&gt;&lt;code&gt;minesweeper.h&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;总头文件。&lt;/p&gt;
-&lt;h4 id=&#34;blockh&#34;&gt;&lt;code&gt;block.h&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;扫雷时的地块类的头文件。&lt;/p&gt;
-&lt;h4 id=&#34;blockcpp&#34;&gt;&lt;code&gt;block.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;扫雷时的地块类的源文件。&lt;/p&gt;
-&lt;h4 id=&#34;buttonh&#34;&gt;&lt;code&gt;button.h&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;按钮类的头文件。&lt;/p&gt;
-&lt;h4 id=&#34;buttoncpp&#34;&gt;&lt;code&gt;button.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;按钮类的源文件。&lt;/p&gt;
-&lt;h4 id=&#34;itemh&#34;&gt;&lt;code&gt;item.h&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;游戏中的图片的头文件。&lt;/p&gt;
-&lt;h4 id=&#34;itemcpp&#34;&gt;&lt;code&gt;item.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;游戏中的图片的源文件。&lt;/p&gt;
-&lt;h4 id=&#34;modeh&#34;&gt;&lt;code&gt;Mode.h&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;模式类的头文件。&lt;/p&gt;
-&lt;h4 id=&#34;modecpp&#34;&gt;&lt;code&gt;Mode.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;模式类的源文件。&lt;/p&gt;
-&lt;h4 id=&#34;maincpp&#34;&gt;&lt;code&gt;main.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;主函数。&lt;/p&gt;
-&lt;h4 id=&#34;welcomecpp&#34;&gt;&lt;code&gt;welcome.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;绘制初始界面以及跳转。&lt;/p&gt;
-&lt;h4 id=&#34;setcpp&#34;&gt;&lt;code&gt;Set.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;绘制设置界面以及跳转。&lt;/p&gt;
-&lt;h4 id=&#34;helpcpp&#34;&gt;&lt;code&gt;Help.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;绘制设置界面以及跳转。&lt;/p&gt;
-&lt;h4 id=&#34;diffcpp&#34;&gt;&lt;code&gt;Diff.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;绘制难度界面以及跳转。&lt;/p&gt;
-&lt;h4 id=&#34;statscpp&#34;&gt;&lt;code&gt;Stats.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;绘制统计界面以及跳转。&lt;/p&gt;
-&lt;h4 id=&#34;resetcpp&#34;&gt;&lt;code&gt;Reset.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;询问是否重置统计数据。&lt;/p&gt;
-&lt;h4 id=&#34;loadcpp&#34;&gt;&lt;code&gt;load.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;读取文件信息（主要是统计数据）。&lt;/p&gt;
-&lt;h4 id=&#34;initimagecpp&#34;&gt;&lt;code&gt;initImage.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;预绘制图片到缓冲窗口。&lt;/p&gt;
-&lt;h4 id=&#34;initgamecpp&#34;&gt;&lt;code&gt;initGame.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;游戏初始化。&lt;/p&gt;
-&lt;h4 id=&#34;endgamecpp&#34;&gt;&lt;code&gt;EndGame.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;游戏结束收尾操作。&lt;/p&gt;
-&lt;h4 id=&#34;paintcpp&#34;&gt;&lt;code&gt;paint.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;绘制游戏画面。&lt;/p&gt;
-&lt;h4 id=&#34;ingamecpp&#34;&gt;&lt;code&gt;inGame.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;游戏内操作以及跳转。&lt;/p&gt;
-&lt;h4 id=&#34;quitcpp&#34;&gt;&lt;code&gt;Quit.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;询问是否退出游戏。&lt;/p&gt;
-&lt;h4 id=&#34;endcpp&#34;&gt;&lt;code&gt;End.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;询问是否结束游戏并返回初始界面。&lt;/p&gt;
-&lt;h4 id=&#34;restartcpp&#34;&gt;&lt;code&gt;Restart.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;询问是否开始新的游戏。&lt;/p&gt;
-&lt;h4 id=&#34;wincpp&#34;&gt;&lt;code&gt;Win.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;游戏胜利时操作。&lt;/p&gt;
-&lt;h4 id=&#34;failcpp&#34;&gt;&lt;code&gt;Fail.cpp&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;游戏失败时操作。&lt;/p&gt;
-&lt;h2 id=&#34;项目总结&#34;&gt;项目总结
-&lt;/h2&gt;&lt;p&gt;这一次项目开发相比上次简单了很多，虽然文件体量更大，功能更加多样，但是开发时间却从一周减少到了3天。这主要还是得益于使用了类的功能以及多文件结构来增加开发效率。&lt;/p&gt;
-&lt;h2 id=&#34;源代码查看&#34;&gt;源代码查看
-&lt;/h2&gt;&lt;p&gt;太多了，请到文件夹中查看。&lt;/p&gt;
-</description>
         </item>
         <item>
         <title>Sort</title>
